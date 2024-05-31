@@ -1,0 +1,518 @@
+/*
+ * File:   TC358870.c
+ * Author: thaya
+ *
+ * Created on 2020/01/04, 22:18
+ */
+
+
+#include "xc.h"
+#include "../extern_val.h"
+#define FCY 16000000UL 
+#include <libpic30.h>
+#include "pin_manager.h"
+#include "power_reset.h"
+
+#include "ortustech_hd_lcd.h"
+#include "santek_qhd_lcd.h"
+
+#include "TC358870.h"
+#include "thd_i2c2.h"
+#include <libpic30.h>
+//#include "../extern_val.h"
+#include "usb/usb.h"
+#include "system.h"
+
+// TC358870 State
+#define S0      0
+#define S1      1
+#define S2      2
+#define S3      3
+#define RS1     4
+#define RS2     5
+#define RS3     6
+#define RS4     7
+#define RS5     8
+#define RS_DO   9
+
+extern uint16_t    m_brightness;
+
+//static int16_t TC_State;
+extern uint16_t TC_State;
+uint8_t hdmi_stat[18];
+extern bool m_bSuspendflg;
+extern bool m_bColorBar_Req;
+extern bool m_bColorBar_Show;
+
+//santek_Check_RS_Int関数用のdefine
+#define INT_SYNC_CHG    0x0008  //SYNC割り込み
+#define INT_HPI_CHG     0x0004  //HPIホットプラグ割り込み（説明書によるとスリープモードでしか使えない？）
+#define INT_DDC_CHG     0x0002  //DDC割り込み
+#define STS_DDC         0x0001  //現在のDDCステータス
+#define STS_SYNC        0x0080  //現在のSYNCステータス
+
+void tc358870_dsi_reset(){
+    i2c2_uh2cd_write16(0x0002,0x0200);  //DSIリセット
+    __delay_ms(10);
+    i2c2_uh2cd_write16(0x0002,0x0000);
+}
+
+void tc358870_init(void)
+{
+    /*
+     * LCD + TC358870 RESET
+     */
+    TC358870_Reset();  
+    //Ortustech_LCD_Reset();
+
+    TC_State = S0;
+}
+void tc358870(bool bCheckAll) {
+    uint16_t retVal;
+//    uint8_t data[17];
+
+    if (LCD_TYPE > 0){    //Ortustech LCD LCD_TYPE in extern_val.h
+        switch(TC_State){
+            case S0:
+            ortustech_RS1();
+            TC_State = S1;
+            break;
+        case S1:
+            retVal = ortustech_Check_HDMI_Cable();
+            if (retVal > 0){
+                //DDC_5V is connected HDMI
+                retVal = ortustech_Check_RS_Int();
+                ortustech_RS2_Ready();
+                TC_State = S2;
+            }
+            break;
+        case S2:
+            //bit2:HPI_chg DDC5V status change
+            //bit1:I_DDC DDC Power 0V<-->5V Change
+            //bit0:S_DDC Statsu of 5V ON or OFF
+            //if(tc358870_interrupt > 0){
+                retVal = ortustech_Check_RS_Int();
+                tc358870_interrupt = 0;   
+                if ((retVal & 0x01) > 0){
+                    //DDC_5V is connected
+                    ortustech_RS3();    //MIPI OUTPUT Start
+                    TC_State = S3;
+                }
+                else{
+                    //DDC_5V is not detected
+                    TC_State = S1;
+                }
+            //}
+            break;
+        case S3:
+            //bit2:HPI_chg DDC5V status change
+            //bit1:I_DDC DDC Power 0V<-->5V Change
+            //bit0:S_DDC Statsu of 5V ON or OFF
+            //if(tc358870_interrupt > 0){
+                retVal = ortustech_Check_RS_Int();
+                tc358870_interrupt = 0;
+                if ((retVal & 0x0080) == 0){
+                    //DDC_5V not detect
+                    //ortustech_RS4(); //MIPI OUTPUT Disable
+                    TC_State = S1;
+                }
+                else{
+                    if ((retVal &  0x0001) == 0){
+                        ortustech_DO();
+                        ortustech_RS4();
+                        TC_State = S2;
+                    }
+                }
+            //}
+                break;
+            }
+        }
+        else {
+            // Santek LCD
+           switch(TC_State){
+            case S0:
+                santek_RS1();
+                TC_State = S1;
+                break;
+            case S1:
+                //retVal = santek_Check_HDMI_Cable();
+                retVal = santek_Check_RS_Int();
+                if (retVal > 0){
+                    //DDC_5V is connected HDMI
+                    retVal = santek_Check_RS_Int();
+                    santek_RS2_Ready();
+                    TC_State = S2;
+                    LED_R_ON_Toggle();
+                }
+                break;
+            case S2:
+                //bit2:HPI_chg DDC5V status change
+                //bit1:I_DDC DDC Power 0V<-->5V Change
+                //bit0:S_DDC Statsu of 5V ON or OFF
+                //if(tc358870_interrupt > 0){
+                    retVal = santek_Check_RS_Int();
+                    tc358870_interrupt = 0;   
+                    if ((retVal & 0x81) == 0x81){ //SYNC StableでDDC 5V ON状態
+                        //DDC_5V is connected
+                        //__delay_ms(1000);
+                        //0714追加してみた
+//                        PW_ON3N_SetLow();
+//                        __delay_us(100);
+//                        TC358870_Reset_SetHigh(); //MIPI IC リセット解除
+//                        __delay_ms(1);
+//                        PW_ON4N_SetLow();
+//                        __delay_ms(2);
+//                        LCD_Reset_SetHigh();  //LCD リセット解除
+//                        __delay_ms(240);
+                        
+                        santek_RS3();    //MIPI OUTPUT Start
+                        TC_State = S3;
+                    }
+                    else{
+                        //DDC_5V is not detected
+                        //TC_State = S1;
+                        BackLight_ON_SetLow();
+                        LED_R_ON_Toggle();
+                    }
+                //}
+                break;
+            case S3:
+                //bit2:HPI_chg DDC5V status change
+                //bit1:I_DDC DDC Power 0V<-->5V Change
+                //bit0:S_DDC Statsu of 5V ON or OFF
+                //if(tc358870_interrupt > 0){
+                    //HDMI_TimChk(data);
+                if (bCheckAll){
+                    if (BackLight_Status > 0){
+                        //サスペンドモードだったらつけない
+                        if (!m_bSuspendflg){
+                            BackLight_ON_SetHigh();
+                        }else{
+                            BackLight_ON_SetLow();
+                        }
+                    }
+                
+                    //カラーバー制御
+                    if (m_bColorBar_Req && !m_bColorBar_Show){
+                        santek_ColorBar();
+                        m_bColorBar_Show = true;
+                    }else if (!m_bColorBar_Req && m_bColorBar_Show){
+                        m_bColorBar_Show = false;
+                        //再接続は、この後のSYNC unstable検出で行う。
+                    }
+                    
+                    santek_LCDBrightness(m_brightness);
+                }
+
+                if (m_bColorBar_Show){ //カラーバー表示中のHDMIイベントは無視
+                    break;
+                }
+                                
+                retVal = santek_Check_RS_Int();
+                tc358870_interrupt = 0;
+
+                //DDC 5V割り込みを検出
+                if((retVal & INT_DDC_CHG) == INT_DDC_CHG){
+                    santek_LCDOFF();
+                    santek_DO();
+                    santek_RS4(); 
+                    //TC_State = S2;
+                    //試し
+                    TC_State = S0;
+                    BackLight_ON_SetLow();
+                    //0714追加してみた 電源落とした後すぐ上げる
+                    LCD_Reset_SetLow();
+                    PW_ON4N_SetHigh();
+                    TC358870_Reset_SetLow();
+                    PW_ON3N_SetHigh();
+                    __delay_ms(1);
+                    PW_ON3N_SetLow();
+                    __delay_us(100);
+                    TC358870_Reset_SetHigh(); //MIPI IC リセット解除
+                    __delay_ms(1);
+                    PW_ON4N_SetLow();
+                    __delay_ms(2);
+                    LCD_Reset_SetHigh();  //LCD リセット解除
+                    __delay_ms(240);
+                }else if ((retVal &  INT_SYNC_CHG) == INT_SYNC_CHG){   //SYNC割り込みを検出
+                    TC_State = S1;
+                    santek_LCDOFF();
+                    santek_RS4();
+                    BackLight_ON_SetLow();
+                }
+//                    if ((retVal & 0x0001) == 0){
+//                        //DDC_5V not detect
+//                        santek_LCDOFF();
+//                        santek_RS4(); //MIPI OUTPUT Disable
+//                        TC_State = S1;
+//                        BackLight_ON_SetLow();
+//                        LED_R_ON_Toggle();
+//                    }
+//                    else{
+//                        if ((retVal &  0x0080) == 0){
+//                            santek_LCDOFF();
+//                            santek_DO();
+//                            //santek_RS4(); 
+//                            TC_State = S1;
+//                            LED_R_ON_Toggle();
+//                            BackLight_ON_SetLow();
+//                        }
+//                        else {
+//                            LED_G_ON_Toggle();                           
+//                        }
+//                    }
+                //}
+                break;
+            }     
+            
+        }
+        //Debug to Chcek HDMI Timing
+        //HDMI_TimChk(&hdmi_stat[0]);
+        //Check hdmi_stat[]
+        //offset value
+         /*
+        #define PX_FREQ0 0
+        #define	PX_FREQ1 1
+        #define	H_SIZE0 2
+        #define	H_SIZE1 3
+        #define	DE_HPOS0 4
+        #define	DE_HPOS1 5
+        #define	DE_HWID0 6
+        #define	DE_HWID1 7
+        #define	V_SIZE0 8
+        #define	V_SIZE1 9
+        #define	DE_POS_A0 10
+        #define	DE_POS_A1 11
+        #define	DE_POS_B0 12
+        #define	DE_POS_B1 13
+        #define	DE_VWID0 14
+        #define	DE_VWID1 15
+        #define	VI_STATUS1 16
+        */               
+}
+
+//共通
+uint16_t Check_DDC(){
+    uint16_t d_IntStatus,retVal;
+    uint8_t  d_IntSYSSTATUS,d_MISC_INT;
+    uint8_t  HPI_chg,I_DDC,S_DDC5V;    
+    // Interrupt Service Routine(RS_Int)
+    // Check Interrupt
+    d_IntStatus = i2c2_uh2cd_read16(0x0014); // IntStatus
+    d_IntSYSSTATUS = i2c2_uh2cd_read16(0x001A); // IntSYSSTATUS
+    HPI_chg =(uint8_t)(d_IntSYSSTATUS & 0x0001); // Check HPDI Change DDC_5V ON or OFF
+    I_DDC = i2c2_uh2cd_read8(0x8502); // SYS_INT
+    I_DDC = 0x01; // DDC Power 0V<-->5V Change
+    d_MISC_INT = i2c2_uh2cd_read8(0x850B); // MISC_INT
+    S_DDC5V = i2c2_uh2cd_read8(0x8520); // SYS_STATUS
+    //S_DDC5V = S_DDC5V & 0x81; //bit0 = 1 DDC5V input = 0:DDC5V no input
+                              //bit7 = 1 S_SYNC stable = 0: unstable
+    //bit7:S_SYNC 1=Stable 0=unstable
+    //bit2:HPI_chg DDC5V status change
+    //bit1:I_DDC DDC Power 0V<-->5V Change
+    //bit0:S_DDC Statsu of 5V ON or OFF
+    //retVal = (HPI_chg << 2)|(I_DDC << 1)|S_DDC5V;
+    retVal = S_DDC5V;
+    return retVal;
+}
+
+void test(){
+//    BYTE	rdata8;
+//	BYTE	bytebuf[10];
+//    BYTE	bytebuf2[190];
+//    BYTE	bytebuf3[17];
+//	WORD	rdata16;
+//    DWORD   rdata32;
+	static	int step;
+//	static	WORD	cnt;
+	static	int _go_rs2_rs3;
+    
+    uint16_t retVal;
+    
+    switch(step){
+        case 0:
+            turner_RS1();
+            // Initialization for Ready (RS2)
+            // Enable Interrupt
+            i2c2_uh2cd_write16(0x0016,0x0D3F); // IntMask
+            // Set HPDO to "H"
+            i2c2_uh2cd_write8(0x854A,0x01); // INIT_END
+            // Interrupt Service Routine(RS_Int)
+            // Exit from Sleep
+            i2c2_uh2cd_write16(0x0002,0x0000); // SysCtl
+
+            //i2c2_uh2cd_write16(0x85C6,0x0053);    //不明なレジスタ 
+            //i2c2_uh2cd_write16(0x85C8,0x01A1);    //不明なレジスタ
+
+            Waitx1us(10);
+            // Check Interrupt
+            i2c2_uh2cd_read16(0x0014); // IntStatus
+            i2c2_uh2cd_read16(0x001A); // IntSYSSTATUS
+            i2c2_uh2cd_read8(0x8502); // SYS_INT
+            i2c2_uh2cd_read8(0x850B); // MISC_INT
+            i2c2_uh2cd_read8(0x8520); // SYS_STATUS
+            i2c2_uh2cd_write16(0x0016,0x0F3F); // IntMask
+            i2c2_uh2cd_write8(0x8502,0xFF); // SYS_INT
+            i2c2_uh2cd_write8(0x850B,0xFF); // MISC_INT
+            i2c2_uh2cd_write16(0x0014,0x0F3F); // IntStatus
+            // Check HDMI cable status
+//            rdata8=i2c2_uh2cd_read8(0x8520); // MISC_INTS_C
+//            rdata8=i2c2_uh2cd_read8(0x8520); // MISC_INTS_C
+//            rdata8=i2c2_uh2cd_read8(0x8520); // MISC_INTS_C
+            retVal = Check_DDC();
+            if( (retVal & 0x01) != 0 ){
+                step = 2;
+            }else{
+                // Enable Interrupt
+                i2c2_uh2cd_write16(0x0016,0x053F); // TOP_INTM
+                // Enter Sleep
+    //			i2c2_h2cpd_write16(0x0002,0x0001); // SysCtl
+                step = 1;
+            }
+            step = 3;
+        break;
+        
+        case 1:
+//            rdata8=i2c2_uh2cd_read8(0x8520); // MISC_INTS_C
+//            rdata8=i2c2_uh2cd_read8(0x8520); // MISC_INTS_C
+//            rdata8=i2c2_uh2cd_read8(0x8520); // MISC_INTS_C
+            retVal = Check_DDC();
+            if( (retVal & 0x01) != 0 )
+            {
+                step = 1;
+            }
+            _go_rs2_rs3 = 0;
+            
+            //入ってこない
+            // Interrupt Service Routine(RS_Int)
+            // Exit from Sleep
+//            rdata32=i2c2_h2cpd_read32(0x01B0);
+//            i2c2_h2cpd_write16(0x0002,0x0000); // SysCtl
+//            Waitx1us(10);
+//            // Check Interrupt
+//            rdata16=i2c2_h2cpd_read16(0x001A); // TOP_INTS_C
+//            if( (rdata16&0x0020) != 0 )
+//            {
+//                //step = 2;
+//            }
+//            bytebuf[0]=i2c2_h2cpd_read8(0x8502); // SYS_INTS_C
+//            if( (bytebuf[0]&0x01) != 0 )
+//            {
+//                //step = 2;
+//            }
+//            bytebuf[1]=i2c2_h2cpd_read8(0x850B); // MISC_INTS_C
+//            if( (bytebuf[1]&0x02) != 0 )
+//            {
+//                //step = 2;
+//            }
+//            bytebuf[2]=i2c2_h2cpd_read8(0x8520); // SYS_STATUS
+//            if( (bytebuf[2]&0x81) != 0 )
+//            {
+//                step = 1;
+//            }
+//            if(step == 2)
+//            {
+//                i2c2_h2cpd_write16(0x0016,0x073F); // TOP_INTM
+//                i2c2_h2cpd_write8(0x8502,0xFF); // SYS_INTS_C
+//                i2c2_h2cpd_write8(0x850B,0x3F); // MISC_INTS_C
+//                i2c2_h2cpd_write16(0x0014,0x073F); // TOP_INTS_C
+//            }
+//            if( ++cnt >= 5000/XAPR_TIMER_INTERVAL)
+//            {
+//                cnt = 0;
+//                if( ( (bytebuf[0]&0x01) != 0 ) &&
+//                    ( (bytebuf[2]&0x01) != 0 ) &&
+//                    ( (bytebuf[2]&0x80) != 0 ) &&
+//                    ( (bytebuf[1]&0x02) != 0 ) 
+//                )
+//                {
+//                    step = 2;
+//                }
+//                else if( ( (bytebuf[1]&0x02) != 0 ) &&
+//                    ( (bytebuf[2]&0x80) != 0 ) &&
+//                    ( (bytebuf[2]&0x01) != 0 ) 
+//                )
+//                {
+//                    _go_rs2_rs3 = 1;
+//                    step = 2;
+//                }
+//            }
+            break;
+            
+        case 2:
+            // Enable Interrupt
+            i2c2_uh2cd_write16(0x0016,0x053F); // TOP_INTM
+            // Let HDMI Source start access
+            i2c2_uh2cd_write8(0x854A,0x01); // INIT_END
+            // Interrupt Service Routine(RS_Int)
+            // Exit from Sleep
+            i2c2_uh2cd_write16(0x0002,0x0000); // SysCtl
+            Waitx1us(10);
+
+//            bytebuf[0]=i2c2_uh2cd_read8(0x85AA); // SYS_INTS_C
+//            bytebuf[1]=i2c2_uh2cd_read8(0x85AF); // MISC_INTS_C
+//            bytebuf[2]=i2c2_uh2cd_read8(0x85AB); // SYS_STATUS
+
+            if(_go_rs2_rs3 == 1){
+                step = 4;
+            }else{
+                step = 3;
+            }
+            break;
+    
+        case 3:
+            // Check Interrupt
+//            rdata16=i2c2_uh2cd_read16(0x0014); // TOP_INTS_C
+//            bytebuf[0]=i2c2_uh2cd_read8(0x8502); // SYS_INTS_C
+//            bytebuf[1]=i2c2_uh2cd_read8(0x850B); // MISC_INTS_C
+//            bytebuf[2]=i2c2_uh2cd_read8(0x8520); // SYS_STATUS
+//            bytebuf[3]=i2c2_uh2cd_read8(0x854A); // SYS_STATUS
+//            bytebuf[4]=i2c2_h2cpd_read8(0x85A5); // SYS_STATUS        //不明なレジスタ
+//            bytebuf[5]=i2c2_h2cpd_read8(0x85A6); // SYS_STATUS
+//            bytebuf[6]=i2c2_h2cpd_read8(0x85A7); // SYS_STATUS
+//            bytebuf[7]=i2c2_h2cpd_read8(0x85A8); // SYS_STATUS
+//            bytebuf[8]=i2c2_h2cpd_read8(0x85A9); // SYS_STATUS
+//            bytebuf[9]=i2c2_h2cpd_read8(0x85AA); // SYS_STATUS
+//            if( ( (bytebuf[1]&0x02) != 0 ) &&
+//                    ( (bytebuf[2]&0x01) != 0 ) &&
+//                    ( (bytebuf[2]&0x80) != 0 ) 
+//                )
+            retVal = Check_DDC();
+            if( ((retVal & 0x01) != 0) && ((retVal & 0x80) != 0))
+            {
+                step = 4;
+            }
+            break;
+        
+        case 4:
+            turner_RS3();
+            step = 6;
+            break;
+        
+        case 5:
+            break;
+
+        case 6:
+            i2c2_uh2cd_write8(0x8540,0xC0); // SYS_FREQ0
+            i2c2_uh2cd_write8(0x8541,0x12); // SYS_FREQ1
+            i2c2_uh2cd_write8(0x8A0C,0xC0); // SYS_FREQ0(CSC)
+            i2c2_uh2cd_write8(0x8A0D,0x12); // SYS_FREQ1(CSC)
+            i2c2_uh2cd_write8(0x8593,0x33); // HV_CLR
+        
+//            rdata8=i2c2_uh2cd_read8(0x8520); // MISC_INTS_C
+//            rdata8=i2c2_uh2cd_read8(0x8520); // MISC_INTS_C
+//
+//            rdata16=i2c2_uh2cd_read16(0x0002);
+            retVal = Check_DDC();
+            if((retVal & 0x0080) == 0){   //HDMI Signal Check
+                step = 3;
+            }
+            if( (retVal & 0x0001) == 0 )            //DC5V CHECK
+            {
+                DDC5V_Noinput();
+                step = 0;
+            }
+        break;
+    }
+
+}

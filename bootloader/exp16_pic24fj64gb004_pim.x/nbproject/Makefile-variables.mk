@@ -1,0 +1,10 @@
+#
+# Generated - do not edit!
+#
+# NOCDDL
+#
+CND_BASEDIR=`pwd`
+# PIC24FJ64GB004_PIM configuration
+CND_ARTIFACT_DIR_PIC24FJ64GB004_PIM=dist/PIC24FJ64GB004_PIM/production
+CND_ARTIFACT_NAME_PIC24FJ64GB004_PIM=exp16_pic24fj64gb004_pim.x.production.hex
+CND_ARTIFACT_PATH_PIC24FJ64GB004_PIM=dist/PIC24FJ64GB004_PIM/production/exp16_pic24fj64gb004_pim.x.production.hex

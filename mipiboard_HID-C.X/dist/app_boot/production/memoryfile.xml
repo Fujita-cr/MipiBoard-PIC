@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+  <executable name="dist/app_boot/production/mipiboard_HID-C.X.production.elf">
+    <memory name="data">
+      <units>bytes</units>
+      <length>8192</length>
+      <used>476</used>
+      <free>7716</free>
+    </memory>
+    <memory name="program">
+      <units>bytes</units>
+      <length>54225</length>
+      <used>48573</used>
+      <free>5652</free>
+    </memory>
+  </executable>
+</project>
