@@ -11,7 +11,7 @@ build/app_boot/production/app_device_custom_hid.o: \
  mcc_generated_files/thd_i2c2.h mcc_generated_files/oc1.h \
  mcc_generated_files/oc2.h mcc_generated_files/oc3.h extern_val.h \
  mcc_generated_files/tmr2.h mcc_generated_files/TC358870.h \
- mcc_generated_files/santek_qhd_lcd.h
+ mcc_generated_files/santek_qhd_lcd.h mcc_generated_files/power_reset.h
 
 mcc_generated_files/usb/usb.h:
 
@@ -58,3 +58,5 @@ mcc_generated_files/tmr2.h:
 mcc_generated_files/TC358870.h:
 
 mcc_generated_files/santek_qhd_lcd.h:
+
+mcc_generated_files/power_reset.h:

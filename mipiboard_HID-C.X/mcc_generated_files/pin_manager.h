@@ -55,6 +55,15 @@
     Section: Device Pin Macros
 */
 
+#define Camera_R_Reset_SetHigh()          _LATA10 = 1
+#define Camera_R_Reset_SetLow()           _LATA10 = 0
+
+#define Camera_C_Reset_SetHigh()          _LATC8 = 1
+#define Camera_C_Reset_SetLow()           _LATC8 = 0
+
+#define Camera_L_Reset_SetHigh()          _LATA4 = 1
+#define Camera_L_Reset_SetLow()           _LATA4 = 0
+
 #define TC358870_Reset_SetHigh()          _LATA7 = 1
 #define TC358870_Reset_SetLow()           _LATA7 = 0
 

@@ -2,7 +2,7 @@
 
 manifest_file_version: 1.0.0
 project: mipiboard_HID
-creation_date: 2026-02-26T13:24:23.473+09:00[Asia/Tokyo]
+creation_date: 2026-02-26T17:23:19.220+09:00[Asia/Tokyo]
 operating_system: Windows 10
 mcc_mode: IDE
 mcc_mode_version: v6.15
@@ -18,5 +18,5 @@ device_library: {library_class: com.microchip.mcc.mcu16.Mcu16PeripheralLibrary, 
     / dsPIC33 / PIC32MM MCUs, version: 1.171.4}
 packs: {name: PIC24F-GA-GB_DFP, version: 1.10.375}
 modules:
-- {name: com.microchip.mcc.mcu16.Mcu16PeripheralLibrary, type: CLASSIC, version: 1.171.4}
 - {name: com.microchip.mcc.USBDEVICELite.USBDEVICELite, type: CLASSIC, version: 1.27.0}
+- {name: com.microchip.mcc.mcu16.Mcu16PeripheralLibrary, type: CLASSIC, version: 1.171.4}

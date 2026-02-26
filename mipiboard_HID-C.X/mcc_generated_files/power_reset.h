@@ -70,6 +70,7 @@ void Santek_LCD_Reset(void);
 void Ortustech_LCD_Reset(void);
 void TC358870_Reset(void);
 void System_Shutdown(void);
+void Camera_Reset(int camsel);
 
 //void Turner_LCD_Reset(void);
 

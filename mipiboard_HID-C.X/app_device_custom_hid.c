@@ -33,6 +33,7 @@ please contact mla_licensing@microchip.com
 #include "mcc_generated_files/tmr2.h"
 #include "mcc_generated_files/TC358870.h"
 #include "mcc_generated_files/santek_qhd_lcd.h"
+#include "mcc_generated_files/power_reset.h"
 
 /** VARIABLES ******************************************************/
 /* Some processors have a limited range of RAM addresses where the USB module
@@ -109,7 +110,8 @@ typedef enum
     COMMAND_HDMIRST = 0x11,         //HDMI RXのリセット
     COMMAND_DSIRST = 0x12,          //DSI TXのリセット
     COMMAND_COLORBAR = 0x13,        //カラーバー表示     
-    COMMAND_GET_SYSSTS = 0x14,      //システムステータス取得    
+    COMMAND_GET_SYSSTS = 0x14,      //システムステータス取得
+    COMMAND_CAMERA_RESET = 0x15,       //カメラのリセット
     COMMAND_UNKNOWN= 0xFF,          //不明なコマンド
 } CUSTOM_HID_DEMO_COMMANDS;
 
@@ -536,9 +538,47 @@ void APP_DeviceCustomHIDTasks()
                         USBInHandle = HIDTxPacket(CUSTOM_DEVICE_HID_EP, (uint8_t*)&ToSendDataBuffer[0],64);    
                     }
                     break;
+                case COMMAND_CAMERA_RESET:  //カメラのリセット
+                    switch(ReceivedDataBuffer[3]){
+                        case 0:
+                        	//すべてのカメラリセット
+                            Camera_Reset(0);
+                            break;
+                        case 1:
+                        	//左カメラリセット
+                            Camera_Reset(1);
+                            break;
+                        case 2:
+                        	//中央カメラリセット
+                            Camera_Reset(2);
+                            break;
+                        case 3:
+                        	//右カメラリセット
+                            Camera_Reset(3);
+                            break;
+                        default:
+                        	break;
+                    }
+                     if(!HIDTxHandleBusy(USBInHandle))
+                    {
+                        ToSendDataBuffer[0] = 0x0A;	  //返信先頭バイト
+                        ToSendDataBuffer[1] = COMMAND_CAMERA_RESET;   //コマンドエコーバック
+                        //Prepare the USB module to send the data packet to the host
+                        USBInHandle = HIDTxPacket(CUSTOM_DEVICE_HID_EP, (uint8_t*)&ToSendDataBuffer[0],64);
+                    }   
+                    break;
+                default:
+                    //登録されていない不正なコマンドの場合
+                    if(!HIDTxHandleBusy(USBInHandle))
+                    {
+                        ToSendDataBuffer[0] = 0x0A;	  //返信先頭バイト
+                        ToSendDataBuffer[1] = COMMAND_UNKNOWN;   //コマンドエコーバック
+                        //Prepare the USB module to send the data packet to the host
+                        USBInHandle = HIDTxPacket(CUSTOM_DEVICE_HID_EP, (uint8_t*)&ToSendDataBuffer[0],64);
+                    }
             }
         }else{
-            //不正なコマンドの場合
+            //最初が05以外の不正なコマンドの場合
             if(!HIDTxHandleBusy(USBInHandle))
             {
                 ToSendDataBuffer[0] = 0x0A;	  //返信先頭バイト
