@@ -143,7 +143,6 @@ void tc358870(bool bCheckAll) {
                     retVal = santek_Check_RS_Int();
                     santek_RS2_Ready();
                     TC_State = S2;
-                    LED_R_ON_Toggle();
                 }
                 break;
             case S2:
@@ -174,7 +173,6 @@ void tc358870(bool bCheckAll) {
                         //DDC_5V is not detected
                         //TC_State = S1;
                         BackLight_ON_SetLow();
-                        LED_R_ON_Toggle();
                     }
                 //}
                 break;
@@ -200,7 +198,24 @@ void tc358870(bool bCheckAll) {
                         m_bColorBar_Show = true;
                     }else if (!m_bColorBar_Req && m_bColorBar_Show){
                         m_bColorBar_Show = false;
-                        //再接続は、この後のSYNC unstable検出で行う。
+                        //カラーバー表示から戻るときはICのリセットが必要
+                        TC_State = S0;
+                        santek_LCDOFF();
+                        santek_RS4();
+                        BackLight_ON_SetLow();
+                        LCD_Reset_SetLow();
+                        PW_ON4N_SetHigh();
+                        TC358870_Reset_SetLow();
+                        PW_ON3N_SetHigh();
+                        __delay_ms(1);
+                        PW_ON3N_SetLow();
+                        __delay_us(100);
+                        TC358870_Reset_SetHigh(); //MIPI IC リセット解除
+                        __delay_ms(1);
+                        PW_ON4N_SetLow();
+                        __delay_ms(2);
+                        LCD_Reset_SetHigh();  //LCD リセット解除
+                        break;
                     }
                     
                     santek_LCDBrightness(m_brightness);
@@ -216,27 +231,10 @@ void tc358870(bool bCheckAll) {
                 //DDC 5V割り込みを検出
                 if(((retVal & INT_DDC_CHG) == INT_DDC_CHG) || ((retVal & STS_DDC) == 0)){
                     i2c2_uh2cd_write8(0x8600,0x01); // オーディオミュート
+                    TC_State = S1;
                     santek_LCDOFF();
-                    santek_DO();
-                    santek_RS4(); 
-                    //TC_State = S2;
-                    //試し
-                    TC_State = S0;
+                    santek_RS4();
                     BackLight_ON_SetLow();
-                    //0714追加してみた 電源落とした後すぐ上げる
-                    LCD_Reset_SetLow();
-                    PW_ON4N_SetHigh();
-                    TC358870_Reset_SetLow();
-                    PW_ON3N_SetHigh();
-                    __delay_ms(1);
-                    PW_ON3N_SetLow();
-                    __delay_us(100);
-                    TC358870_Reset_SetHigh(); //MIPI IC リセット解除
-                    __delay_ms(1);
-                    PW_ON4N_SetLow();
-                    __delay_ms(2);
-                    LCD_Reset_SetHigh();  //LCD リセット解除
-                    __delay_ms(240);
                 }else if (((retVal &  INT_SYNC_CHG) == INT_SYNC_CHG) || ((retVal & STS_SYNC) == 0)){   //SYNC割り込みを検出
                     i2c2_uh2cd_write8(0x8600,0x01); // オーディオミュート
                     TC_State = S1;

@@ -44,6 +44,7 @@ Command:
   build/app_only/production/mcc_generated_files/oc1.o \
   build/app_only/production/mcc_generated_files/oc2.o \
   build/app_only/production/mcc_generated_files/oc3.o \
+  build/app_only/production/mcc_generated_files/tmr2.o \
   build/app_only/production/app_device_custom_hid.o \
   build/app_only/production/main.o \
   --defsym=__MPLAB_BUILD=1 \
@@ -125,15 +126,15 @@ Default Scalar Model: Small
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                       0x1ec0               0x62e           0x945  (2373)
-.const                      0x24ee                0xca           0x12f  (303)
-.text                       0x25b8              0x7580          0xb040  (45120)
-.dinit                      0x9b38                0x8e            0xd5  (213)
-.text                       0x9bc6                0xfc           0x17a  (378)
-.init.delay32               0x9cc2                0x1c            0x2a  (42)
-.text                       0x9cde                0x36            0x51  (81)
+.text                       0x1ec0               0x668           0x99c  (2460)
+.const                      0x2528                0xca           0x12f  (303)
+.text                       0x25f2              0x75bc          0xb09a  (45210)
+.dinit                      0x9bae                0x9a            0xe7  (231)
+.text                       0x9c48               0x19c           0x26a  (618)
+.init.delay32               0x9de4                0x1c            0x2a  (42)
+.text                       0x9e00                0x36            0x51  (81)
 
-                 Total "program" memory used (bytes):         0xbd7e  (48510) 89%
+                 Total "program" memory used (bytes):         0xbf31  (48945) 90%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
@@ -142,12 +143,12 @@ section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
 .nbss                        0x800                   0            0x8a  (138)
 .ndata                       0x88a                   0             0x2  (2)
-.nbss                        0x88c                   0             0x6  (6)
-.bss                         0x892                   0            0xc8  (200)
-.bss                         0x95a                   0            0x62  (98)
-_0000000004C60960664d74c5     0xa00                   0            0x20  (32)
+.nbss                        0x88c                   0             0x8  (8)
+.bss                         0x894                   0            0xc8  (200)
+.bss                         0x95c                   0            0x64  (100)
+_0000000004544960699fde39     0xa00                   0            0x20  (32)
 
-                 Total "data" memory used (bytes):          0x1dc  (476) 5%
+                 Total "data" memory used (bytes):          0x1e0  (480) 5%
 
 
 Dynamic Memory Usage
@@ -232,18 +233,19 @@ External Symbols in Data Memory (by address):
                     0x087c                  _IC2C2_AckCheck
                     0x087e                  _IC2C2_CollisionCheck
                     0x0888                  _tc358870_interrupt
-                    0x0892                  _ReceivedDataBuffer
-                    0x08d2                  _ToSendDataBuffer
-                    0x0912                  _mem_buffer
-                    0x0932                  _ad_arry
-                    0x0946                  _sort_arry
-                    0x095a                  _inPipes
-                    0x0960                  _outPipes
-                    0x0967                  _ep_data_in
-                    0x0969                  _ep_data_out
-                    0x096b                  _SetupPkt
-                    0x0973                  _CtrlTrfData
-                    0x099c                  _hdmi_stat
+                    0x0892                  _TMR2_InterruptHandler
+                    0x0894                  _ReceivedDataBuffer
+                    0x08d4                  _ToSendDataBuffer
+                    0x0914                  _mem_buffer
+                    0x0934                  _ad_arry
+                    0x0948                  _sort_arry
+                    0x095c                  _inPipes
+                    0x0962                  _outPipes
+                    0x0969                  _ep_data_in
+                    0x096b                  _ep_data_out
+                    0x096d                  _SetupPkt
+                    0x0975                  _CtrlTrfData
+                    0x099e                  _hdmi_stat
                     0x0a00                  _BDT
 
 External Symbols in Data Memory (by name):
@@ -261,22 +263,23 @@ External Symbols in Data Memory (by name):
                     0x083e                  _BothEP0OutUOWNsSet
                     0x0802                  _CDS_AD_Val
                     0x0871                  _CDS_Timer
-                    0x0973                  _CtrlTrfData
+                    0x0975                  _CtrlTrfData
                     0x0878                  _IC2C1_AckCheck
                     0x087a                  _IC2C1_CollisionCheck
                     0x087c                  _IC2C2_AckCheck
                     0x087e                  _IC2C2_CollisionCheck
-                    0x0892                  _ReceivedDataBuffer
+                    0x0894                  _ReceivedDataBuffer
                     0x083a                  _RemoteWakeup
-                    0x096b                  _SetupPkt
+                    0x096d                  _SetupPkt
                     0x0822                  _TC358870_BootCount
                     0x0824                  _TC358870_CheckAll
                     0x0874                  _TC358870_Timer
                     0x081e                  _TC_State
                     0x0872                  _TMP102_Timer
                     0x0804                  _TMP102_Val
+                    0x0892                  _TMR2_InterruptHandler
                     0x0876                  _TMR5_InterruptHandler
-                    0x08d2                  _ToSendDataBuffer
+                    0x08d4                  _ToSendDataBuffer
                     0x0846                  _USB1msTickCount
                     0x0828                  _USBActiveConfiguration
                     0x0829                  _USBAlternateInterface
@@ -292,33 +295,33 @@ External Symbols in Data Memory (by name):
                     0x083f                  _USBStatusStageTimeoutCounter
                     0x084a                  _USBTicksSinceSuspendEnd
                     0x083c                  _USTATcopy
-                    0x0932                  _ad_arry
+                    0x0934                  _ad_arry
                     0x080c                  _ad_val_tmp
                     0x0837                  _controlTransferState
                     0x0850                  _da_data
                     0x083d                  _endpoint_number
-                    0x0967                  _ep_data_in
-                    0x0969                  _ep_data_out
+                    0x0969                  _ep_data_in
+                    0x096b                  _ep_data_out
                     0x085e                  _fan2_data
                     0x085c                  _fan_data
-                    0x099c                  _hdmi_stat
-                    0x095a                  _inPipes
+                    0x099e                  _hdmi_stat
+                    0x095c                  _inPipes
                     0x0852                  _index_retVal
                     0x0864                  _m_bColorBar_Req
                     0x0865                  _m_bColorBar_Show
                     0x0820                  _m_bSuspendflg
                     0x081c                  _m_brightness
                     0x0854                  _mem_adr
-                    0x0912                  _mem_buffer
+                    0x0914                  _mem_buffer
                     0x0856                  _mem_num
-                    0x0960                  _outPipes
+                    0x0962                  _outPipes
                     0x082a                  _pBDTEntryEP0OutCurrent
                     0x082c                  _pBDTEntryEP0OutNext
                     0x0832                  _pBDTEntryIn
                     0x082e                  _pBDTEntryOut
                     0x0838                  _pDst
                     0x0836                  _shortPacketStatus
-                    0x0946                  _sort_arry
+                    0x0948                  _sort_arry
                     0x0888                  _tc358870_interrupt
                     0x0863                  _tc_audio_status0
                     0x0860                  _tc_sys_status
@@ -337,442 +340,468 @@ External Symbols in Program Memory (by address):
                   0x001efc                  __psv_init
                   0x001f12                  __data_init_standard
                   0x001f12                  __data_init
-                  0x001f8c                  __INT0Interrupt
-                  0x001faa                  __INT1Interrupt
-                  0x001fc8                  __OscillatorFail
-                  0x001fd0                  __StackError
-                  0x001fda                  __AddressError
-                  0x001fe2                  __MathError
-                  0x001fea                  __T5Interrupt
-                  0x002020                  __MI2C1Interrupt
-                  0x002042                  __MI2C2Interrupt
-                  0x002064                  __USB1Interrupt
-                  0x002088                  __DefaultInterrupt
-                  0x00208e                  ___divsi3
-                  0x0020ac                  ___fixsfsi
-                  0x0020ee                  ___floatsisf
-                  0x0020f4                  __funpack
-                  0x00211e                  ___udivsi3
-                  0x00213e                  ___mulsf3x
-                  0x00213e                  ___mulsf3
-                  0x00224a                  __dnrmpackf
-                  0x00229e                  __unpackdnrmf
-                  0x0022fc                  __typef
-                  0x002330                  __propnanf
-                  0x002342                  ___floatdisf
-                  0x002362                  ___floatundisf
-                  0x0023c0                  __fpack
-                  0x00240c                  _memcpy
-                  0x00241a                  _memset
-                  0x0024e2                  ___mulsi3
-                  0x0024e2                  ___mulp32eds3
-                  0x0024e2                  ___mulp32peds3
-                  0x0024ee                  _device_dsc
-                  0x002500                  _configDescriptor1
-                  0x00252a                  _sd000
-                  0x00252e                  _sd001
-                  0x002562                  _sd002
-                  0x002590                  _hid_rpt01
-                  0x0025ae                  _USB_CD_Ptr
-                  0x0025b0                  _USB_SD_Ptr
-                  0x0025b6                  _m_version
-                  0x0025b8                  _ortustech_RS1
-                  0x002c9a                  _ortustech_Check_HDMI_Cable
-                  0x002cc4                  _ortustech_Check_RS_Int
-                  0x002d36                  _ortustech_RS2_Ready
-                  0x002d48                  _ortustech_RS3
-                  0x0033f2                  _ortustech_DO
-                  0x0035da                  _ortustech_RS4
-                  0x0035ee                  _HDMI_TimChk
-                  0x0036c2                  _ortustech_LCDInit
-                  0x003b78                  _turner_RS1
-                  0x0042a8                  _turner_RS3
-                  0x00496c                  _DDC5V_Noinput
-                  0x005226                  _santek_ColorBar
-                  0x005610                  _santek_RS1
-                  0x005cf2                  _santek_Check_HDMI_Cable
-                  0x005d1c                  _santek_Check_RS_Int
-                  0x005da2                  _santek_RS2_Ready
-                  0x005db4                  _santek_RS3
-                  0x0061c2                  _santek_DO
-                  0x0064f8                  _santek_RS4
-                  0x00650a                  _santek_LCDOFF
-                  0x006522                  _santek_LCDBrightness
-                  0x00655c                  _USBDeviceInit
-                  0x00664c                  _USBDeviceTasks
-                  0x0067d2                  _USBEnableEndpoint
-                  0x00680c                  _USBTransferOnePacket
-                  0x0068b2                  _USBStallEndpoint
-                  0x00694c                  _USBCancelIO
-                  0x0069f8                  _USBDeviceDetach
-                  0x006a04                  _USBDeviceAttach
-                  0x006a38                  _USBCtrlEPAllowStatusStage
-                  0x006aae                  _USBCtrlEPAllowDataStage
-                  0x0074ae                  _USBIncrement1msInternalTimers
-                  0x0074d8                  _USBGet1msTickCount
-                  0x0074f2                  _APP_DeviceCustomHIDInitialize
-                  0x00750c                  _APP_DeviceCustomHIDTasks
-                  0x007c5c                  _I2C2_IdleCheck
-                  0x007c74                  _I2C2_Initialize
-                  0x007c88                  _I2C2_Start
-                  0x007cd8                  _I2C2_rStart
-                  0x007d28                  _I2C2_Stop
-                  0x007d42                  _I2C2_Send
-                  0x007d7c                  _I2C2_Receive
-                  0x007de4                  _I2C2_SlaveRead
-                  0x007e72                  _I2C2_SlaveWrite
-                  0x007eda                  _I2C2_TC358870_Read
-                  0x007f74                  _I2C2_TC358870_Write
-                  0x007fe8                  _i2c2_uh2cd_read8
-                  0x007ffe                  _i2c2_uh2cd_read16
-                  0x008036                  _i2c2_uh2cd_read32
-                  0x008114                  _i2c2_uh2cd_write8
-                  0x008130                  _i2c2_uh2cd_write16
-                  0x008156                  _i2c2_uh2cd_write32
-                  0x00819a                  _I2C1_IdleCheck
-                  0x0081c8                  _I2C1_Initialize
-                  0x0081dc                  _I2C1_Start
-                  0x00823c                  _I2C1_rStart
-                  0x00829c                  _I2C1_Stop
-                  0x0082be                  _I2C1_Send
-                  0x008300                  _I2C1_Receive
-                  0x0083b0                  _I2C1_SlaveRead
-                  0x008478                  _I2C1_SlaveWrite
-                  0x0084e0                  _I2C1_EEPROM_Read
-                  0x0085ac                  _I2C1_EEPROM_Write
-                  0x00862e                  _I2C1_Device_init
-                  0x00864e                  _I2C1_Device_Check
-                  0x0088ae                  _main
-                  0x008988                  _tc358870_dsi_reset
-                  0x0089a0                  _tc358870_init
-                  0x0089aa                  _tc358870
-                  0x008adc                  _Check_DDC
-                  0x008b12                  _test
-                  0x008c56                  _USBSleepOnSuspend
-                  0x008c7a                  _USBRemoteWakeupAssertBlocking
-                  0x008cf4                  _USBVBUSSessionValidStateGet
-                  0x008d7e                  _USBMaskAllUSBInterrupts
-                  0x008d98                  _USBRestoreUSBInterrupts
-                  0x008e72                  _bitflip16
-                  0x008fc6                  _Spi_LT1661_Set
-                  0x009040                  _OC2_Initialize
-                  0x009066                  _OC2_Tasks
-                  0x00907a                  _OC2_Start
-                  0x009094                  _OC2_Stop
-                  0x0090a2                  _OC2_SingleCompareValueSet
-                  0x0090ae                  _OC2_DualCompareValueSet
-                  0x0090c0                  _OC2_CentreAlignedPWMConfig
-                  0x0090d2                  _OC2_EdgeAlignedPWMConfig
-                  0x0090e4                  _OC2_SecondaryValueSet
-                  0x0090f0                  _OC2_PrimaryValueSet
-                  0x0090fc                  _OC2_IsCompareCycleComplete
-                  0x009114                  _OC2_FaultStatusGet
-                  0x00916a                  _OC2_FaultStatusClear
-                  0x00918e                  _OC2_ManualTriggerSet
-                  0x009196                  _OC2_TriggerStatusGet
-                  0x0091ae                  _OC2_TriggerStatusClear
-                  0x0091b6                  _OC3_Initialize
-                  0x0091dc                  _OC3_Tasks
-                  0x0091f0                  _OC3_Start
-                  0x00920a                  _OC3_Stop
-                  0x009218                  _OC3_SingleCompareValueSet
-                  0x009224                  _OC3_DualCompareValueSet
-                  0x009236                  _OC3_CentreAlignedPWMConfig
-                  0x009248                  _OC3_EdgeAlignedPWMConfig
-                  0x00925a                  _OC3_SecondaryValueSet
-                  0x009266                  _OC3_PrimaryValueSet
-                  0x009272                  _OC3_IsCompareCycleComplete
-                  0x00928a                  _OC3_FaultStatusGet
-                  0x0092e0                  _OC3_FaultStatusClear
-                  0x009304                  _OC3_ManualTriggerSet
-                  0x00930c                  _OC3_TriggerStatusGet
-                  0x009324                  _OC3_TriggerStatusClear
-                  0x00932c                  _OC1_Initialize
-                  0x009352                  _OC1_Tasks
-                  0x009364                  _OC1_Start
-                  0x00937e                  _OC1_Stop
-                  0x00938c                  _OC1_SingleCompareValueSet
-                  0x009398                  _OC1_DualCompareValueSet
-                  0x0093aa                  _OC1_CentreAlignedPWMConfig
-                  0x0093bc                  _OC1_EdgeAlignedPWMConfig
-                  0x0093ce                  _OC1_SecondaryValueSet
-                  0x0093da                  _OC1_PrimaryValueSet
-                  0x0093e6                  _OC1_IsCompareCycleComplete
-                  0x0093fe                  _OC1_FaultStatusGet
-                  0x009454                  _OC1_FaultStatusClear
-                  0x009478                  _OC1_ManualTriggerSet
-                  0x009480                  _OC1_TriggerStatusGet
-                  0x009498                  _OC1_TriggerStatusClear
-                  0x0094a0                  _SPI1_Initialize
-                  0x0094ae                  _SPI_Send_16
-                  0x0094e2                  _SPI1_Exchange
-                  0x009512                  _SPI1_ExchangeBuffer
-                  0x0095dc                  _SPI1_Exchange8bit
-                  0x0095ec                  _SPI1_Exchange8bitBuffer
-                  0x009600                  _SPI1_StatusGet
-                  0x009608                  _ADC1_Initialize
-                  0x009622                  _ADC1_Start
-                  0x00962a                  _ADC1_Stop
-                  0x009632                  _ADC1_ConversionResultBufferGet
-                  0x009664                  _ADC1_ConversionResultGet
-                  0x00966c                  _ADC1_IsConversionComplete
-                  0x009684                  _ADC1_ChannelSelect
-                  0x009696                  _ADC1_Tasks
-                  0x0096aa                  _adc_api
-                  0x0096c0                  _ADC_BLSENSOR_Read
-                  0x0096ec                  _ADC_CDS_Read
-                  0x009718                  _adxl350_init
-                  0x00978a                  _adxl350_xyz_read
-                  0x0097b8                  _tmp102_init
-                  0x0097c4                  _tmp102_read_temp
-                  0x009824                  _USBCheckHIDRequest
-                  0x009904                  _TMR5_Initialize
-                  0x009928                  _TMR5_Period16BitSet
-                  0x00993a                  _TMR5_Period16BitGet
-                  0x009942                  _TMR5_Counter16BitSet
-                  0x009954                  _TMR5_Counter16BitGet
-                  0x009980                  _TMR5_SetInterruptHandler
-                  0x009990                  _TMR5_Start
-                  0x0099a0                  _TMR5_Stop
-                  0x0099aa                  _TMR5_GetElapsedThenClear
-                  0x0099c2                  _TMR5_SoftwareCounterGet
-                  0x0099ce                  _TMR5_SoftwareCounterClear
-                  0x0099da                  _Power_Reset_Init
-                  0x0099f4                  _Power_On
-                  0x009a2a                  _Power_Off
-                  0x009a44                  _Santek_LCD_Reset
-                  0x009a62                  _Ortustech_LCD_Reset
-                  0x009a80                  _TC358870_Reset
-                  0x009a9e                  _PIN_MANAGER_Initialize
-                  0x009bc6                  _USER_USB_CALLBACK_EVENT_HANDLER
-                  0x009c2a                  _INTERRUPT_Initialize
-                  0x009c6c                  _CLOCK_Initialize
-                  0x009cae                  _EXT_INT_Initialize
-                  0x009cc2                  ___delay32
-                  0x009cde                  _SYSTEM_Initialize
-                  0x009d0c                  _OSCILLATOR_Initialize
+                  0x001f90                  __INT0Interrupt
+                  0x001fae                  __INT1Interrupt
+                  0x001fcc                  __OscillatorFail
+                  0x001fd4                  __StackError
+                  0x001fde                  __AddressError
+                  0x001fe6                  __MathError
+                  0x001fee                  __T5Interrupt
+                  0x002024                  __MI2C1Interrupt
+                  0x002046                  __MI2C2Interrupt
+                  0x002068                  __USB1Interrupt
+                  0x00208c                  __T2Interrupt
+                  0x0020c2                  __DefaultInterrupt
+                  0x0020c8                  ___divsi3
+                  0x0020e6                  ___fixsfsi
+                  0x002128                  ___floatsisf
+                  0x00212e                  __funpack
+                  0x002158                  ___udivsi3
+                  0x002178                  ___mulsf3x
+                  0x002178                  ___mulsf3
+                  0x002284                  __dnrmpackf
+                  0x0022d8                  __unpackdnrmf
+                  0x002336                  __typef
+                  0x00236a                  __propnanf
+                  0x00237c                  ___floatdisf
+                  0x00239c                  ___floatundisf
+                  0x0023fa                  __fpack
+                  0x002446                  _memcpy
+                  0x002454                  _memset
+                  0x00251c                  ___mulp32peds3
+                  0x00251c                  ___mulsi3
+                  0x00251c                  ___mulp32eds3
+                  0x002528                  _device_dsc
+                  0x00253a                  _configDescriptor1
+                  0x002564                  _sd000
+                  0x002568                  _sd001
+                  0x00259c                  _sd002
+                  0x0025ca                  _hid_rpt01
+                  0x0025e8                  _USB_CD_Ptr
+                  0x0025ea                  _USB_SD_Ptr
+                  0x0025f0                  _m_version
+                  0x0025f2                  _ortustech_RS1
+                  0x002cd4                  _ortustech_Check_HDMI_Cable
+                  0x002cfe                  _ortustech_Check_RS_Int
+                  0x002d70                  _ortustech_RS2_Ready
+                  0x002d82                  _ortustech_RS3
+                  0x00342c                  _ortustech_DO
+                  0x003614                  _ortustech_RS4
+                  0x003628                  _HDMI_TimChk
+                  0x0036fc                  _ortustech_LCDInit
+                  0x003bb2                  _turner_RS1
+                  0x0042e2                  _turner_RS3
+                  0x0049a6                  _DDC5V_Noinput
+                  0x005260                  _santek_ColorBar
+                  0x00564a                  _santek_RS1
+                  0x005d2c                  _santek_Check_HDMI_Cable
+                  0x005d56                  _santek_Check_RS_Int
+                  0x005ddc                  _santek_RS2_Ready
+                  0x005dee                  _santek_RS3
+                  0x0061fc                  _santek_DO
+                  0x006532                  _santek_RS4
+                  0x006544                  _santek_LCDOFF
+                  0x00655c                  _santek_LCDBrightness
+                  0x006596                  _USBDeviceInit
+                  0x006686                  _USBDeviceTasks
+                  0x00680c                  _USBEnableEndpoint
+                  0x006846                  _USBTransferOnePacket
+                  0x0068ec                  _USBStallEndpoint
+                  0x006986                  _USBCancelIO
+                  0x006a32                  _USBDeviceDetach
+                  0x006a3e                  _USBDeviceAttach
+                  0x006a72                  _USBCtrlEPAllowStatusStage
+                  0x006ae8                  _USBCtrlEPAllowDataStage
+                  0x0074e8                  _USBIncrement1msInternalTimers
+                  0x007512                  _USBGet1msTickCount
+                  0x00752c                  _APP_DeviceCustomHIDInitialize
+                  0x007546                  _APP_DeviceCustomHIDTasks
+                  0x007c7e                  _I2C2_IdleCheck
+                  0x007c96                  _I2C2_Initialize
+                  0x007caa                  _I2C2_Start
+                  0x007cfa                  _I2C2_rStart
+                  0x007d4a                  _I2C2_Stop
+                  0x007d64                  _I2C2_Send
+                  0x007d9e                  _I2C2_Receive
+                  0x007e06                  _I2C2_SlaveRead
+                  0x007e94                  _I2C2_SlaveWrite
+                  0x007efc                  _I2C2_TC358870_Read
+                  0x007f96                  _I2C2_TC358870_Write
+                  0x00800a                  _i2c2_uh2cd_read8
+                  0x008020                  _i2c2_uh2cd_read16
+                  0x008058                  _i2c2_uh2cd_read32
+                  0x008136                  _i2c2_uh2cd_write8
+                  0x008152                  _i2c2_uh2cd_write16
+                  0x008178                  _i2c2_uh2cd_write32
+                  0x0081bc                  _I2C1_IdleCheck
+                  0x0081ea                  _I2C1_Initialize
+                  0x0081fe                  _I2C1_Start
+                  0x00825e                  _I2C1_rStart
+                  0x0082be                  _I2C1_Stop
+                  0x0082e0                  _I2C1_Send
+                  0x008322                  _I2C1_Receive
+                  0x0083d2                  _I2C1_SlaveRead
+                  0x00849a                  _I2C1_SlaveWrite
+                  0x008502                  _I2C1_EEPROM_Read
+                  0x0085ce                  _I2C1_EEPROM_Write
+                  0x008650                  _I2C1_Device_init
+                  0x008670                  _I2C1_Device_Check
+                  0x0088d0                  _main
+                  0x0089ac                  _tc358870_dsi_reset
+                  0x0089c4                  _tc358870_init
+                  0x0089ce                  _tc358870
+                  0x008b02                  _Check_DDC
+                  0x008b38                  _test
+                  0x008c7c                  _USBSleepOnSuspend
+                  0x008ca0                  _USBRemoteWakeupAssertBlocking
+                  0x008d1a                  _USBVBUSSessionValidStateGet
+                  0x008da4                  _USBMaskAllUSBInterrupts
+                  0x008dbe                  _USBRestoreUSBInterrupts
+                  0x008e98                  _bitflip16
+                  0x008fec                  _Spi_LT1661_Set
+                  0x009066                  _OC2_Initialize
+                  0x00908c                  _OC2_Tasks
+                  0x0090a0                  _OC2_Start
+                  0x0090ba                  _OC2_Stop
+                  0x0090c8                  _OC2_SingleCompareValueSet
+                  0x0090d4                  _OC2_DualCompareValueSet
+                  0x0090e6                  _OC2_CentreAlignedPWMConfig
+                  0x0090f8                  _OC2_EdgeAlignedPWMConfig
+                  0x00910a                  _OC2_SecondaryValueSet
+                  0x009116                  _OC2_PrimaryValueSet
+                  0x009122                  _OC2_IsCompareCycleComplete
+                  0x00913a                  _OC2_FaultStatusGet
+                  0x009190                  _OC2_FaultStatusClear
+                  0x0091b4                  _OC2_ManualTriggerSet
+                  0x0091bc                  _OC2_TriggerStatusGet
+                  0x0091d4                  _OC2_TriggerStatusClear
+                  0x0091dc                  _OC3_Initialize
+                  0x009202                  _OC3_Tasks
+                  0x009216                  _OC3_Start
+                  0x009230                  _OC3_Stop
+                  0x00923e                  _OC3_SingleCompareValueSet
+                  0x00924a                  _OC3_DualCompareValueSet
+                  0x00925c                  _OC3_CentreAlignedPWMConfig
+                  0x00926e                  _OC3_EdgeAlignedPWMConfig
+                  0x009280                  _OC3_SecondaryValueSet
+                  0x00928c                  _OC3_PrimaryValueSet
+                  0x009298                  _OC3_IsCompareCycleComplete
+                  0x0092b0                  _OC3_FaultStatusGet
+                  0x009306                  _OC3_FaultStatusClear
+                  0x00932a                  _OC3_ManualTriggerSet
+                  0x009332                  _OC3_TriggerStatusGet
+                  0x00934a                  _OC3_TriggerStatusClear
+                  0x009352                  _OC1_Initialize
+                  0x009378                  _OC1_Tasks
+                  0x00938a                  _OC1_Start
+                  0x0093a4                  _OC1_Stop
+                  0x0093b2                  _OC1_SingleCompareValueSet
+                  0x0093be                  _OC1_DualCompareValueSet
+                  0x0093d0                  _OC1_CentreAlignedPWMConfig
+                  0x0093e2                  _OC1_EdgeAlignedPWMConfig
+                  0x0093f4                  _OC1_SecondaryValueSet
+                  0x009400                  _OC1_PrimaryValueSet
+                  0x00940c                  _OC1_IsCompareCycleComplete
+                  0x009424                  _OC1_FaultStatusGet
+                  0x00947a                  _OC1_FaultStatusClear
+                  0x00949e                  _OC1_ManualTriggerSet
+                  0x0094a6                  _OC1_TriggerStatusGet
+                  0x0094be                  _OC1_TriggerStatusClear
+                  0x0094c6                  _SPI1_Initialize
+                  0x0094d4                  _SPI_Send_16
+                  0x009508                  _SPI1_Exchange
+                  0x009538                  _SPI1_ExchangeBuffer
+                  0x009602                  _SPI1_Exchange8bit
+                  0x009612                  _SPI1_Exchange8bitBuffer
+                  0x009626                  _SPI1_StatusGet
+                  0x00962e                  _ADC1_Initialize
+                  0x009648                  _ADC1_Start
+                  0x009650                  _ADC1_Stop
+                  0x009658                  _ADC1_ConversionResultBufferGet
+                  0x00968a                  _ADC1_ConversionResultGet
+                  0x009692                  _ADC1_IsConversionComplete
+                  0x0096aa                  _ADC1_ChannelSelect
+                  0x0096bc                  _ADC1_Tasks
+                  0x0096d0                  _adc_api
+                  0x0096e6                  _ADC_BLSENSOR_Read
+                  0x009712                  _ADC_CDS_Read
+                  0x00973e                  _adxl350_init
+                  0x0097b0                  _adxl350_xyz_read
+                  0x0097de                  _tmp102_init
+                  0x0097ea                  _tmp102_read_temp
+                  0x00984a                  _Power_Reset_Init
+                  0x009860                  _Power_On
+                  0x009896                  _Power_Off
+                  0x0098b0                  _Santek_LCD_Reset
+                  0x0098ce                  _Ortustech_LCD_Reset
+                  0x0098ec                  _TC358870_Reset
+                  0x00990a                  _System_Shutdown
+                  0x009932                  _USBCheckHIDRequest
+                  0x009a12                  _TMR5_Initialize
+                  0x009a36                  _TMR5_Period16BitSet
+                  0x009a48                  _TMR5_Period16BitGet
+                  0x009a50                  _TMR5_Counter16BitSet
+                  0x009a62                  _TMR5_Counter16BitGet
+                  0x009a8e                  _TMR5_SetInterruptHandler
+                  0x009a9e                  _TMR5_Start
+                  0x009aae                  _TMR5_Stop
+                  0x009ab8                  _TMR5_GetElapsedThenClear
+                  0x009ad0                  _TMR5_SoftwareCounterGet
+                  0x009adc                  _TMR5_SoftwareCounterClear
+                  0x009ae8                  _TMR2_Initialize
+                  0x009b0a                  _TMR2_Period16BitSet
+                  0x009b1c                  _TMR2_Period16BitGet
+                  0x009b24                  _TMR2_Counter16BitSet
+                  0x009b36                  _TMR2_Counter16BitGet
+                  0x009b54                  _TMR2_SetInterruptHandler
+                  0x009b64                  _TMR2_Start
+                  0x009b74                  _TMR2_Stop
+                  0x009b7e                  _TMR2_GetElapsedThenClear
+                  0x009b96                  _TMR2_SoftwareCounterGet
+                  0x009ba2                  _TMR2_SoftwareCounterClear
+                  0x009c48                  _PIN_MANAGER_Initialize
+                  0x009cda                  _USER_USB_CALLBACK_EVENT_HANDLER
+                  0x009d3e                  _INTERRUPT_Initialize
+                  0x009d8a                  _CLOCK_Initialize
+                  0x009dd0                  _EXT_INT_Initialize
+                  0x009de4                  ___delay32
+                  0x009e00                  _SYSTEM_Initialize
+                  0x009e2e                  _OSCILLATOR_Initialize
 
 External Symbols in Program Memory (by name):
 
-                  0x009684                  _ADC1_ChannelSelect
-                  0x009632                  _ADC1_ConversionResultBufferGet
-                  0x009664                  _ADC1_ConversionResultGet
-                  0x009608                  _ADC1_Initialize
-                  0x00966c                  _ADC1_IsConversionComplete
-                  0x009622                  _ADC1_Start
-                  0x00962a                  _ADC1_Stop
-                  0x009696                  _ADC1_Tasks
-                  0x0096c0                  _ADC_BLSENSOR_Read
-                  0x0096ec                  _ADC_CDS_Read
-                  0x0074f2                  _APP_DeviceCustomHIDInitialize
-                  0x00750c                  _APP_DeviceCustomHIDTasks
-                  0x009c6c                  _CLOCK_Initialize
-                  0x008adc                  _Check_DDC
-                  0x00496c                  _DDC5V_Noinput
-                  0x009cae                  _EXT_INT_Initialize
-                  0x0035ee                  _HDMI_TimChk
-                  0x00864e                  _I2C1_Device_Check
-                  0x00862e                  _I2C1_Device_init
-                  0x0084e0                  _I2C1_EEPROM_Read
-                  0x0085ac                  _I2C1_EEPROM_Write
-                  0x00819a                  _I2C1_IdleCheck
-                  0x0081c8                  _I2C1_Initialize
-                  0x008300                  _I2C1_Receive
-                  0x0082be                  _I2C1_Send
-                  0x0083b0                  _I2C1_SlaveRead
-                  0x008478                  _I2C1_SlaveWrite
-                  0x0081dc                  _I2C1_Start
-                  0x00829c                  _I2C1_Stop
-                  0x00823c                  _I2C1_rStart
-                  0x007c5c                  _I2C2_IdleCheck
-                  0x007c74                  _I2C2_Initialize
-                  0x007d7c                  _I2C2_Receive
-                  0x007d42                  _I2C2_Send
-                  0x007de4                  _I2C2_SlaveRead
-                  0x007e72                  _I2C2_SlaveWrite
-                  0x007c88                  _I2C2_Start
-                  0x007d28                  _I2C2_Stop
-                  0x007eda                  _I2C2_TC358870_Read
-                  0x007f74                  _I2C2_TC358870_Write
-                  0x007cd8                  _I2C2_rStart
-                  0x009c2a                  _INTERRUPT_Initialize
-                  0x0093aa                  _OC1_CentreAlignedPWMConfig
-                  0x009398                  _OC1_DualCompareValueSet
-                  0x0093bc                  _OC1_EdgeAlignedPWMConfig
-                  0x009454                  _OC1_FaultStatusClear
-                  0x0093fe                  _OC1_FaultStatusGet
-                  0x00932c                  _OC1_Initialize
-                  0x0093e6                  _OC1_IsCompareCycleComplete
-                  0x009478                  _OC1_ManualTriggerSet
-                  0x0093da                  _OC1_PrimaryValueSet
-                  0x0093ce                  _OC1_SecondaryValueSet
-                  0x00938c                  _OC1_SingleCompareValueSet
-                  0x009364                  _OC1_Start
-                  0x00937e                  _OC1_Stop
-                  0x009352                  _OC1_Tasks
-                  0x009498                  _OC1_TriggerStatusClear
-                  0x009480                  _OC1_TriggerStatusGet
-                  0x0090c0                  _OC2_CentreAlignedPWMConfig
-                  0x0090ae                  _OC2_DualCompareValueSet
-                  0x0090d2                  _OC2_EdgeAlignedPWMConfig
-                  0x00916a                  _OC2_FaultStatusClear
-                  0x009114                  _OC2_FaultStatusGet
-                  0x009040                  _OC2_Initialize
-                  0x0090fc                  _OC2_IsCompareCycleComplete
-                  0x00918e                  _OC2_ManualTriggerSet
-                  0x0090f0                  _OC2_PrimaryValueSet
-                  0x0090e4                  _OC2_SecondaryValueSet
-                  0x0090a2                  _OC2_SingleCompareValueSet
-                  0x00907a                  _OC2_Start
-                  0x009094                  _OC2_Stop
-                  0x009066                  _OC2_Tasks
-                  0x0091ae                  _OC2_TriggerStatusClear
-                  0x009196                  _OC2_TriggerStatusGet
-                  0x009236                  _OC3_CentreAlignedPWMConfig
-                  0x009224                  _OC3_DualCompareValueSet
-                  0x009248                  _OC3_EdgeAlignedPWMConfig
-                  0x0092e0                  _OC3_FaultStatusClear
-                  0x00928a                  _OC3_FaultStatusGet
-                  0x0091b6                  _OC3_Initialize
-                  0x009272                  _OC3_IsCompareCycleComplete
-                  0x009304                  _OC3_ManualTriggerSet
-                  0x009266                  _OC3_PrimaryValueSet
-                  0x00925a                  _OC3_SecondaryValueSet
-                  0x009218                  _OC3_SingleCompareValueSet
-                  0x0091f0                  _OC3_Start
-                  0x00920a                  _OC3_Stop
-                  0x0091dc                  _OC3_Tasks
-                  0x009324                  _OC3_TriggerStatusClear
-                  0x00930c                  _OC3_TriggerStatusGet
-                  0x009d0c                  _OSCILLATOR_Initialize
-                  0x009a62                  _Ortustech_LCD_Reset
-                  0x009a9e                  _PIN_MANAGER_Initialize
-                  0x009a2a                  _Power_Off
-                  0x0099f4                  _Power_On
-                  0x0099da                  _Power_Reset_Init
-                  0x0094e2                  _SPI1_Exchange
-                  0x0095dc                  _SPI1_Exchange8bit
-                  0x0095ec                  _SPI1_Exchange8bitBuffer
-                  0x009512                  _SPI1_ExchangeBuffer
-                  0x0094a0                  _SPI1_Initialize
-                  0x009600                  _SPI1_StatusGet
-                  0x0094ae                  _SPI_Send_16
-                  0x009cde                  _SYSTEM_Initialize
-                  0x009a44                  _Santek_LCD_Reset
-                  0x008fc6                  _Spi_LT1661_Set
-                  0x009a80                  _TC358870_Reset
-                  0x009954                  _TMR5_Counter16BitGet
-                  0x009942                  _TMR5_Counter16BitSet
-                  0x0099aa                  _TMR5_GetElapsedThenClear
-                  0x009904                  _TMR5_Initialize
-                  0x00993a                  _TMR5_Period16BitGet
-                  0x009928                  _TMR5_Period16BitSet
-                  0x009980                  _TMR5_SetInterruptHandler
-                  0x0099ce                  _TMR5_SoftwareCounterClear
-                  0x0099c2                  _TMR5_SoftwareCounterGet
-                  0x009990                  _TMR5_Start
-                  0x0099a0                  _TMR5_Stop
-                  0x00694c                  _USBCancelIO
-                  0x009824                  _USBCheckHIDRequest
-                  0x006aae                  _USBCtrlEPAllowDataStage
-                  0x006a38                  _USBCtrlEPAllowStatusStage
-                  0x006a04                  _USBDeviceAttach
-                  0x0069f8                  _USBDeviceDetach
-                  0x00655c                  _USBDeviceInit
-                  0x00664c                  _USBDeviceTasks
-                  0x0067d2                  _USBEnableEndpoint
-                  0x0074d8                  _USBGet1msTickCount
-                  0x0074ae                  _USBIncrement1msInternalTimers
-                  0x008d7e                  _USBMaskAllUSBInterrupts
-                  0x008c7a                  _USBRemoteWakeupAssertBlocking
-                  0x008d98                  _USBRestoreUSBInterrupts
-                  0x008c56                  _USBSleepOnSuspend
-                  0x0068b2                  _USBStallEndpoint
-                  0x00680c                  _USBTransferOnePacket
-                  0x008cf4                  _USBVBUSSessionValidStateGet
-                  0x0025ae                  _USB_CD_Ptr
-                  0x0025b0                  _USB_SD_Ptr
-                  0x009bc6                  _USER_USB_CALLBACK_EVENT_HANDLER
-                  0x001fda                  __AddressError
+                  0x0096aa                  _ADC1_ChannelSelect
+                  0x009658                  _ADC1_ConversionResultBufferGet
+                  0x00968a                  _ADC1_ConversionResultGet
+                  0x00962e                  _ADC1_Initialize
+                  0x009692                  _ADC1_IsConversionComplete
+                  0x009648                  _ADC1_Start
+                  0x009650                  _ADC1_Stop
+                  0x0096bc                  _ADC1_Tasks
+                  0x0096e6                  _ADC_BLSENSOR_Read
+                  0x009712                  _ADC_CDS_Read
+                  0x00752c                  _APP_DeviceCustomHIDInitialize
+                  0x007546                  _APP_DeviceCustomHIDTasks
+                  0x009d8a                  _CLOCK_Initialize
+                  0x008b02                  _Check_DDC
+                  0x0049a6                  _DDC5V_Noinput
+                  0x009dd0                  _EXT_INT_Initialize
+                  0x003628                  _HDMI_TimChk
+                  0x008670                  _I2C1_Device_Check
+                  0x008650                  _I2C1_Device_init
+                  0x008502                  _I2C1_EEPROM_Read
+                  0x0085ce                  _I2C1_EEPROM_Write
+                  0x0081bc                  _I2C1_IdleCheck
+                  0x0081ea                  _I2C1_Initialize
+                  0x008322                  _I2C1_Receive
+                  0x0082e0                  _I2C1_Send
+                  0x0083d2                  _I2C1_SlaveRead
+                  0x00849a                  _I2C1_SlaveWrite
+                  0x0081fe                  _I2C1_Start
+                  0x0082be                  _I2C1_Stop
+                  0x00825e                  _I2C1_rStart
+                  0x007c7e                  _I2C2_IdleCheck
+                  0x007c96                  _I2C2_Initialize
+                  0x007d9e                  _I2C2_Receive
+                  0x007d64                  _I2C2_Send
+                  0x007e06                  _I2C2_SlaveRead
+                  0x007e94                  _I2C2_SlaveWrite
+                  0x007caa                  _I2C2_Start
+                  0x007d4a                  _I2C2_Stop
+                  0x007efc                  _I2C2_TC358870_Read
+                  0x007f96                  _I2C2_TC358870_Write
+                  0x007cfa                  _I2C2_rStart
+                  0x009d3e                  _INTERRUPT_Initialize
+                  0x0093d0                  _OC1_CentreAlignedPWMConfig
+                  0x0093be                  _OC1_DualCompareValueSet
+                  0x0093e2                  _OC1_EdgeAlignedPWMConfig
+                  0x00947a                  _OC1_FaultStatusClear
+                  0x009424                  _OC1_FaultStatusGet
+                  0x009352                  _OC1_Initialize
+                  0x00940c                  _OC1_IsCompareCycleComplete
+                  0x00949e                  _OC1_ManualTriggerSet
+                  0x009400                  _OC1_PrimaryValueSet
+                  0x0093f4                  _OC1_SecondaryValueSet
+                  0x0093b2                  _OC1_SingleCompareValueSet
+                  0x00938a                  _OC1_Start
+                  0x0093a4                  _OC1_Stop
+                  0x009378                  _OC1_Tasks
+                  0x0094be                  _OC1_TriggerStatusClear
+                  0x0094a6                  _OC1_TriggerStatusGet
+                  0x0090e6                  _OC2_CentreAlignedPWMConfig
+                  0x0090d4                  _OC2_DualCompareValueSet
+                  0x0090f8                  _OC2_EdgeAlignedPWMConfig
+                  0x009190                  _OC2_FaultStatusClear
+                  0x00913a                  _OC2_FaultStatusGet
+                  0x009066                  _OC2_Initialize
+                  0x009122                  _OC2_IsCompareCycleComplete
+                  0x0091b4                  _OC2_ManualTriggerSet
+                  0x009116                  _OC2_PrimaryValueSet
+                  0x00910a                  _OC2_SecondaryValueSet
+                  0x0090c8                  _OC2_SingleCompareValueSet
+                  0x0090a0                  _OC2_Start
+                  0x0090ba                  _OC2_Stop
+                  0x00908c                  _OC2_Tasks
+                  0x0091d4                  _OC2_TriggerStatusClear
+                  0x0091bc                  _OC2_TriggerStatusGet
+                  0x00925c                  _OC3_CentreAlignedPWMConfig
+                  0x00924a                  _OC3_DualCompareValueSet
+                  0x00926e                  _OC3_EdgeAlignedPWMConfig
+                  0x009306                  _OC3_FaultStatusClear
+                  0x0092b0                  _OC3_FaultStatusGet
+                  0x0091dc                  _OC3_Initialize
+                  0x009298                  _OC3_IsCompareCycleComplete
+                  0x00932a                  _OC3_ManualTriggerSet
+                  0x00928c                  _OC3_PrimaryValueSet
+                  0x009280                  _OC3_SecondaryValueSet
+                  0x00923e                  _OC3_SingleCompareValueSet
+                  0x009216                  _OC3_Start
+                  0x009230                  _OC3_Stop
+                  0x009202                  _OC3_Tasks
+                  0x00934a                  _OC3_TriggerStatusClear
+                  0x009332                  _OC3_TriggerStatusGet
+                  0x009e2e                  _OSCILLATOR_Initialize
+                  0x0098ce                  _Ortustech_LCD_Reset
+                  0x009c48                  _PIN_MANAGER_Initialize
+                  0x009896                  _Power_Off
+                  0x009860                  _Power_On
+                  0x00984a                  _Power_Reset_Init
+                  0x009508                  _SPI1_Exchange
+                  0x009602                  _SPI1_Exchange8bit
+                  0x009612                  _SPI1_Exchange8bitBuffer
+                  0x009538                  _SPI1_ExchangeBuffer
+                  0x0094c6                  _SPI1_Initialize
+                  0x009626                  _SPI1_StatusGet
+                  0x0094d4                  _SPI_Send_16
+                  0x009e00                  _SYSTEM_Initialize
+                  0x0098b0                  _Santek_LCD_Reset
+                  0x008fec                  _Spi_LT1661_Set
+                  0x00990a                  _System_Shutdown
+                  0x0098ec                  _TC358870_Reset
+                  0x009b36                  _TMR2_Counter16BitGet
+                  0x009b24                  _TMR2_Counter16BitSet
+                  0x009b7e                  _TMR2_GetElapsedThenClear
+                  0x009ae8                  _TMR2_Initialize
+                  0x009b1c                  _TMR2_Period16BitGet
+                  0x009b0a                  _TMR2_Period16BitSet
+                  0x009b54                  _TMR2_SetInterruptHandler
+                  0x009ba2                  _TMR2_SoftwareCounterClear
+                  0x009b96                  _TMR2_SoftwareCounterGet
+                  0x009b64                  _TMR2_Start
+                  0x009b74                  _TMR2_Stop
+                  0x009a62                  _TMR5_Counter16BitGet
+                  0x009a50                  _TMR5_Counter16BitSet
+                  0x009ab8                  _TMR5_GetElapsedThenClear
+                  0x009a12                  _TMR5_Initialize
+                  0x009a48                  _TMR5_Period16BitGet
+                  0x009a36                  _TMR5_Period16BitSet
+                  0x009a8e                  _TMR5_SetInterruptHandler
+                  0x009adc                  _TMR5_SoftwareCounterClear
+                  0x009ad0                  _TMR5_SoftwareCounterGet
+                  0x009a9e                  _TMR5_Start
+                  0x009aae                  _TMR5_Stop
+                  0x006986                  _USBCancelIO
+                  0x009932                  _USBCheckHIDRequest
+                  0x006ae8                  _USBCtrlEPAllowDataStage
+                  0x006a72                  _USBCtrlEPAllowStatusStage
+                  0x006a3e                  _USBDeviceAttach
+                  0x006a32                  _USBDeviceDetach
+                  0x006596                  _USBDeviceInit
+                  0x006686                  _USBDeviceTasks
+                  0x00680c                  _USBEnableEndpoint
+                  0x007512                  _USBGet1msTickCount
+                  0x0074e8                  _USBIncrement1msInternalTimers
+                  0x008da4                  _USBMaskAllUSBInterrupts
+                  0x008ca0                  _USBRemoteWakeupAssertBlocking
+                  0x008dbe                  _USBRestoreUSBInterrupts
+                  0x008c7c                  _USBSleepOnSuspend
+                  0x0068ec                  _USBStallEndpoint
+                  0x006846                  _USBTransferOnePacket
+                  0x008d1a                  _USBVBUSSessionValidStateGet
+                  0x0025e8                  _USB_CD_Ptr
+                  0x0025ea                  _USB_SD_Ptr
+                  0x009cda                  _USER_USB_CALLBACK_EVENT_HANDLER
+                  0x001fde                  __AddressError
                   0x001ebc                  __DEFAULT_VECTOR
-                  0x002088                  __DefaultInterrupt
-                  0x001f8c                  __INT0Interrupt
-                  0x001faa                  __INT1Interrupt
-                  0x002020                  __MI2C1Interrupt
-                  0x002042                  __MI2C2Interrupt
-                  0x001fe2                  __MathError
-                  0x001fc8                  __OscillatorFail
-                  0x001fd0                  __StackError
-                  0x001fea                  __T5Interrupt
-                  0x002064                  __USB1Interrupt
-                  0x009cc2                  ___delay32
-                  0x00208e                  ___divsi3
-                  0x0020ac                  ___fixsfsi
-                  0x002342                  ___floatdisf
-                  0x0020ee                  ___floatsisf
-                  0x002362                  ___floatundisf
-                  0x0024e2                  ___mulp32eds3
-                  0x0024e2                  ___mulp32peds3
-                  0x00213e                  ___mulsf3
-                  0x00213e                  ___mulsf3x
-                  0x0024e2                  ___mulsi3
-                  0x00211e                  ___udivsi3
+                  0x0020c2                  __DefaultInterrupt
+                  0x001f90                  __INT0Interrupt
+                  0x001fae                  __INT1Interrupt
+                  0x002024                  __MI2C1Interrupt
+                  0x002046                  __MI2C2Interrupt
+                  0x001fe6                  __MathError
+                  0x001fcc                  __OscillatorFail
+                  0x001fd4                  __StackError
+                  0x00208c                  __T2Interrupt
+                  0x001fee                  __T5Interrupt
+                  0x002068                  __USB1Interrupt
+                  0x009de4                  ___delay32
+                  0x0020c8                  ___divsi3
+                  0x0020e6                  ___fixsfsi
+                  0x00237c                  ___floatdisf
+                  0x002128                  ___floatsisf
+                  0x00239c                  ___floatundisf
+                  0x00251c                  ___mulp32eds3
+                  0x00251c                  ___mulp32peds3
+                  0x002178                  ___mulsf3
+                  0x002178                  ___mulsf3x
+                  0x00251c                  ___mulsi3
+                  0x002158                  ___udivsi3
                   0x001f12                  __data_init
                   0x001f12                  __data_init_standard
-                  0x00224a                  __dnrmpackf
-                  0x0023c0                  __fpack
-                  0x0020f4                  __funpack
-                  0x002330                  __propnanf
+                  0x002284                  __dnrmpackf
+                  0x0023fa                  __fpack
+                  0x00212e                  __funpack
+                  0x00236a                  __propnanf
                   0x001efc                  __psv_init
                   0x001ec0                  __resetPRI
-                  0x0022fc                  __typef
-                  0x00229e                  __unpackdnrmf
-                  0x0096aa                  _adc_api
-                  0x009718                  _adxl350_init
-                  0x00978a                  _adxl350_xyz_read
-                  0x008e72                  _bitflip16
-                  0x002500                  _configDescriptor1
-                  0x0024ee                  _device_dsc
-                  0x002590                  _hid_rpt01
-                  0x007ffe                  _i2c2_uh2cd_read16
-                  0x008036                  _i2c2_uh2cd_read32
-                  0x007fe8                  _i2c2_uh2cd_read8
-                  0x008130                  _i2c2_uh2cd_write16
-                  0x008156                  _i2c2_uh2cd_write32
-                  0x008114                  _i2c2_uh2cd_write8
-                  0x0025b6                  _m_version
-                  0x0088ae                  _main
-                  0x00240c                  _memcpy
-                  0x00241a                  _memset
-                  0x002c9a                  _ortustech_Check_HDMI_Cable
-                  0x002cc4                  _ortustech_Check_RS_Int
-                  0x0033f2                  _ortustech_DO
-                  0x0036c2                  _ortustech_LCDInit
-                  0x0025b8                  _ortustech_RS1
-                  0x002d36                  _ortustech_RS2_Ready
-                  0x002d48                  _ortustech_RS3
-                  0x0035da                  _ortustech_RS4
-                  0x005cf2                  _santek_Check_HDMI_Cable
-                  0x005d1c                  _santek_Check_RS_Int
-                  0x005226                  _santek_ColorBar
-                  0x0061c2                  _santek_DO
-                  0x006522                  _santek_LCDBrightness
-                  0x00650a                  _santek_LCDOFF
-                  0x005610                  _santek_RS1
-                  0x005da2                  _santek_RS2_Ready
-                  0x005db4                  _santek_RS3
-                  0x0064f8                  _santek_RS4
-                  0x00252a                  _sd000
-                  0x00252e                  _sd001
-                  0x002562                  _sd002
-                  0x0089aa                  _tc358870
-                  0x008988                  _tc358870_dsi_reset
-                  0x0089a0                  _tc358870_init
-                  0x008b12                  _test
-                  0x0097b8                  _tmp102_init
-                  0x0097c4                  _tmp102_read_temp
-                  0x003b78                  _turner_RS1
-                  0x0042a8                  _turner_RS3
+                  0x002336                  __typef
+                  0x0022d8                  __unpackdnrmf
+                  0x0096d0                  _adc_api
+                  0x00973e                  _adxl350_init
+                  0x0097b0                  _adxl350_xyz_read
+                  0x008e98                  _bitflip16
+                  0x00253a                  _configDescriptor1
+                  0x002528                  _device_dsc
+                  0x0025ca                  _hid_rpt01
+                  0x008020                  _i2c2_uh2cd_read16
+                  0x008058                  _i2c2_uh2cd_read32
+                  0x00800a                  _i2c2_uh2cd_read8
+                  0x008152                  _i2c2_uh2cd_write16
+                  0x008178                  _i2c2_uh2cd_write32
+                  0x008136                  _i2c2_uh2cd_write8
+                  0x0025f0                  _m_version
+                  0x0088d0                  _main
+                  0x002446                  _memcpy
+                  0x002454                  _memset
+                  0x002cd4                  _ortustech_Check_HDMI_Cable
+                  0x002cfe                  _ortustech_Check_RS_Int
+                  0x00342c                  _ortustech_DO
+                  0x0036fc                  _ortustech_LCDInit
+                  0x0025f2                  _ortustech_RS1
+                  0x002d70                  _ortustech_RS2_Ready
+                  0x002d82                  _ortustech_RS3
+                  0x003614                  _ortustech_RS4
+                  0x005d2c                  _santek_Check_HDMI_Cable
+                  0x005d56                  _santek_Check_RS_Int
+                  0x005260                  _santek_ColorBar
+                  0x0061fc                  _santek_DO
+                  0x00655c                  _santek_LCDBrightness
+                  0x006544                  _santek_LCDOFF
+                  0x00564a                  _santek_RS1
+                  0x005ddc                  _santek_RS2_Ready
+                  0x005dee                  _santek_RS3
+                  0x006532                  _santek_RS4
+                  0x002564                  _sd000
+                  0x002568                  _sd001
+                  0x00259c                  _sd002
+                  0x0089ce                  _tc358870
+                  0x0089ac                  _tc358870_dsi_reset
+                  0x0089c4                  _tc358870_init
+                  0x008b38                  _test
+                  0x0097de                  _tmp102_init
+                  0x0097ea                  _tmp102_read_temp
+                  0x003bb2                  _turner_RS1
+                  0x0042e2                  _turner_RS3
 
 Memory Configuration
 
@@ -818,6 +847,7 @@ LOAD build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
 LOAD build/app_only/production/mcc_generated_files/oc1.o
 LOAD build/app_only/production/mcc_generated_files/oc2.o
 LOAD build/app_only/production/mcc_generated_files/oc3.o
+LOAD build/app_only/production/mcc_generated_files/tmr2.o
 LOAD build/app_only/production/app_device_custom_hid.o
 LOAD build/app_only/production/main.o
                     0x0001                  __MPLAB_BUILD = 0x1
@@ -842,7 +872,7 @@ LOAD c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x001ec0        0x62e
+.text             0x001ec0        0x668
  *(.init)
  .init            0x001ec0         0x4c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(crt0_standard.o)
                   0x001ec0                  __resetPRI
@@ -854,70 +884,72 @@ LOAD c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libfx-elf.a
  *(.user_init)
  *(.handle)
  *(.isr*)
- .isr.text        0x001f8c         0x3c build/app_only/production/mcc_generated_files/ext_int.o
-                  0x001f8c                  __INT0Interrupt
-                  0x001faa                  __INT1Interrupt
- .isr.text        0x001fc8         0x22 build/app_only/production/mcc_generated_files/traps.o
-                  0x001fc8                  __OscillatorFail
-                  0x001fd0                  __StackError
-                  0x001fda                  __AddressError
-                  0x001fe2                  __MathError
- .isr.text        0x001fea         0x36 build/app_only/production/mcc_generated_files/tmr5.o
-                  0x001fea                  __T5Interrupt
- .isr.text        0x002020         0x22 build/app_only/production/mcc_generated_files/thd_i2c1.o
-                  0x002020                  __MI2C1Interrupt
- .isr.text        0x002042         0x22 build/app_only/production/mcc_generated_files/thd_i2c2.o
-                  0x002042                  __MI2C2Interrupt
- .isr.text        0x002064         0x24 build/app_only/production/mcc_generated_files/system.o
-                  0x002064                  __USB1Interrupt
- .isr             0x002088          0x4 default_isr
-                  0x002088                  __DefaultInterrupt
+ .isr.text        0x001f90         0x3c build/app_only/production/mcc_generated_files/ext_int.o
+                  0x001f90                  __INT0Interrupt
+                  0x001fae                  __INT1Interrupt
+ .isr.text        0x001fcc         0x22 build/app_only/production/mcc_generated_files/traps.o
+                  0x001fcc                  __OscillatorFail
+                  0x001fd4                  __StackError
+                  0x001fde                  __AddressError
+                  0x001fe6                  __MathError
+ .isr.text        0x001fee         0x36 build/app_only/production/mcc_generated_files/tmr5.o
+                  0x001fee                  __T5Interrupt
+ .isr.text        0x002024         0x22 build/app_only/production/mcc_generated_files/thd_i2c1.o
+                  0x002024                  __MI2C1Interrupt
+ .isr.text        0x002046         0x22 build/app_only/production/mcc_generated_files/thd_i2c2.o
+                  0x002046                  __MI2C2Interrupt
+ .isr.text        0x002068         0x24 build/app_only/production/mcc_generated_files/system.o
+                  0x002068                  __USB1Interrupt
+ .isr.text        0x00208c         0x36 build/app_only/production/mcc_generated_files/tmr2.o
+                  0x00208c                  __T2Interrupt
+ .isr             0x0020c2          0x4 default_isr
+                  0x0020c2                  __DefaultInterrupt
  *(.libc)
  *(.libm)
  *(.libdsp)
  *(.lib*)
  .libpic30_crt_start_mode
-                  0x00208c          0x2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(crt_start_mode_normal.Meo)
-                  0x00208c                  __crt_start_mode
-                  0x00208c                  __crt_start_mode_normal
- .libm.divsi3     0x00208e         0x1e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsi3.XX_o)
-                  0x00208e                  ___divsi3
- .libm.fixsfsi    0x0020ac         0x42 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
-                  0x0020ac                  _(float, int, long long, short, float, short, int)
+                  0x0020c6          0x2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(crt_start_mode_normal.Meo)
+                  0x0020c6                  __crt_start_mode
+                  0x0020c6                  __crt_start_mode_normal
+ .libm.divsi3     0x0020c8         0x1e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsi3.XX_o)
+                  0x0020c8                  ___divsi3
+ .libm.fixsfsi    0x0020e6         0x42 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
+                  0x0020e6                  _(float, int, long long, short, float, short, int)
  .libm.floatsisf
-                  0x0020ee          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
-                  0x0020ee                  ___floatsisf
- .libm.funpack    0x0020f4         0x2a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
-                  0x0020f4                  __funpack
- .libm.udivsi3    0x00211e         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
-                  0x00211e                  ___udivsi3
- .libmx           0x00213e        0x10c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
-                  0x00213e                  ___mulsf3x
-                  0x00213e                  ___mulsf3
- .libmx           0x00224a         0x54 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
-                  0x00224a                  __dnrmpackf
- .libmx           0x00229e         0x5e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
-                  0x00229e                  __unpackdnrmf
- .libmx           0x0022fc         0x34 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
-                  0x0022fc                  __typef
- .libmx           0x002330         0x12 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
-                  0x002330                  __propnanf
+                  0x002128          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
+                  0x002128                  ___floatsisf
+ .libm.funpack    0x00212e         0x2a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+                  0x00212e                  __funpack
+ .libm.udivsi3    0x002158         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
+                  0x002158                  ___udivsi3
+ .libmx           0x002178        0x10c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
+                  0x002178                  ___mulsf3x
+                  0x002178                  ___mulsf3
+ .libmx           0x002284         0x54 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
+                  0x002284                  __dnrmpackf
+ .libmx           0x0022d8         0x5e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
+                  0x0022d8                  __unpackdnrmf
+ .libmx           0x002336         0x34 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
+                  0x002336                  __typef
+ .libmx           0x00236a         0x12 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
+                  0x00236a                  __propnanf
  .libm.floatdisf
-                  0x002342         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
-                  0x002342                  ___floatdisf
+                  0x00237c         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
+                  0x00237c                  ___floatdisf
  .libm.floatundisf
-                  0x002362         0x5e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
-                  0x002362                  ___floatundisf
- .libm.fpack      0x0023c0         0x4c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
-                  0x0023c0                  __fpack
- .libc.memcpy     0x00240c          0xe c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcpy.XX_o)
-                  0x00240c                  _memcpy
- .libc.memset     0x00241a         0xc8 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memset.XX_o)
-                  0x00241a                  _memset
- .libm.mulsi3     0x0024e2          0xc c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
-                  0x0024e2                  ___mulp32peds3
-                  0x0024e2                  ___mulsi3
-                  0x0024e2                  ___mulp32eds3
+                  0x00239c         0x5e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
+                  0x00239c                  ___floatundisf
+ .libm.fpack      0x0023fa         0x4c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
+                  0x0023fa                  __fpack
+ .libc.memcpy     0x002446          0xe c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcpy.XX_o)
+                  0x002446                  _memcpy
+ .libc.memset     0x002454         0xc8 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memset.XX_o)
+                  0x002454                  _memset
+ .libm.mulsi3     0x00251c          0xc c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+                  0x00251c                  ___mulp32peds3
+                  0x00251c                  ___mulsi3
+                  0x00251c                  ___mulp32eds3
 
 usercode
  *(usercode)
@@ -937,7 +969,7 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000      0x1112c
+.debug_info       0x000000      0x1242e
  *(.debug_info)
  .debug_info      0x000000        0x85d build/app_only/production/mcc_generated_files/usb/usb_descriptors.o
  .debug_info      0x00085d       0x273f build/app_only/production/mcc_generated_files/usb/usb_device.o
@@ -948,42 +980,43 @@ __CONFIG1
  .debug_info      0x005cd6        0x25e build/app_only/production/mcc_generated_files/clock.o
  .debug_info      0x005f34        0x856 build/app_only/production/mcc_generated_files/adc1.o
  .debug_info      0x00678a        0x7d4 build/app_only/production/mcc_generated_files/ext_int.o
- .debug_info      0x006f5e        0xb3e build/app_only/production/mcc_generated_files/interrupt_manager.o
- .debug_info      0x007a9c        0x17c build/app_only/production/mcc_generated_files/mcc.o
- .debug_info      0x007c18        0xaeb build/app_only/production/mcc_generated_files/pin_manager.o
- .debug_info      0x008703        0x396 build/app_only/production/mcc_generated_files/traps.o
- .debug_info      0x008a99        0x8a7 build/app_only/production/mcc_generated_files/tmr5.o
- .debug_info      0x009340        0xc4c build/app_only/production/mcc_generated_files/thd_i2c1.o
- .debug_info      0x009f8c        0xd8d build/app_only/production/mcc_generated_files/thd_i2c2.o
- .debug_info      0x00ad19        0x2eb build/app_only/production/mcc_generated_files/ADXL350_TMP102.o
- .debug_info      0x00b004        0x314 build/app_only/production/mcc_generated_files/ltc1661.o
- .debug_info      0x00b318        0x58a build/app_only/production/mcc_generated_files/power_reset.o
- .debug_info      0x00b8a2        0x329 build/app_only/production/mcc_generated_files/system.o
- .debug_info      0x00bbcb        0xaaf build/app_only/production/mcc_generated_files/TC358870.o
- .debug_info      0x00c67a        0x3af build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
- .debug_info      0x00ca29        0x3c7 build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
- .debug_info      0x00cdf0        0xab7 build/app_only/production/mcc_generated_files/oc1.o
- .debug_info      0x00d8a7        0xab7 build/app_only/production/mcc_generated_files/oc2.o
- .debug_info      0x00e35e        0xaae build/app_only/production/mcc_generated_files/oc3.o
- .debug_info      0x00ee0c       0x1087 build/app_only/production/app_device_custom_hid.o
- .debug_info      0x00fe93        0xa86 build/app_only/production/main.o
- .debug_info      0x010919         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsi3.XX_o)
- .debug_info      0x0109a5         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
- .debug_info      0x010a32         0x8f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
- .debug_info      0x010ac1         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
- .debug_info      0x010b4e         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
- .debug_info      0x010bdb         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
- .debug_info      0x010c78         0xa0 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
- .debug_info      0x010d18         0xa2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
- .debug_info      0x010dba         0x9c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
- .debug_info      0x010e56         0x9f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
- .debug_info      0x010ef5         0x8f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
- .debug_info      0x010f84         0x91 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
- .debug_info      0x011015         0x8b c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
- .debug_info      0x0110a0         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_info      0x006f5e        0xcab build/app_only/production/mcc_generated_files/interrupt_manager.o
+ .debug_info      0x007c09        0x32a build/app_only/production/mcc_generated_files/mcc.o
+ .debug_info      0x007f33        0x973 build/app_only/production/mcc_generated_files/pin_manager.o
+ .debug_info      0x0088a6        0x396 build/app_only/production/mcc_generated_files/traps.o
+ .debug_info      0x008c3c        0x8a7 build/app_only/production/mcc_generated_files/tmr5.o
+ .debug_info      0x0094e3        0xc4c build/app_only/production/mcc_generated_files/thd_i2c1.o
+ .debug_info      0x00a12f        0xd8d build/app_only/production/mcc_generated_files/thd_i2c2.o
+ .debug_info      0x00aebc        0x2eb build/app_only/production/mcc_generated_files/ADXL350_TMP102.o
+ .debug_info      0x00b1a7        0x314 build/app_only/production/mcc_generated_files/ltc1661.o
+ .debug_info      0x00b4bb        0xcdb build/app_only/production/mcc_generated_files/power_reset.o
+ .debug_info      0x00c196        0x329 build/app_only/production/mcc_generated_files/system.o
+ .debug_info      0x00c4bf        0xa8a build/app_only/production/mcc_generated_files/TC358870.o
+ .debug_info      0x00cf49        0x3af build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
+ .debug_info      0x00d2f8        0x3c7 build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
+ .debug_info      0x00d6bf        0xab7 build/app_only/production/mcc_generated_files/oc1.o
+ .debug_info      0x00e176        0xab7 build/app_only/production/mcc_generated_files/oc2.o
+ .debug_info      0x00ec2d        0xaae build/app_only/production/mcc_generated_files/oc3.o
+ .debug_info      0x00f6db        0xa73 build/app_only/production/mcc_generated_files/tmr2.o
+ .debug_info      0x01014e        0xea8 build/app_only/production/app_device_custom_hid.o
+ .debug_info      0x010ff6        0xc25 build/app_only/production/main.o
+ .debug_info      0x011c1b         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsi3.XX_o)
+ .debug_info      0x011ca7         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
+ .debug_info      0x011d34         0x8f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
+ .debug_info      0x011dc3         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+ .debug_info      0x011e50         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
+ .debug_info      0x011edd         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
+ .debug_info      0x011f7a         0xa0 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
+ .debug_info      0x01201a         0xa2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
+ .debug_info      0x0120bc         0x9c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
+ .debug_info      0x012158         0x9f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
+ .debug_info      0x0121f7         0x8f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
+ .debug_info      0x012286         0x91 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
+ .debug_info      0x012317         0x8b c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
+ .debug_info      0x0123a2         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000       0x2154
+.debug_abbrev     0x000000       0x239b
  *(.debug_abbrev)
  .debug_abbrev    0x000000         0xf3 build/app_only/production/mcc_generated_files/usb/usb_descriptors.o
  .debug_abbrev    0x0000f3        0x2b6 build/app_only/production/mcc_generated_files/usb/usb_device.o
@@ -995,40 +1028,41 @@ __CONFIG1
  .debug_abbrev    0x0008fa        0x198 build/app_only/production/mcc_generated_files/adc1.o
  .debug_abbrev    0x000a92         0xd0 build/app_only/production/mcc_generated_files/ext_int.o
  .debug_abbrev    0x000b62         0xb4 build/app_only/production/mcc_generated_files/interrupt_manager.o
- .debug_abbrev    0x000c16         0x34 build/app_only/production/mcc_generated_files/mcc.o
- .debug_abbrev    0x000c4a         0xd6 build/app_only/production/mcc_generated_files/pin_manager.o
- .debug_abbrev    0x000d20        0x100 build/app_only/production/mcc_generated_files/traps.o
- .debug_abbrev    0x000e20        0x18d build/app_only/production/mcc_generated_files/tmr5.o
- .debug_abbrev    0x000fad        0x1b1 build/app_only/production/mcc_generated_files/thd_i2c1.o
- .debug_abbrev    0x00115e        0x1cb build/app_only/production/mcc_generated_files/thd_i2c2.o
- .debug_abbrev    0x001329         0xc3 build/app_only/production/mcc_generated_files/ADXL350_TMP102.o
- .debug_abbrev    0x0013ec         0xac build/app_only/production/mcc_generated_files/ltc1661.o
- .debug_abbrev    0x001498         0x8a build/app_only/production/mcc_generated_files/power_reset.o
- .debug_abbrev    0x001522         0xd5 build/app_only/production/mcc_generated_files/system.o
- .debug_abbrev    0x0015f7        0x187 build/app_only/production/mcc_generated_files/TC358870.o
- .debug_abbrev    0x00177e         0xc8 build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
- .debug_abbrev    0x001846         0xad build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
- .debug_abbrev    0x0018f3        0x173 build/app_only/production/mcc_generated_files/oc1.o
- .debug_abbrev    0x001a66        0x173 build/app_only/production/mcc_generated_files/oc2.o
- .debug_abbrev    0x001bd9        0x14f build/app_only/production/mcc_generated_files/oc3.o
- .debug_abbrev    0x001d28        0x1ad build/app_only/production/app_device_custom_hid.o
- .debug_abbrev    0x001ed5        0x167 build/app_only/production/main.o
- .debug_abbrev    0x00203c         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsi3.XX_o)
- .debug_abbrev    0x002050         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
- .debug_abbrev    0x002064         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
- .debug_abbrev    0x002078         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
- .debug_abbrev    0x00208c         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
- .debug_abbrev    0x0020a0         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
- .debug_abbrev    0x0020b4         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
- .debug_abbrev    0x0020c8         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
- .debug_abbrev    0x0020dc         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
- .debug_abbrev    0x0020f0         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
- .debug_abbrev    0x002104         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
- .debug_abbrev    0x002118         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
- .debug_abbrev    0x00212c         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
- .debug_abbrev    0x002140         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_abbrev    0x000c16         0xb4 build/app_only/production/mcc_generated_files/mcc.o
+ .debug_abbrev    0x000cca         0xd6 build/app_only/production/mcc_generated_files/pin_manager.o
+ .debug_abbrev    0x000da0        0x100 build/app_only/production/mcc_generated_files/traps.o
+ .debug_abbrev    0x000ea0        0x18d build/app_only/production/mcc_generated_files/tmr5.o
+ .debug_abbrev    0x00102d        0x1b1 build/app_only/production/mcc_generated_files/thd_i2c1.o
+ .debug_abbrev    0x0011de        0x1cb build/app_only/production/mcc_generated_files/thd_i2c2.o
+ .debug_abbrev    0x0013a9         0xc3 build/app_only/production/mcc_generated_files/ADXL350_TMP102.o
+ .debug_abbrev    0x00146c         0xac build/app_only/production/mcc_generated_files/ltc1661.o
+ .debug_abbrev    0x001518         0xeb build/app_only/production/mcc_generated_files/power_reset.o
+ .debug_abbrev    0x001603         0xd5 build/app_only/production/mcc_generated_files/system.o
+ .debug_abbrev    0x0016d8        0x168 build/app_only/production/mcc_generated_files/TC358870.o
+ .debug_abbrev    0x001840         0xc8 build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
+ .debug_abbrev    0x001908         0xad build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
+ .debug_abbrev    0x0019b5        0x173 build/app_only/production/mcc_generated_files/oc1.o
+ .debug_abbrev    0x001b28        0x173 build/app_only/production/mcc_generated_files/oc2.o
+ .debug_abbrev    0x001c9b        0x14f build/app_only/production/mcc_generated_files/oc3.o
+ .debug_abbrev    0x001dea        0x1a2 build/app_only/production/mcc_generated_files/tmr2.o
+ .debug_abbrev    0x001f8c        0x166 build/app_only/production/app_device_custom_hid.o
+ .debug_abbrev    0x0020f2        0x191 build/app_only/production/main.o
+ .debug_abbrev    0x002283         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsi3.XX_o)
+ .debug_abbrev    0x002297         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
+ .debug_abbrev    0x0022ab         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
+ .debug_abbrev    0x0022bf         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+ .debug_abbrev    0x0022d3         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
+ .debug_abbrev    0x0022e7         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
+ .debug_abbrev    0x0022fb         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
+ .debug_abbrev    0x00230f         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
+ .debug_abbrev    0x002323         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
+ .debug_abbrev    0x002337         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
+ .debug_abbrev    0x00234b         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
+ .debug_abbrev    0x00235f         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
+ .debug_abbrev    0x002373         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
+ .debug_abbrev    0x002387         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
 
-.debug_line       0x000000       0x385d
+.debug_line       0x000000       0x3a92
  *(.debug_line)
  .debug_line      0x000000         0xc7 build/app_only/production/mcc_generated_files/usb/usb_descriptors.o
  .debug_line      0x0000c7        0x440 build/app_only/production/mcc_generated_files/usb/usb_device.o
@@ -1039,41 +1073,42 @@ __CONFIG1
  .debug_line      0x000a6d        0x121 build/app_only/production/mcc_generated_files/clock.o
  .debug_line      0x000b8e        0x164 build/app_only/production/mcc_generated_files/adc1.o
  .debug_line      0x000cf2        0x145 build/app_only/production/mcc_generated_files/ext_int.o
- .debug_line      0x000e37        0x12c build/app_only/production/mcc_generated_files/interrupt_manager.o
- .debug_line      0x000f63         0x49 build/app_only/production/mcc_generated_files/mcc.o
- .debug_line      0x000fac        0x139 build/app_only/production/mcc_generated_files/pin_manager.o
- .debug_line      0x0010e5        0x147 build/app_only/production/mcc_generated_files/traps.o
- .debug_line      0x00122c        0x167 build/app_only/production/mcc_generated_files/tmr5.o
- .debug_line      0x001393        0x21d build/app_only/production/mcc_generated_files/thd_i2c1.o
- .debug_line      0x0015b0        0x212 build/app_only/production/mcc_generated_files/thd_i2c2.o
- .debug_line      0x0017c2         0xcc build/app_only/production/mcc_generated_files/ADXL350_TMP102.o
- .debug_line      0x00188e        0x14f build/app_only/production/mcc_generated_files/ltc1661.o
- .debug_line      0x0019dd        0x158 build/app_only/production/mcc_generated_files/power_reset.o
- .debug_line      0x001b35        0x144 build/app_only/production/mcc_generated_files/system.o
- .debug_line      0x001c79        0x22d build/app_only/production/mcc_generated_files/TC358870.o
- .debug_line      0x001ea6        0x38c build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
- .debug_line      0x002232        0x7da build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
- .debug_line      0x002a0c        0x177 build/app_only/production/mcc_generated_files/oc1.o
- .debug_line      0x002b83        0x177 build/app_only/production/mcc_generated_files/oc2.o
- .debug_line      0x002cfa        0x177 build/app_only/production/mcc_generated_files/oc3.o
- .debug_line      0x002e71        0x2cf build/app_only/production/app_device_custom_hid.o
- .debug_line      0x003140        0x20d build/app_only/production/main.o
- .debug_line      0x00334d         0x43 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsi3.XX_o)
- .debug_line      0x003390         0x56 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
- .debug_line      0x0033e6         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
- .debug_line      0x003420         0x4a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
- .debug_line      0x00346a         0x45 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
- .debug_line      0x0034af         0xcc c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
- .debug_line      0x00357b         0x72 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
- .debug_line      0x0035ed         0x7a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
- .debug_line      0x003667         0x5e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
- .debug_line      0x0036c5         0x51 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
- .debug_line      0x003716         0x47 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
- .debug_line      0x00375d         0x6c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
- .debug_line      0x0037c9         0x5a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
- .debug_line      0x003823         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_line      0x000e37        0x12b build/app_only/production/mcc_generated_files/interrupt_manager.o
+ .debug_line      0x000f62        0x118 build/app_only/production/mcc_generated_files/mcc.o
+ .debug_line      0x00107a        0x134 build/app_only/production/mcc_generated_files/pin_manager.o
+ .debug_line      0x0011ae        0x147 build/app_only/production/mcc_generated_files/traps.o
+ .debug_line      0x0012f5        0x167 build/app_only/production/mcc_generated_files/tmr5.o
+ .debug_line      0x00145c        0x21d build/app_only/production/mcc_generated_files/thd_i2c1.o
+ .debug_line      0x001679        0x212 build/app_only/production/mcc_generated_files/thd_i2c2.o
+ .debug_line      0x00188b         0xcc build/app_only/production/mcc_generated_files/ADXL350_TMP102.o
+ .debug_line      0x001957        0x14f build/app_only/production/mcc_generated_files/ltc1661.o
+ .debug_line      0x001aa6        0x167 build/app_only/production/mcc_generated_files/power_reset.o
+ .debug_line      0x001c0d        0x143 build/app_only/production/mcc_generated_files/system.o
+ .debug_line      0x001d50        0x22a build/app_only/production/mcc_generated_files/TC358870.o
+ .debug_line      0x001f7a        0x38c build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
+ .debug_line      0x002306        0x7da build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
+ .debug_line      0x002ae0        0x177 build/app_only/production/mcc_generated_files/oc1.o
+ .debug_line      0x002c57        0x177 build/app_only/production/mcc_generated_files/oc2.o
+ .debug_line      0x002dce        0x177 build/app_only/production/mcc_generated_files/oc3.o
+ .debug_line      0x002f45        0x166 build/app_only/production/mcc_generated_files/tmr2.o
+ .debug_line      0x0030ab        0x2c9 build/app_only/production/app_device_custom_hid.o
+ .debug_line      0x003374        0x20e build/app_only/production/main.o
+ .debug_line      0x003582         0x43 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsi3.XX_o)
+ .debug_line      0x0035c5         0x56 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
+ .debug_line      0x00361b         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
+ .debug_line      0x003655         0x4a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+ .debug_line      0x00369f         0x45 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
+ .debug_line      0x0036e4         0xcc c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
+ .debug_line      0x0037b0         0x72 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
+ .debug_line      0x003822         0x7a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
+ .debug_line      0x00389c         0x5e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
+ .debug_line      0x0038fa         0x51 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
+ .debug_line      0x00394b         0x47 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
+ .debug_line      0x003992         0x6c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
+ .debug_line      0x0039fe         0x5a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
+ .debug_line      0x003a58         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
 
-.debug_frame      0x000000       0x183e
+.debug_frame      0x000000       0x19e2
  *(.debug_frame)
  .debug_frame     0x000000        0x2ec build/app_only/production/mcc_generated_files/usb/usb_device.o
  .debug_frame     0x0002ec         0x2e build/app_only/production/mcc_generated_files/usb/usb_device_hid.o
@@ -1092,18 +1127,19 @@ __CONFIG1
  .debug_frame     0x000b1c        0x1fe build/app_only/production/mcc_generated_files/thd_i2c2.o
  .debug_frame     0x000d1a         0x7c build/app_only/production/mcc_generated_files/ADXL350_TMP102.o
  .debug_frame     0x000d96         0x54 build/app_only/production/mcc_generated_files/ltc1661.o
- .debug_frame     0x000dea         0xb0 build/app_only/production/mcc_generated_files/power_reset.o
- .debug_frame     0x000e9a         0x74 build/app_only/production/mcc_generated_files/system.o
- .debug_frame     0x000f0e         0x96 build/app_only/production/mcc_generated_files/TC358870.o
- .debug_frame     0x000fa4        0x118 build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
- .debug_frame     0x0010bc        0x14c build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
- .debug_frame     0x001208        0x1ce build/app_only/production/mcc_generated_files/oc1.o
- .debug_frame     0x0013d6        0x1ce build/app_only/production/mcc_generated_files/oc2.o
- .debug_frame     0x0015a4        0x1ce build/app_only/production/mcc_generated_files/oc3.o
- .debug_frame     0x001772         0x48 build/app_only/production/app_device_custom_hid.o
- .debug_frame     0x0017ba         0x84 build/app_only/production/main.o
+ .debug_frame     0x000dea         0xca build/app_only/production/mcc_generated_files/power_reset.o
+ .debug_frame     0x000eb4         0x74 build/app_only/production/mcc_generated_files/system.o
+ .debug_frame     0x000f28         0x96 build/app_only/production/mcc_generated_files/TC358870.o
+ .debug_frame     0x000fbe        0x118 build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
+ .debug_frame     0x0010d6        0x14c build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
+ .debug_frame     0x001222        0x1ce build/app_only/production/mcc_generated_files/oc1.o
+ .debug_frame     0x0013f0        0x1ce build/app_only/production/mcc_generated_files/oc2.o
+ .debug_frame     0x0015be        0x1ce build/app_only/production/mcc_generated_files/oc3.o
+ .debug_frame     0x00178c        0x18a build/app_only/production/mcc_generated_files/tmr2.o
+ .debug_frame     0x001916         0x48 build/app_only/production/app_device_custom_hid.o
+ .debug_frame     0x00195e         0x84 build/app_only/production/main.o
 
-.debug_str        0x000000        0xa88
+.debug_str        0x000000        0xb35
  *(.debug_str)
  .debug_str       0x000000         0x2a build/app_only/production/mcc_generated_files/usb/usb_descriptors.o
  .debug_str       0x00002a        0x2ae build/app_only/production/mcc_generated_files/usb/usb_device.o
@@ -1112,22 +1148,24 @@ __CONFIG1
  .debug_str       0x0003c3         0x5c build/app_only/production/mcc_generated_files/spi1.o
  .debug_str       0x00041f         0x29 build/app_only/production/mcc_generated_files/adc1.o
  .debug_str       0x000448         0x43 build/app_only/production/mcc_generated_files/ext_int.o
- .debug_str       0x00048b         0x38 build/app_only/production/mcc_generated_files/interrupt_manager.o
- .debug_str       0x0004c3         0x41 build/app_only/production/mcc_generated_files/pin_manager.o
- .debug_str       0x000504          0xc build/app_only/production/mcc_generated_files/traps.o
- .debug_str       0x000510         0x6f build/app_only/production/mcc_generated_files/tmr5.o
- .debug_str       0x00057f         0x91 build/app_only/production/mcc_generated_files/thd_i2c1.o
- .debug_str       0x000610         0x89 build/app_only/production/mcc_generated_files/thd_i2c2.o
- .debug_str       0x000699          0x7 build/app_only/production/mcc_generated_files/ADXL350_TMP102.o
- .debug_str       0x0006a0          0x9 build/app_only/production/mcc_generated_files/ltc1661.o
- .debug_str       0x0006a9         0x1b build/app_only/production/mcc_generated_files/power_reset.o
- .debug_str       0x0006c4         0x17 build/app_only/production/mcc_generated_files/system.o
- .debug_str       0x0006db         0x8b build/app_only/production/mcc_generated_files/TC358870.o
- .debug_str       0x000766         0x38 build/app_only/production/mcc_generated_files/oc1.o
- .debug_str       0x00079e         0x38 build/app_only/production/mcc_generated_files/oc2.o
- .debug_str       0x0007d6         0x38 build/app_only/production/mcc_generated_files/oc3.o
- .debug_str       0x00080e        0x18a build/app_only/production/app_device_custom_hid.o
- .debug_str       0x000998         0xf0 build/app_only/production/main.o
+ .debug_str       0x00048b         0x41 build/app_only/production/mcc_generated_files/interrupt_manager.o
+ .debug_str       0x0004cc          0xc build/app_only/production/mcc_generated_files/mcc.o
+ .debug_str       0x0004d8         0x35 build/app_only/production/mcc_generated_files/pin_manager.o
+ .debug_str       0x00050d          0xc build/app_only/production/mcc_generated_files/traps.o
+ .debug_str       0x000519         0x6f build/app_only/production/mcc_generated_files/tmr5.o
+ .debug_str       0x000588         0x91 build/app_only/production/mcc_generated_files/thd_i2c1.o
+ .debug_str       0x000619         0x89 build/app_only/production/mcc_generated_files/thd_i2c2.o
+ .debug_str       0x0006a2          0x7 build/app_only/production/mcc_generated_files/ADXL350_TMP102.o
+ .debug_str       0x0006a9          0x9 build/app_only/production/mcc_generated_files/ltc1661.o
+ .debug_str       0x0006b2         0x77 build/app_only/production/mcc_generated_files/power_reset.o
+ .debug_str       0x000729         0x17 build/app_only/production/mcc_generated_files/system.o
+ .debug_str       0x000740         0x8b build/app_only/production/mcc_generated_files/TC358870.o
+ .debug_str       0x0007cb         0x38 build/app_only/production/mcc_generated_files/oc1.o
+ .debug_str       0x000803         0x38 build/app_only/production/mcc_generated_files/oc2.o
+ .debug_str       0x00083b         0x38 build/app_only/production/mcc_generated_files/oc3.o
+ .debug_str       0x000873         0x45 build/app_only/production/mcc_generated_files/tmr2.o
+ .debug_str       0x0008b8        0x181 build/app_only/production/app_device_custom_hid.o
+ .debug_str       0x000a39         0xfc build/app_only/production/main.o
 
 .debug_loc
  *(.debug_loc)
@@ -1136,7 +1174,7 @@ __CONFIG1
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000       0x1889
+                  0x000000       0x19f3
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x81 build/app_only/production/mcc_generated_files/usb/usb_descriptors.o
@@ -1175,30 +1213,32 @@ __CONFIG1
  .debug_pubnames
                   0x000d3b         0x33 build/app_only/production/mcc_generated_files/ltc1661.o
  .debug_pubnames
-                  0x000d6e         0x82 build/app_only/production/mcc_generated_files/power_reset.o
+                  0x000d6e         0x96 build/app_only/production/mcc_generated_files/power_reset.o
  .debug_pubnames
-                  0x000df0         0x3b build/app_only/production/mcc_generated_files/system.o
+                  0x000e04         0x3b build/app_only/production/mcc_generated_files/system.o
  .debug_pubnames
-                  0x000e2b         0x6d build/app_only/production/mcc_generated_files/TC358870.o
+                  0x000e3f         0x6d build/app_only/production/mcc_generated_files/TC358870.o
  .debug_pubnames
-                  0x000e98         0xd5 build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
+                  0x000eac         0xd5 build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
  .debug_pubnames
-                  0x000f6d        0x101 build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
+                  0x000f81        0x101 build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
  .debug_pubnames
-                  0x00106e        0x1a3 build/app_only/production/mcc_generated_files/oc1.o
+                  0x001082        0x1a3 build/app_only/production/mcc_generated_files/oc1.o
  .debug_pubnames
-                  0x001211        0x1a3 build/app_only/production/mcc_generated_files/oc2.o
+                  0x001225        0x1a3 build/app_only/production/mcc_generated_files/oc2.o
  .debug_pubnames
-                  0x0013b4        0x1a3 build/app_only/production/mcc_generated_files/oc3.o
+                  0x0013c8        0x1a3 build/app_only/production/mcc_generated_files/oc3.o
  .debug_pubnames
-                  0x001557        0x1aa build/app_only/production/app_device_custom_hid.o
+                  0x00156b        0x156 build/app_only/production/mcc_generated_files/tmr2.o
  .debug_pubnames
-                  0x001701        0x188 build/app_only/production/main.o
+                  0x0016c1        0x1aa build/app_only/production/app_device_custom_hid.o
+ .debug_pubnames
+                  0x00186b        0x188 build/app_only/production/main.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000        0x448
+.debug_aranges    0x000000        0x460
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/app_only/production/mcc_generated_files/usb/usb_device.o
@@ -1251,37 +1291,39 @@ __CONFIG1
  .debug_aranges
                   0x000240         0x18 build/app_only/production/mcc_generated_files/oc3.o
  .debug_aranges
-                  0x000258         0x18 build/app_only/production/app_device_custom_hid.o
+                  0x000258         0x18 build/app_only/production/mcc_generated_files/tmr2.o
  .debug_aranges
-                  0x000270         0x18 build/app_only/production/main.o
+                  0x000270         0x18 build/app_only/production/app_device_custom_hid.o
  .debug_aranges
-                  0x000288         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsi3.XX_o)
+                  0x000288         0x18 build/app_only/production/main.o
  .debug_aranges
-                  0x0002a8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
+                  0x0002a0         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsi3.XX_o)
  .debug_aranges
-                  0x0002c8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
+                  0x0002c0         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
  .debug_aranges
-                  0x0002e8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+                  0x0002e0         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
  .debug_aranges
-                  0x000308         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
+                  0x000300         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
  .debug_aranges
-                  0x000328         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
+                  0x000320         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
  .debug_aranges
-                  0x000348         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
+                  0x000340         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
  .debug_aranges
-                  0x000368         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
+                  0x000360         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
  .debug_aranges
-                  0x000388         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
+                  0x000380         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
  .debug_aranges
-                  0x0003a8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
+                  0x0003a0         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
  .debug_aranges
-                  0x0003c8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
+                  0x0003c0         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
  .debug_aranges
-                  0x0003e8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
+                  0x0003e0         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
  .debug_aranges
-                  0x000408         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
+                  0x000400         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
  .debug_aranges
-                  0x000428         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+                  0x000420         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
+ .debug_aranges
+                  0x000440         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
 
 .application_ivt
                   0x001e00         0xc0
@@ -1289,192 +1331,192 @@ __CONFIG1
                   0x001e01          0x2 SHORT 0x4
                   0x001e02          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x001e03          0x2 SHORT 0x0
-                  0x001e04          0x2 SHORT 0x2088 DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
+                  0x001e04          0x2 SHORT 0x20c2 DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
                   0x001e05          0x2 SHORT 0x4
                   0x001e06          0x2 SHORT 0x0 DEFINED (__ReservedTrap0)?((ABSOLUTE (__ReservedTrap0) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e07          0x2 SHORT 0x0
-                  0x001e08          0x2 SHORT 0x1fc8 DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
+                  0x001e08          0x2 SHORT 0x1fcc DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
                   0x001e09          0x2 SHORT 0x4
                   0x001e0a          0x2 SHORT 0x0 DEFINED (__OscillatorFail)?((ABSOLUTE (__OscillatorFail) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e0b          0x2 SHORT 0x0
-                  0x001e0c          0x2 SHORT 0x1fda DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
+                  0x001e0c          0x2 SHORT 0x1fde DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
                   0x001e0d          0x2 SHORT 0x4
                   0x001e0e          0x2 SHORT 0x0 DEFINED (__AddressError)?((ABSOLUTE (__AddressError) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e0f          0x2 SHORT 0x0
-                  0x001e10          0x2 SHORT 0x1fd0 DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
+                  0x001e10          0x2 SHORT 0x1fd4 DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
                   0x001e11          0x2 SHORT 0x4
                   0x001e12          0x2 SHORT 0x0 DEFINED (__StackError)?((ABSOLUTE (__StackError) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e13          0x2 SHORT 0x0
-                  0x001e14          0x2 SHORT 0x1fe2 DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
+                  0x001e14          0x2 SHORT 0x1fe6 DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
                   0x001e15          0x2 SHORT 0x4
                   0x001e16          0x2 SHORT 0x0 DEFINED (__MathError)?((ABSOLUTE (__MathError) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e17          0x2 SHORT 0x0
-                  0x001e18          0x2 SHORT 0x1f8c DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e18          0x2 SHORT 0x1f90 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e19          0x2 SHORT 0x4
                   0x001e1a          0x2 SHORT 0x0 DEFINED (__INT0Interrupt)?((ABSOLUTE (__INT0Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e1b          0x2 SHORT 0x0
-                  0x001e1c          0x2 SHORT 0x2088 DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e1c          0x2 SHORT 0x20c2 DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e1d          0x2 SHORT 0x4
                   0x001e1e          0x2 SHORT 0x0 DEFINED (__IC1Interrupt)?((ABSOLUTE (__IC1Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e1f          0x2 SHORT 0x0
-                  0x001e20          0x2 SHORT 0x2088 DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e20          0x2 SHORT 0x20c2 DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e21          0x2 SHORT 0x4
                   0x001e22          0x2 SHORT 0x0 DEFINED (__OC1Interrupt)?((ABSOLUTE (__OC1Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e23          0x2 SHORT 0x0
-                  0x001e24          0x2 SHORT 0x2088 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e24          0x2 SHORT 0x20c2 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e25          0x2 SHORT 0x4
                   0x001e26          0x2 SHORT 0x0 DEFINED (__T1Interrupt)?((ABSOLUTE (__T1Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e27          0x2 SHORT 0x0
-                  0x001e28          0x2 SHORT 0x2088 DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e28          0x2 SHORT 0x20c2 DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e29          0x2 SHORT 0x4
                   0x001e2a          0x2 SHORT 0x0 DEFINED (__IC2Interrupt)?((ABSOLUTE (__IC2Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e2b          0x2 SHORT 0x0
-                  0x001e2c          0x2 SHORT 0x2088 DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e2c          0x2 SHORT 0x20c2 DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e2d          0x2 SHORT 0x4
                   0x001e2e          0x2 SHORT 0x0 DEFINED (__OC2Interrupt)?((ABSOLUTE (__OC2Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e2f          0x2 SHORT 0x0
-                  0x001e30          0x2 SHORT 0x2088 DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e30          0x2 SHORT 0x208c DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e31          0x2 SHORT 0x4
                   0x001e32          0x2 SHORT 0x0 DEFINED (__T2Interrupt)?((ABSOLUTE (__T2Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e33          0x2 SHORT 0x0
-                  0x001e34          0x2 SHORT 0x2088 DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e34          0x2 SHORT 0x20c2 DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e35          0x2 SHORT 0x4
                   0x001e36          0x2 SHORT 0x0 DEFINED (__T3Interrupt)?((ABSOLUTE (__T3Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e37          0x2 SHORT 0x0
-                  0x001e38          0x2 SHORT 0x2088 DEFINED (__SPI1ErrInterrupt)?ABSOLUTE (__SPI1ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e38          0x2 SHORT 0x20c2 DEFINED (__SPI1ErrInterrupt)?ABSOLUTE (__SPI1ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e39          0x2 SHORT 0x4
                   0x001e3a          0x2 SHORT 0x0 DEFINED (__SPI1ErrInterrupt)?((ABSOLUTE (__SPI1ErrInterrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e3b          0x2 SHORT 0x0
-                  0x001e3c          0x2 SHORT 0x2088 DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e3c          0x2 SHORT 0x20c2 DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e3d          0x2 SHORT 0x4
                   0x001e3e          0x2 SHORT 0x0 DEFINED (__SPI1Interrupt)?((ABSOLUTE (__SPI1Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e3f          0x2 SHORT 0x0
-                  0x001e40          0x2 SHORT 0x2088 DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e40          0x2 SHORT 0x20c2 DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e41          0x2 SHORT 0x4
                   0x001e42          0x2 SHORT 0x0 DEFINED (__U1RXInterrupt)?((ABSOLUTE (__U1RXInterrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e43          0x2 SHORT 0x0
-                  0x001e44          0x2 SHORT 0x2088 DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e44          0x2 SHORT 0x20c2 DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e45          0x2 SHORT 0x4
                   0x001e46          0x2 SHORT 0x0 DEFINED (__U1TXInterrupt)?((ABSOLUTE (__U1TXInterrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e47          0x2 SHORT 0x0
-                  0x001e48          0x2 SHORT 0x2088 DEFINED (__ADC1Interrupt)?ABSOLUTE (__ADC1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e48          0x2 SHORT 0x20c2 DEFINED (__ADC1Interrupt)?ABSOLUTE (__ADC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e49          0x2 SHORT 0x4
                   0x001e4a          0x2 SHORT 0x0 DEFINED (__ADC1Interrupt)?((ABSOLUTE (__ADC1Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e4b          0x2 SHORT 0x0
-                  0x001e4c          0x2 SHORT 0x2088 DEFINED (__SI2C1Interrupt)?ABSOLUTE (__SI2C1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e4c          0x2 SHORT 0x20c2 DEFINED (__SI2C1Interrupt)?ABSOLUTE (__SI2C1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e4d          0x2 SHORT 0x4
                   0x001e4e          0x2 SHORT 0x0 DEFINED (__SI2C1Interrupt)?((ABSOLUTE (__SI2C1Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e4f          0x2 SHORT 0x0
-                  0x001e50          0x2 SHORT 0x2020 DEFINED (__MI2C1Interrupt)?ABSOLUTE (__MI2C1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e50          0x2 SHORT 0x2024 DEFINED (__MI2C1Interrupt)?ABSOLUTE (__MI2C1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e51          0x2 SHORT 0x4
                   0x001e52          0x2 SHORT 0x0 DEFINED (__MI2C1Interrupt)?((ABSOLUTE (__MI2C1Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e53          0x2 SHORT 0x0
-                  0x001e54          0x2 SHORT 0x2088 DEFINED (__CompInterrupt)?ABSOLUTE (__CompInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e54          0x2 SHORT 0x20c2 DEFINED (__CompInterrupt)?ABSOLUTE (__CompInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e55          0x2 SHORT 0x4
                   0x001e56          0x2 SHORT 0x0 DEFINED (__CompInterrupt)?((ABSOLUTE (__CompInterrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e57          0x2 SHORT 0x0
-                  0x001e58          0x2 SHORT 0x2088 DEFINED (__CNInterrupt)?ABSOLUTE (__CNInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e58          0x2 SHORT 0x20c2 DEFINED (__CNInterrupt)?ABSOLUTE (__CNInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e59          0x2 SHORT 0x4
                   0x001e5a          0x2 SHORT 0x0 DEFINED (__CNInterrupt)?((ABSOLUTE (__CNInterrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e5b          0x2 SHORT 0x0
-                  0x001e5c          0x2 SHORT 0x1faa DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e5c          0x2 SHORT 0x1fae DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e5d          0x2 SHORT 0x4
                   0x001e5e          0x2 SHORT 0x0 DEFINED (__INT1Interrupt)?((ABSOLUTE (__INT1Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e5f          0x2 SHORT 0x0
-                  0x001e60          0x2 SHORT 0x2088 DEFINED (__OC3Interrupt)?ABSOLUTE (__OC3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e60          0x2 SHORT 0x20c2 DEFINED (__OC3Interrupt)?ABSOLUTE (__OC3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e61          0x2 SHORT 0x4
                   0x001e62          0x2 SHORT 0x0 DEFINED (__OC3Interrupt)?((ABSOLUTE (__OC3Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e63          0x2 SHORT 0x0
-                  0x001e64          0x2 SHORT 0x2088 DEFINED (__OC4Interrupt)?ABSOLUTE (__OC4Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e64          0x2 SHORT 0x20c2 DEFINED (__OC4Interrupt)?ABSOLUTE (__OC4Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e65          0x2 SHORT 0x4
                   0x001e66          0x2 SHORT 0x0 DEFINED (__OC4Interrupt)?((ABSOLUTE (__OC4Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e67          0x2 SHORT 0x0
-                  0x001e68          0x2 SHORT 0x2088 DEFINED (__T4Interrupt)?ABSOLUTE (__T4Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e68          0x2 SHORT 0x20c2 DEFINED (__T4Interrupt)?ABSOLUTE (__T4Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e69          0x2 SHORT 0x4
                   0x001e6a          0x2 SHORT 0x0 DEFINED (__T4Interrupt)?((ABSOLUTE (__T4Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e6b          0x2 SHORT 0x0
-                  0x001e6c          0x2 SHORT 0x1fea DEFINED (__T5Interrupt)?ABSOLUTE (__T5Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e6c          0x2 SHORT 0x1fee DEFINED (__T5Interrupt)?ABSOLUTE (__T5Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e6d          0x2 SHORT 0x4
                   0x001e6e          0x2 SHORT 0x0 DEFINED (__T5Interrupt)?((ABSOLUTE (__T5Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e6f          0x2 SHORT 0x0
-                  0x001e70          0x2 SHORT 0x2088 DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e70          0x2 SHORT 0x20c2 DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e71          0x2 SHORT 0x4
                   0x001e72          0x2 SHORT 0x0 DEFINED (__INT2Interrupt)?((ABSOLUTE (__INT2Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e73          0x2 SHORT 0x0
-                  0x001e74          0x2 SHORT 0x2088 DEFINED (__U2RXInterrupt)?ABSOLUTE (__U2RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e74          0x2 SHORT 0x20c2 DEFINED (__U2RXInterrupt)?ABSOLUTE (__U2RXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e75          0x2 SHORT 0x4
                   0x001e76          0x2 SHORT 0x0 DEFINED (__U2RXInterrupt)?((ABSOLUTE (__U2RXInterrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e77          0x2 SHORT 0x0
-                  0x001e78          0x2 SHORT 0x2088 DEFINED (__U2TXInterrupt)?ABSOLUTE (__U2TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e78          0x2 SHORT 0x20c2 DEFINED (__U2TXInterrupt)?ABSOLUTE (__U2TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e79          0x2 SHORT 0x4
                   0x001e7a          0x2 SHORT 0x0 DEFINED (__U2TXInterrupt)?((ABSOLUTE (__U2TXInterrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e7b          0x2 SHORT 0x0
-                  0x001e7c          0x2 SHORT 0x2088 DEFINED (__SPI2ErrInterrupt)?ABSOLUTE (__SPI2ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e7c          0x2 SHORT 0x20c2 DEFINED (__SPI2ErrInterrupt)?ABSOLUTE (__SPI2ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e7d          0x2 SHORT 0x4
                   0x001e7e          0x2 SHORT 0x0 DEFINED (__SPI2ErrInterrupt)?((ABSOLUTE (__SPI2ErrInterrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e7f          0x2 SHORT 0x0
-                  0x001e80          0x2 SHORT 0x2088 DEFINED (__SPI2Interrupt)?ABSOLUTE (__SPI2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e80          0x2 SHORT 0x20c2 DEFINED (__SPI2Interrupt)?ABSOLUTE (__SPI2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e81          0x2 SHORT 0x4
                   0x001e82          0x2 SHORT 0x0 DEFINED (__SPI2Interrupt)?((ABSOLUTE (__SPI2Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e83          0x2 SHORT 0x0
-                  0x001e84          0x2 SHORT 0x2088 DEFINED (__IC3Interrupt)?ABSOLUTE (__IC3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e84          0x2 SHORT 0x20c2 DEFINED (__IC3Interrupt)?ABSOLUTE (__IC3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e85          0x2 SHORT 0x4
                   0x001e86          0x2 SHORT 0x0 DEFINED (__IC3Interrupt)?((ABSOLUTE (__IC3Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e87          0x2 SHORT 0x0
-                  0x001e88          0x2 SHORT 0x2088 DEFINED (__IC4Interrupt)?ABSOLUTE (__IC4Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e88          0x2 SHORT 0x20c2 DEFINED (__IC4Interrupt)?ABSOLUTE (__IC4Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e89          0x2 SHORT 0x4
                   0x001e8a          0x2 SHORT 0x0 DEFINED (__IC4Interrupt)?((ABSOLUTE (__IC4Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e8b          0x2 SHORT 0x0
-                  0x001e8c          0x2 SHORT 0x2088 DEFINED (__IC5Interrupt)?ABSOLUTE (__IC5Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e8c          0x2 SHORT 0x20c2 DEFINED (__IC5Interrupt)?ABSOLUTE (__IC5Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e8d          0x2 SHORT 0x4
                   0x001e8e          0x2 SHORT 0x0 DEFINED (__IC5Interrupt)?((ABSOLUTE (__IC5Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e8f          0x2 SHORT 0x0
-                  0x001e90          0x2 SHORT 0x2088 DEFINED (__OC5Interrupt)?ABSOLUTE (__OC5Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e90          0x2 SHORT 0x20c2 DEFINED (__OC5Interrupt)?ABSOLUTE (__OC5Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e91          0x2 SHORT 0x4
                   0x001e92          0x2 SHORT 0x0 DEFINED (__OC5Interrupt)?((ABSOLUTE (__OC5Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e93          0x2 SHORT 0x0
-                  0x001e94          0x2 SHORT 0x2088 DEFINED (__PMPInterrupt)?ABSOLUTE (__PMPInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e94          0x2 SHORT 0x20c2 DEFINED (__PMPInterrupt)?ABSOLUTE (__PMPInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e95          0x2 SHORT 0x4
                   0x001e96          0x2 SHORT 0x0 DEFINED (__PMPInterrupt)?((ABSOLUTE (__PMPInterrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e97          0x2 SHORT 0x0
-                  0x001e98          0x2 SHORT 0x2088 DEFINED (__SI2C2Interrupt)?ABSOLUTE (__SI2C2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e98          0x2 SHORT 0x20c2 DEFINED (__SI2C2Interrupt)?ABSOLUTE (__SI2C2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e99          0x2 SHORT 0x4
                   0x001e9a          0x2 SHORT 0x0 DEFINED (__SI2C2Interrupt)?((ABSOLUTE (__SI2C2Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e9b          0x2 SHORT 0x0
-                  0x001e9c          0x2 SHORT 0x2042 DEFINED (__MI2C2Interrupt)?ABSOLUTE (__MI2C2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001e9c          0x2 SHORT 0x2046 DEFINED (__MI2C2Interrupt)?ABSOLUTE (__MI2C2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001e9d          0x2 SHORT 0x4
                   0x001e9e          0x2 SHORT 0x0 DEFINED (__MI2C2Interrupt)?((ABSOLUTE (__MI2C2Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001e9f          0x2 SHORT 0x0
-                  0x001ea0          0x2 SHORT 0x2088 DEFINED (__RTCCInterrupt)?ABSOLUTE (__RTCCInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001ea0          0x2 SHORT 0x20c2 DEFINED (__RTCCInterrupt)?ABSOLUTE (__RTCCInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001ea1          0x2 SHORT 0x4
                   0x001ea2          0x2 SHORT 0x0 DEFINED (__RTCCInterrupt)?((ABSOLUTE (__RTCCInterrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001ea3          0x2 SHORT 0x0
-                  0x001ea4          0x2 SHORT 0x2088 DEFINED (__U1ErrInterrupt)?ABSOLUTE (__U1ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001ea4          0x2 SHORT 0x20c2 DEFINED (__U1ErrInterrupt)?ABSOLUTE (__U1ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001ea5          0x2 SHORT 0x4
                   0x001ea6          0x2 SHORT 0x0 DEFINED (__U1ErrInterrupt)?((ABSOLUTE (__U1ErrInterrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001ea7          0x2 SHORT 0x0
-                  0x001ea8          0x2 SHORT 0x2088 DEFINED (__U2ErrInterrupt)?ABSOLUTE (__U2ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001ea8          0x2 SHORT 0x20c2 DEFINED (__U2ErrInterrupt)?ABSOLUTE (__U2ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001ea9          0x2 SHORT 0x4
                   0x001eaa          0x2 SHORT 0x0 DEFINED (__U2ErrInterrupt)?((ABSOLUTE (__U2ErrInterrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001eab          0x2 SHORT 0x0
-                  0x001eac          0x2 SHORT 0x2088 DEFINED (__CRCInterrupt)?ABSOLUTE (__CRCInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001eac          0x2 SHORT 0x20c2 DEFINED (__CRCInterrupt)?ABSOLUTE (__CRCInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001ead          0x2 SHORT 0x4
                   0x001eae          0x2 SHORT 0x0 DEFINED (__CRCInterrupt)?((ABSOLUTE (__CRCInterrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001eaf          0x2 SHORT 0x0
-                  0x001eb0          0x2 SHORT 0x2088 DEFINED (__LVDInterrupt)?ABSOLUTE (__LVDInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001eb0          0x2 SHORT 0x20c2 DEFINED (__LVDInterrupt)?ABSOLUTE (__LVDInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001eb1          0x2 SHORT 0x4
                   0x001eb2          0x2 SHORT 0x0 DEFINED (__LVDInterrupt)?((ABSOLUTE (__LVDInterrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001eb3          0x2 SHORT 0x0
-                  0x001eb4          0x2 SHORT 0x2088 DEFINED (__CTMUInterrupt)?ABSOLUTE (__CTMUInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001eb4          0x2 SHORT 0x20c2 DEFINED (__CTMUInterrupt)?ABSOLUTE (__CTMUInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001eb5          0x2 SHORT 0x4
                   0x001eb6          0x2 SHORT 0x0 DEFINED (__CTMUInterrupt)?((ABSOLUTE (__CTMUInterrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001eb7          0x2 SHORT 0x0
-                  0x001eb8          0x2 SHORT 0x2064 DEFINED (__USB1Interrupt)?ABSOLUTE (__USB1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x001eb8          0x2 SHORT 0x2068 DEFINED (__USB1Interrupt)?ABSOLUTE (__USB1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x001eb9          0x2 SHORT 0x4
                   0x001eba          0x2 SHORT 0x0 DEFINED (__USB1Interrupt)?((ABSOLUTE (__USB1Interrupt) >> 0x10) & 0x7f):((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001ebb          0x2 SHORT 0x0
                   0x001ebc                  __DEFAULT_VECTOR = .
-                  0x001ebc          0x2 SHORT 0x2088 ABSOLUTE (__DefaultInterrupt)
+                  0x001ebc          0x2 SHORT 0x20c2 ABSOLUTE (__DefaultInterrupt)
                   0x001ebd          0x2 SHORT 0x4
                   0x001ebe          0x2 SHORT 0x0 ((ABSOLUTE (__DefaultInterrupt) >> 0x10) & 0x7f)
                   0x001ebf          0x2 SHORT 0x0
@@ -2465,7 +2507,7 @@ LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x001ec0       0x1080
+                  0x001ec0       0x124a
  .debug_pubtypes
                   0x001ec0         0x60 build/app_only/production/mcc_generated_files/usb/usb_descriptors.o
  .debug_pubtypes
@@ -2485,130 +2527,134 @@ LOAD data_init
  .debug_pubtypes
                   0x002506         0xc2 build/app_only/production/mcc_generated_files/ext_int.o
  .debug_pubtypes
-                  0x0025c8         0xd1 build/app_only/production/mcc_generated_files/interrupt_manager.o
+                  0x0025c8         0xee build/app_only/production/mcc_generated_files/interrupt_manager.o
  .debug_pubtypes
-                  0x002699         0x12 build/app_only/production/mcc_generated_files/mcc.o
+                  0x0026b6         0x42 build/app_only/production/mcc_generated_files/mcc.o
  .debug_pubtypes
-                  0x0026ab         0xe3 build/app_only/production/mcc_generated_files/pin_manager.o
+                  0x0026f8         0xc0 build/app_only/production/mcc_generated_files/pin_manager.o
  .debug_pubtypes
-                  0x00278e         0x4e build/app_only/production/mcc_generated_files/traps.o
+                  0x0027b8         0x4e build/app_only/production/mcc_generated_files/traps.o
  .debug_pubtypes
-                  0x0027dc         0xa4 build/app_only/production/mcc_generated_files/tmr5.o
+                  0x002806         0xa4 build/app_only/production/mcc_generated_files/tmr5.o
  .debug_pubtypes
-                  0x002880         0xb9 build/app_only/production/mcc_generated_files/thd_i2c1.o
+                  0x0028aa         0xb9 build/app_only/production/mcc_generated_files/thd_i2c1.o
  .debug_pubtypes
-                  0x002939         0xd2 build/app_only/production/mcc_generated_files/thd_i2c2.o
+                  0x002963         0xd2 build/app_only/production/mcc_generated_files/thd_i2c2.o
  .debug_pubtypes
-                  0x002a0b         0x2a build/app_only/production/mcc_generated_files/ADXL350_TMP102.o
+                  0x002a35         0x2a build/app_only/production/mcc_generated_files/ADXL350_TMP102.o
  .debug_pubtypes
-                  0x002a35         0x55 build/app_only/production/mcc_generated_files/ltc1661.o
+                  0x002a5f         0x55 build/app_only/production/mcc_generated_files/ltc1661.o
  .debug_pubtypes
-                  0x002a8a         0x76 build/app_only/production/mcc_generated_files/power_reset.o
+                  0x002ab4        0x130 build/app_only/production/mcc_generated_files/power_reset.o
  .debug_pubtypes
-                  0x002b00         0x4d build/app_only/production/mcc_generated_files/system.o
+                  0x002be4         0x4d build/app_only/production/mcc_generated_files/system.o
  .debug_pubtypes
-                  0x002b4d         0x8e build/app_only/production/mcc_generated_files/TC358870.o
+                  0x002c31         0x8e build/app_only/production/mcc_generated_files/TC358870.o
  .debug_pubtypes
-                  0x002bdb         0x37 build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
+                  0x002cbf         0x37 build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
  .debug_pubtypes
-                  0x002c12         0x2b build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
+                  0x002cf6         0x2b build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
  .debug_pubtypes
-                  0x002c3d         0x91 build/app_only/production/mcc_generated_files/oc1.o
+                  0x002d21         0x91 build/app_only/production/mcc_generated_files/oc1.o
  .debug_pubtypes
-                  0x002cce         0x91 build/app_only/production/mcc_generated_files/oc2.o
+                  0x002db2         0x91 build/app_only/production/mcc_generated_files/oc2.o
  .debug_pubtypes
-                  0x002d5f         0x91 build/app_only/production/mcc_generated_files/oc3.o
+                  0x002e43         0x91 build/app_only/production/mcc_generated_files/oc3.o
  .debug_pubtypes
-                  0x002df0         0xe5 build/app_only/production/app_device_custom_hid.o
+                  0x002ed4         0xe0 build/app_only/production/mcc_generated_files/tmr2.o
  .debug_pubtypes
-                  0x002ed5         0x6b build/app_only/production/main.o
+                  0x002fb4         0xc8 build/app_only/production/app_device_custom_hid.o
+ .debug_pubtypes
+                  0x00307c         0x8e build/app_only/production/main.o
 
 __c30_signature
-                  0x002f40         0xfc
+                  0x00310a        0x102
  __c30_signature
-                  0x002f40          0x6 build/app_only/production/mcc_generated_files/usb/usb_descriptors.o
+                  0x00310a          0x6 build/app_only/production/mcc_generated_files/usb/usb_descriptors.o
  __c30_signature
-                  0x002f46          0x6 build/app_only/production/mcc_generated_files/usb/usb_device.o
+                  0x003110          0x6 build/app_only/production/mcc_generated_files/usb/usb_device.o
  __c30_signature
-                  0x002f4c          0x6 build/app_only/production/mcc_generated_files/usb/usb_device_hid.o
+                  0x003116          0x6 build/app_only/production/mcc_generated_files/usb/usb_device_hid.o
  __c30_signature
-                  0x002f52          0x6 build/app_only/production/mcc_generated_files/usb/usb_events.o
+                  0x00311c          0x6 build/app_only/production/mcc_generated_files/usb/usb_events.o
  __c30_signature
-                  0x002f58          0x6 build/app_only/production/mcc_generated_files/usb/usb_hal_16bit.o
+                  0x003122          0x6 build/app_only/production/mcc_generated_files/usb/usb_hal_16bit.o
  __c30_signature
-                  0x002f5e          0x6 build/app_only/production/mcc_generated_files/spi1.o
+                  0x003128          0x6 build/app_only/production/mcc_generated_files/spi1.o
  __c30_signature
-                  0x002f64          0x6 build/app_only/production/mcc_generated_files/clock.o
+                  0x00312e          0x6 build/app_only/production/mcc_generated_files/clock.o
  __c30_signature
-                  0x002f6a          0x6 build/app_only/production/mcc_generated_files/adc1.o
+                  0x003134          0x6 build/app_only/production/mcc_generated_files/adc1.o
  __c30_signature
-                  0x002f70          0x6 build/app_only/production/mcc_generated_files/ext_int.o
+                  0x00313a          0x6 build/app_only/production/mcc_generated_files/ext_int.o
  __c30_signature
-                  0x002f76          0x6 build/app_only/production/mcc_generated_files/interrupt_manager.o
+                  0x003140          0x6 build/app_only/production/mcc_generated_files/interrupt_manager.o
  __c30_signature
-                  0x002f7c          0x6 build/app_only/production/mcc_generated_files/mcc.o
+                  0x003146          0x6 build/app_only/production/mcc_generated_files/mcc.o
  __c30_signature
-                  0x002f82          0x6 build/app_only/production/mcc_generated_files/pin_manager.o
+                  0x00314c          0x6 build/app_only/production/mcc_generated_files/pin_manager.o
  __c30_signature
-                  0x002f88          0x6 build/app_only/production/mcc_generated_files/traps.o
+                  0x003152          0x6 build/app_only/production/mcc_generated_files/traps.o
  __c30_signature
-                  0x002f8e          0x6 build/app_only/production/mcc_generated_files/tmr5.o
+                  0x003158          0x6 build/app_only/production/mcc_generated_files/tmr5.o
  __c30_signature
-                  0x002f94          0x6 build/app_only/production/mcc_generated_files/thd_i2c1.o
+                  0x00315e          0x6 build/app_only/production/mcc_generated_files/thd_i2c1.o
  __c30_signature
-                  0x002f9a          0x6 build/app_only/production/mcc_generated_files/thd_i2c2.o
+                  0x003164          0x6 build/app_only/production/mcc_generated_files/thd_i2c2.o
  __c30_signature
-                  0x002fa0          0x6 build/app_only/production/mcc_generated_files/ADXL350_TMP102.o
+                  0x00316a          0x6 build/app_only/production/mcc_generated_files/ADXL350_TMP102.o
  __c30_signature
-                  0x002fa6          0x6 build/app_only/production/mcc_generated_files/ltc1661.o
+                  0x003170          0x6 build/app_only/production/mcc_generated_files/ltc1661.o
  __c30_signature
-                  0x002fac          0x6 build/app_only/production/mcc_generated_files/power_reset.o
+                  0x003176          0x6 build/app_only/production/mcc_generated_files/power_reset.o
  __c30_signature
-                  0x002fb2          0x6 build/app_only/production/mcc_generated_files/system.o
+                  0x00317c          0x6 build/app_only/production/mcc_generated_files/system.o
  __c30_signature
-                  0x002fb8          0x6 build/app_only/production/mcc_generated_files/TC358870.o
+                  0x003182          0x6 build/app_only/production/mcc_generated_files/TC358870.o
  __c30_signature
-                  0x002fbe          0x6 build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
+                  0x003188          0x6 build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
  __c30_signature
-                  0x002fc4          0x6 build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
+                  0x00318e          0x6 build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
  __c30_signature
-                  0x002fca          0x6 build/app_only/production/mcc_generated_files/oc1.o
+                  0x003194          0x6 build/app_only/production/mcc_generated_files/oc1.o
  __c30_signature
-                  0x002fd0          0x6 build/app_only/production/mcc_generated_files/oc2.o
+                  0x00319a          0x6 build/app_only/production/mcc_generated_files/oc2.o
  __c30_signature
-                  0x002fd6          0x6 build/app_only/production/mcc_generated_files/oc3.o
+                  0x0031a0          0x6 build/app_only/production/mcc_generated_files/oc3.o
  __c30_signature
-                  0x002fdc          0x6 build/app_only/production/app_device_custom_hid.o
+                  0x0031a6          0x6 build/app_only/production/mcc_generated_files/tmr2.o
  __c30_signature
-                  0x002fe2          0x6 build/app_only/production/main.o
+                  0x0031ac          0x6 build/app_only/production/app_device_custom_hid.o
  __c30_signature
-                  0x002fe8          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(crt0_standard.o)
+                  0x0031b2          0x6 build/app_only/production/main.o
  __c30_signature
-                  0x002fee          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(data_init_standard.o)
+                  0x0031b8          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x002ff4          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(delay32.Meo)
+                  0x0031be          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(data_init_standard.o)
  __c30_signature
-                  0x002ffa          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsi3.XX_o)
+                  0x0031c4          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(delay32.Meo)
  __c30_signature
-                  0x003000          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
+                  0x0031ca          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsi3.XX_o)
  __c30_signature
-                  0x003006          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
+                  0x0031d0          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
  __c30_signature
-                  0x00300c          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+                  0x0031d6          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
  __c30_signature
-                  0x003012          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
+                  0x0031dc          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
  __c30_signature
-                  0x003018          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
+                  0x0031e2          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
  __c30_signature
-                  0x00301e          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
+                  0x0031e8          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
  __c30_signature
-                  0x003024          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
+                  0x0031ee          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
  __c30_signature
-                  0x00302a          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcpy.XX_o)
+                  0x0031f4          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
  __c30_signature
-                  0x003030          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memset.XX_o)
+                  0x0031fa          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcpy.XX_o)
  __c30_signature
-                  0x003036          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+                  0x003200          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memset.XX_o)
+ __c30_signature
+                  0x003206          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
 
 .nbss               0x0800         0x8a
  .nbss              0x0800         0x26 build/app_only/production/main.o
@@ -2694,39 +2740,42 @@ __c30_signature
 .ndata              0x088a          0x2
  .ndata             0x088a          0x2 build/app_only/production/mcc_generated_files/traps.o
 
-.nbss               0x088c          0x6
+.nbss               0x088c          0x8
  .nbss              0x088c          0x2 build/app_only/production/mcc_generated_files/oc1.o
  .nbss              0x088e          0x2 build/app_only/production/mcc_generated_files/oc2.o
  .nbss              0x0890          0x2 build/app_only/production/mcc_generated_files/oc3.o
+ .nbss              0x0892          0x2 build/app_only/production/mcc_generated_files/tmr2.o
+                    0x0892                  _TMR2_InterruptHandler
 
-.bss                0x0892         0xc8
- .bss               0x0892         0xa0 build/app_only/production/app_device_custom_hid.o
-                    0x0892                  _ReceivedDataBuffer
-                    0x08d2                  _ToSendDataBuffer
-                    0x0912                  _mem_buffer
- .bss               0x0932         0x28 build/app_only/production/main.o
-                    0x0932                  _ad_arry
-                    0x0946                  _sort_arry
+.bss                0x0894         0xc8
+ .bss               0x0894         0xa0 build/app_only/production/app_device_custom_hid.o
+                    0x0894                  _ReceivedDataBuffer
+                    0x08d4                  _ToSendDataBuffer
+                    0x0914                  _mem_buffer
+ .bss               0x0934         0x28 build/app_only/production/main.o
+                    0x0934                  _ad_arry
+                    0x0948                  _sort_arry
 
-_0000000004C60960664d74c5
+_0000000004544960699fde39
                     0x0a00         0x20
- _0000000004C60960664d74c5
+ _0000000004544960699fde39
                     0x0a00         0x20 build/app_only/production/mcc_generated_files/usb/usb_device.o
                     0x0a00                  _BDT
 
-.bss                0x095a         0x62
- .bss               0x095a         0x22 build/app_only/production/mcc_generated_files/usb/usb_device.o
-                    0x095a                  _inPipes
-                    0x0960                  _outPipes
-                    0x0967                  _ep_data_in
-                    0x0969                  _ep_data_out
-                    0x096b                  _SetupPkt
-                    0x0973                  _CtrlTrfData
- .bss               0x097c         0x20 build/app_only/production/mcc_generated_files/traps.o
- .bss               0x099c         0x12 build/app_only/production/mcc_generated_files/TC358870.o
-                    0x099c                  _hdmi_stat
- .bss               0x09ae          0xc build/app_only/production/mcc_generated_files/usb/usb_hal_16bit.o
- .bss               0x09ba          0x2 build/app_only/production/mcc_generated_files/tmr5.o
+.bss                0x095c         0x64
+ .bss               0x095c         0x22 build/app_only/production/mcc_generated_files/usb/usb_device.o
+                    0x095c                  _inPipes
+                    0x0962                  _outPipes
+                    0x0969                  _ep_data_in
+                    0x096b                  _ep_data_out
+                    0x096d                  _SetupPkt
+                    0x0975                  _CtrlTrfData
+ .bss               0x097e         0x20 build/app_only/production/mcc_generated_files/traps.o
+ .bss               0x099e         0x12 build/app_only/production/mcc_generated_files/TC358870.o
+                    0x099e                  _hdmi_stat
+ .bss               0x09b0          0xc build/app_only/production/mcc_generated_files/usb/usb_hal_16bit.o
+ .bss               0x09bc          0x2 build/app_only/production/mcc_generated_files/tmr5.o
+ .bss               0x09be          0x2 build/app_only/production/mcc_generated_files/tmr2.o
 
 .ivt._INT0Interrupt
                     0x0014          0x2
@@ -2793,237 +2842,256 @@ _0000000004C60960664d74c5
  .ivt._USB1Interrupt
                     0x00c0          0x2 build/app_only/production/mcc_generated_files/system.o
 
-.const              0xa4ee         0xca load address 0x0024ee  
- .const             0xa4ee         0xc8 build/app_only/production/mcc_generated_files/usb/usb_descriptors.o
-                    0xa4ee                  _device_dsc
-                    0xa500                  _configDescriptor1
-                    0xa52a                  _sd000
-                    0xa52e                  _sd001
-                    0xa562                  _sd002
-                    0xa590                  _hid_rpt01
-                    0xa5ae                  _USB_CD_Ptr
-                    0xa5b0                  _USB_SD_Ptr
- .const             0xa5b6          0x2 build/app_only/production/main.o
-                    0xa5b6                  _m_version
+.ivt._T2Interrupt
+                    0x0022          0x2
+ .ivt._T2Interrupt
+                    0x0022          0x2 build/app_only/production/mcc_generated_files/tmr2.o
 
-.text             0x0025b8       0x7580
- .text            0x0025b8       0x2c6e build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
-                  0x0025b8                  _ortustech_RS1
-                  0x002c9a                  _ortustech_Check_HDMI_Cable
-                  0x002cc4                  _ortustech_Check_RS_Int
-                  0x002d36                  _ortustech_RS2_Ready
-                  0x002d48                  _ortustech_RS3
-                  0x0033f2                  _ortustech_DO
-                  0x0035da                  _ortustech_RS4
-                  0x0035ee                  _HDMI_TimChk
-                  0x0036c2                  _ortustech_LCDInit
-                  0x003b78                  _turner_RS1
-                  0x0042a8                  _turner_RS3
-                  0x00496c                  _DDC5V_Noinput
- .text            0x005226       0x1336 build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
-                  0x005226                  _santek_ColorBar
-                  0x005610                  _santek_RS1
-                  0x005cf2                  _santek_Check_HDMI_Cable
-                  0x005d1c                  _santek_Check_RS_Int
-                  0x005da2                  _santek_RS2_Ready
-                  0x005db4                  _santek_RS3
-                  0x0061c2                  _santek_DO
-                  0x0064f8                  _santek_RS4
-                  0x00650a                  _santek_LCDOFF
-                  0x006522                  _santek_LCDBrightness
- .text            0x00655c        0xf96 build/app_only/production/mcc_generated_files/usb/usb_device.o
-                  0x00655c                  _USBDeviceInit
-                  0x00664c                  _USBDeviceTasks
-                  0x0067d2                  _USBEnableEndpoint
-                  0x00680c                  _USBTransferOnePacket
-                  0x0068b2                  _USBStallEndpoint
-                  0x00694c                  _USBCancelIO
-                  0x0069f8                  _USBDeviceDetach
-                  0x006a04                  _USBDeviceAttach
-                  0x006a38                  _USBCtrlEPAllowStatusStage
-                  0x006aae                  _USBCtrlEPAllowDataStage
-                  0x0074ae                  _USBIncrement1msInternalTimers
-                  0x0074d8                  _USBGet1msTickCount
- .text            0x0074f2        0x76a build/app_only/production/app_device_custom_hid.o
-                  0x0074f2                  _APP_DeviceCustomHIDInitialize
-                  0x00750c                  _APP_DeviceCustomHIDTasks
- .text            0x007c5c        0x53e build/app_only/production/mcc_generated_files/thd_i2c2.o
-                  0x007c5c                  _I2C2_IdleCheck
-                  0x007c74                  _I2C2_Initialize
-                  0x007c88                  _I2C2_Start
-                  0x007cd8                  _I2C2_rStart
-                  0x007d28                  _I2C2_Stop
-                  0x007d42                  _I2C2_Send
-                  0x007d7c                  _I2C2_Receive
-                  0x007de4                  _I2C2_SlaveRead
-                  0x007e72                  _I2C2_SlaveWrite
-                  0x007eda                  _I2C2_TC358870_Read
-                  0x007f74                  _I2C2_TC358870_Write
-                  0x007fe8                  _i2c2_uh2cd_read8
-                  0x007ffe                  _i2c2_uh2cd_read16
-                  0x008036                  _i2c2_uh2cd_read32
-                  0x008114                  _i2c2_uh2cd_write8
-                  0x008130                  _i2c2_uh2cd_write16
-                  0x008156                  _i2c2_uh2cd_write32
- .text            0x00819a        0x486 build/app_only/production/mcc_generated_files/thd_i2c1.o
-                  0x00819a                  _I2C1_IdleCheck
-                  0x0081c8                  _I2C1_Initialize
-                  0x0081dc                  _I2C1_Start
-                  0x00823c                  _I2C1_rStart
-                  0x00829c                  _I2C1_Stop
-                  0x0082be                  _I2C1_Send
-                  0x008300                  _I2C1_Receive
-                  0x0083b0                  _I2C1_SlaveRead
-                  0x008478                  _I2C1_SlaveWrite
-                  0x0084e0                  _I2C1_EEPROM_Read
-                  0x0085ac                  _I2C1_EEPROM_Write
- .text            0x008620        0x368 build/app_only/production/main.o
-                  0x00862e                  _I2C1_Device_init
-                  0x00864e                  _I2C1_Device_Check
-                  0x0088ae                  _main
- .text            0x008988        0x2ce build/app_only/production/mcc_generated_files/TC358870.o
-                  0x008988                  _tc358870_dsi_reset
-                  0x0089a0                  _tc358870_init
-                  0x0089aa                  _tc358870
-                  0x008adc                  _Check_DDC
-                  0x008b12                  _test
- .text            0x008c56        0x21c build/app_only/production/mcc_generated_files/usb/usb_hal_16bit.o
-                  0x008c56                  _USBSleepOnSuspend
-                  0x008c7a                  _USBRemoteWakeupAssertBlocking
-                  0x008cf4                  _USBVBUSSessionValidStateGet
-                  0x008d7e                  _USBMaskAllUSBInterrupts
-                  0x008d98                  _USBRestoreUSBInterrupts
- .text            0x008e72        0x1ce build/app_only/production/mcc_generated_files/ltc1661.o
-                  0x008e72                  _bitflip16
-                  0x008fc6                  _Spi_LT1661_Set
- .text            0x009040        0x176 build/app_only/production/mcc_generated_files/oc2.o
-                  0x009040                  _OC2_Initialize
-                  0x009060                  _OC2_CallBack
-                  0x009066                  _OC2_Tasks
-                  0x00907a                  _OC2_Start
-                  0x009094                  _OC2_Stop
-                  0x0090a2                  _OC2_SingleCompareValueSet
-                  0x0090ae                  _OC2_DualCompareValueSet
-                  0x0090c0                  _OC2_CentreAlignedPWMConfig
-                  0x0090d2                  _OC2_EdgeAlignedPWMConfig
-                  0x0090e4                  _OC2_SecondaryValueSet
-                  0x0090f0                  _OC2_PrimaryValueSet
-                  0x0090fc                  _OC2_IsCompareCycleComplete
-                  0x009114                  _OC2_FaultStatusGet
-                  0x00916a                  _OC2_FaultStatusClear
-                  0x00918e                  _OC2_ManualTriggerSet
-                  0x009196                  _OC2_TriggerStatusGet
-                  0x0091ae                  _OC2_TriggerStatusClear
- .text            0x0091b6        0x176 build/app_only/production/mcc_generated_files/oc3.o
-                  0x0091b6                  _OC3_Initialize
-                  0x0091d6                  _OC3_CallBack
-                  0x0091dc                  _OC3_Tasks
-                  0x0091f0                  _OC3_Start
-                  0x00920a                  _OC3_Stop
-                  0x009218                  _OC3_SingleCompareValueSet
-                  0x009224                  _OC3_DualCompareValueSet
-                  0x009236                  _OC3_CentreAlignedPWMConfig
-                  0x009248                  _OC3_EdgeAlignedPWMConfig
-                  0x00925a                  _OC3_SecondaryValueSet
-                  0x009266                  _OC3_PrimaryValueSet
-                  0x009272                  _OC3_IsCompareCycleComplete
-                  0x00928a                  _OC3_FaultStatusGet
-                  0x0092e0                  _OC3_FaultStatusClear
-                  0x009304                  _OC3_ManualTriggerSet
-                  0x00930c                  _OC3_TriggerStatusGet
-                  0x009324                  _OC3_TriggerStatusClear
- .text            0x00932c        0x174 build/app_only/production/mcc_generated_files/oc1.o
-                  0x00932c                  _OC1_Initialize
-                  0x00934c                  _OC1_CallBack
-                  0x009352                  _OC1_Tasks
-                  0x009364                  _OC1_Start
-                  0x00937e                  _OC1_Stop
-                  0x00938c                  _OC1_SingleCompareValueSet
-                  0x009398                  _OC1_DualCompareValueSet
-                  0x0093aa                  _OC1_CentreAlignedPWMConfig
-                  0x0093bc                  _OC1_EdgeAlignedPWMConfig
-                  0x0093ce                  _OC1_SecondaryValueSet
-                  0x0093da                  _OC1_PrimaryValueSet
-                  0x0093e6                  _OC1_IsCompareCycleComplete
-                  0x0093fe                  _OC1_FaultStatusGet
-                  0x009454                  _OC1_FaultStatusClear
-                  0x009478                  _OC1_ManualTriggerSet
-                  0x009480                  _OC1_TriggerStatusGet
-                  0x009498                  _OC1_TriggerStatusClear
- .text            0x0094a0        0x168 build/app_only/production/mcc_generated_files/spi1.o
-                  0x0094a0                  _SPI1_Initialize
-                  0x0094ae                  _SPI_Send_16
-                  0x0094e2                  _SPI1_Exchange
-                  0x009512                  _SPI1_ExchangeBuffer
-                  0x0095dc                  _SPI1_Exchange8bit
-                  0x0095ec                  _SPI1_Exchange8bitBuffer
-                  0x009600                  _SPI1_StatusGet
- .text            0x009608        0x110 build/app_only/production/mcc_generated_files/adc1.o
-                  0x009608                  _ADC1_Initialize
-                  0x009622                  _ADC1_Start
-                  0x00962a                  _ADC1_Stop
-                  0x009632                  _ADC1_ConversionResultBufferGet
-                  0x009664                  _ADC1_ConversionResultGet
-                  0x00966c                  _ADC1_IsConversionComplete
-                  0x009684                  _ADC1_ChannelSelect
-                  0x009690                  _ADC1_CallBack
-                  0x009696                  _ADC1_Tasks
-                  0x0096aa                  _adc_api
-                  0x0096c0                  _ADC_BLSENSOR_Read
-                  0x0096ec                  _ADC_CDS_Read
- .text            0x009718        0x10c build/app_only/production/mcc_generated_files/ADXL350_TMP102.o
-                  0x009718                  _adxl350_init
-                  0x00978a                  _adxl350_xyz_read
-                  0x0097b8                  _tmp102_init
-                  0x0097c4                  _tmp102_read_temp
- .text            0x009824         0xe0 build/app_only/production/mcc_generated_files/usb/usb_device_hid.o
-                  0x009824                  _USBCheckHIDRequest
- .text            0x009904         0xd6 build/app_only/production/mcc_generated_files/tmr5.o
-                  0x009904                  _TMR5_Initialize
-                  0x009928                  _TMR5_Period16BitSet
-                  0x00993a                  _TMR5_Period16BitGet
-                  0x009942                  _TMR5_Counter16BitSet
-                  0x009954                  _TMR5_Counter16BitGet
-                  0x00995c                  _TMR5_CallBack
-                  0x009980                  _TMR5_SetInterruptHandler
-                  0x009990                  _TMR5_Start
-                  0x0099a0                  _TMR5_Stop
-                  0x0099aa                  _TMR5_GetElapsedThenClear
-                  0x0099c2                  _TMR5_SoftwareCounterGet
-                  0x0099ce                  _TMR5_SoftwareCounterClear
- .text            0x0099da         0xc4 build/app_only/production/mcc_generated_files/power_reset.o
-                  0x0099da                  _Power_Reset_Init
-                  0x0099f4                  _Power_On
-                  0x009a2a                  _Power_Off
-                  0x009a44                  _Santek_LCD_Reset
-                  0x009a62                  _Ortustech_LCD_Reset
-                  0x009a80                  _TC358870_Reset
- .text            0x009a9e         0x9a build/app_only/production/mcc_generated_files/pin_manager.o
-                  0x009a9e                  _PIN_MANAGER_Initialize
+.const              0xa528         0xca load address 0x002528  
+ .const             0xa528         0xc8 build/app_only/production/mcc_generated_files/usb/usb_descriptors.o
+                    0xa528                  _device_dsc
+                    0xa53a                  _configDescriptor1
+                    0xa564                  _sd000
+                    0xa568                  _sd001
+                    0xa59c                  _sd002
+                    0xa5ca                  _hid_rpt01
+                    0xa5e8                  _USB_CD_Ptr
+                    0xa5ea                  _USB_SD_Ptr
+ .const             0xa5f0          0x2 build/app_only/production/main.o
+                    0xa5f0                  _m_version
 
-.dinit            0x009b38         0x8e
- .dinit           0x009b38         0x8e data_init
+.text             0x0025f2       0x75bc
+ .text            0x0025f2       0x2c6e build/app_only/production/mcc_generated_files/ortustech_hd_lcd.o
+                  0x0025f2                  _ortustech_RS1
+                  0x002cd4                  _ortustech_Check_HDMI_Cable
+                  0x002cfe                  _ortustech_Check_RS_Int
+                  0x002d70                  _ortustech_RS2_Ready
+                  0x002d82                  _ortustech_RS3
+                  0x00342c                  _ortustech_DO
+                  0x003614                  _ortustech_RS4
+                  0x003628                  _HDMI_TimChk
+                  0x0036fc                  _ortustech_LCDInit
+                  0x003bb2                  _turner_RS1
+                  0x0042e2                  _turner_RS3
+                  0x0049a6                  _DDC5V_Noinput
+ .text            0x005260       0x1336 build/app_only/production/mcc_generated_files/santek_qhd_lcd.o
+                  0x005260                  _santek_ColorBar
+                  0x00564a                  _santek_RS1
+                  0x005d2c                  _santek_Check_HDMI_Cable
+                  0x005d56                  _santek_Check_RS_Int
+                  0x005ddc                  _santek_RS2_Ready
+                  0x005dee                  _santek_RS3
+                  0x0061fc                  _santek_DO
+                  0x006532                  _santek_RS4
+                  0x006544                  _santek_LCDOFF
+                  0x00655c                  _santek_LCDBrightness
+ .text            0x006596        0xf96 build/app_only/production/mcc_generated_files/usb/usb_device.o
+                  0x006596                  _USBDeviceInit
+                  0x006686                  _USBDeviceTasks
+                  0x00680c                  _USBEnableEndpoint
+                  0x006846                  _USBTransferOnePacket
+                  0x0068ec                  _USBStallEndpoint
+                  0x006986                  _USBCancelIO
+                  0x006a32                  _USBDeviceDetach
+                  0x006a3e                  _USBDeviceAttach
+                  0x006a72                  _USBCtrlEPAllowStatusStage
+                  0x006ae8                  _USBCtrlEPAllowDataStage
+                  0x0074e8                  _USBIncrement1msInternalTimers
+                  0x007512                  _USBGet1msTickCount
+ .text            0x00752c        0x752 build/app_only/production/app_device_custom_hid.o
+                  0x00752c                  _APP_DeviceCustomHIDInitialize
+                  0x007546                  _APP_DeviceCustomHIDTasks
+ .text            0x007c7e        0x53e build/app_only/production/mcc_generated_files/thd_i2c2.o
+                  0x007c7e                  _I2C2_IdleCheck
+                  0x007c96                  _I2C2_Initialize
+                  0x007caa                  _I2C2_Start
+                  0x007cfa                  _I2C2_rStart
+                  0x007d4a                  _I2C2_Stop
+                  0x007d64                  _I2C2_Send
+                  0x007d9e                  _I2C2_Receive
+                  0x007e06                  _I2C2_SlaveRead
+                  0x007e94                  _I2C2_SlaveWrite
+                  0x007efc                  _I2C2_TC358870_Read
+                  0x007f96                  _I2C2_TC358870_Write
+                  0x00800a                  _i2c2_uh2cd_read8
+                  0x008020                  _i2c2_uh2cd_read16
+                  0x008058                  _i2c2_uh2cd_read32
+                  0x008136                  _i2c2_uh2cd_write8
+                  0x008152                  _i2c2_uh2cd_write16
+                  0x008178                  _i2c2_uh2cd_write32
+ .text            0x0081bc        0x486 build/app_only/production/mcc_generated_files/thd_i2c1.o
+                  0x0081bc                  _I2C1_IdleCheck
+                  0x0081ea                  _I2C1_Initialize
+                  0x0081fe                  _I2C1_Start
+                  0x00825e                  _I2C1_rStart
+                  0x0082be                  _I2C1_Stop
+                  0x0082e0                  _I2C1_Send
+                  0x008322                  _I2C1_Receive
+                  0x0083d2                  _I2C1_SlaveRead
+                  0x00849a                  _I2C1_SlaveWrite
+                  0x008502                  _I2C1_EEPROM_Read
+                  0x0085ce                  _I2C1_EEPROM_Write
+ .text            0x008642        0x36a build/app_only/production/main.o
+                  0x008650                  _I2C1_Device_init
+                  0x008670                  _I2C1_Device_Check
+                  0x0088d0                  _main
+ .text            0x0089ac        0x2d0 build/app_only/production/mcc_generated_files/TC358870.o
+                  0x0089ac                  _tc358870_dsi_reset
+                  0x0089c4                  _tc358870_init
+                  0x0089ce                  _tc358870
+                  0x008b02                  _Check_DDC
+                  0x008b38                  _test
+ .text            0x008c7c        0x21c build/app_only/production/mcc_generated_files/usb/usb_hal_16bit.o
+                  0x008c7c                  _USBSleepOnSuspend
+                  0x008ca0                  _USBRemoteWakeupAssertBlocking
+                  0x008d1a                  _USBVBUSSessionValidStateGet
+                  0x008da4                  _USBMaskAllUSBInterrupts
+                  0x008dbe                  _USBRestoreUSBInterrupts
+ .text            0x008e98        0x1ce build/app_only/production/mcc_generated_files/ltc1661.o
+                  0x008e98                  _bitflip16
+                  0x008fec                  _Spi_LT1661_Set
+ .text            0x009066        0x176 build/app_only/production/mcc_generated_files/oc2.o
+                  0x009066                  _OC2_Initialize
+                  0x009086                  _OC2_CallBack
+                  0x00908c                  _OC2_Tasks
+                  0x0090a0                  _OC2_Start
+                  0x0090ba                  _OC2_Stop
+                  0x0090c8                  _OC2_SingleCompareValueSet
+                  0x0090d4                  _OC2_DualCompareValueSet
+                  0x0090e6                  _OC2_CentreAlignedPWMConfig
+                  0x0090f8                  _OC2_EdgeAlignedPWMConfig
+                  0x00910a                  _OC2_SecondaryValueSet
+                  0x009116                  _OC2_PrimaryValueSet
+                  0x009122                  _OC2_IsCompareCycleComplete
+                  0x00913a                  _OC2_FaultStatusGet
+                  0x009190                  _OC2_FaultStatusClear
+                  0x0091b4                  _OC2_ManualTriggerSet
+                  0x0091bc                  _OC2_TriggerStatusGet
+                  0x0091d4                  _OC2_TriggerStatusClear
+ .text            0x0091dc        0x176 build/app_only/production/mcc_generated_files/oc3.o
+                  0x0091dc                  _OC3_Initialize
+                  0x0091fc                  _OC3_CallBack
+                  0x009202                  _OC3_Tasks
+                  0x009216                  _OC3_Start
+                  0x009230                  _OC3_Stop
+                  0x00923e                  _OC3_SingleCompareValueSet
+                  0x00924a                  _OC3_DualCompareValueSet
+                  0x00925c                  _OC3_CentreAlignedPWMConfig
+                  0x00926e                  _OC3_EdgeAlignedPWMConfig
+                  0x009280                  _OC3_SecondaryValueSet
+                  0x00928c                  _OC3_PrimaryValueSet
+                  0x009298                  _OC3_IsCompareCycleComplete
+                  0x0092b0                  _OC3_FaultStatusGet
+                  0x009306                  _OC3_FaultStatusClear
+                  0x00932a                  _OC3_ManualTriggerSet
+                  0x009332                  _OC3_TriggerStatusGet
+                  0x00934a                  _OC3_TriggerStatusClear
+ .text            0x009352        0x174 build/app_only/production/mcc_generated_files/oc1.o
+                  0x009352                  _OC1_Initialize
+                  0x009372                  _OC1_CallBack
+                  0x009378                  _OC1_Tasks
+                  0x00938a                  _OC1_Start
+                  0x0093a4                  _OC1_Stop
+                  0x0093b2                  _OC1_SingleCompareValueSet
+                  0x0093be                  _OC1_DualCompareValueSet
+                  0x0093d0                  _OC1_CentreAlignedPWMConfig
+                  0x0093e2                  _OC1_EdgeAlignedPWMConfig
+                  0x0093f4                  _OC1_SecondaryValueSet
+                  0x009400                  _OC1_PrimaryValueSet
+                  0x00940c                  _OC1_IsCompareCycleComplete
+                  0x009424                  _OC1_FaultStatusGet
+                  0x00947a                  _OC1_FaultStatusClear
+                  0x00949e                  _OC1_ManualTriggerSet
+                  0x0094a6                  _OC1_TriggerStatusGet
+                  0x0094be                  _OC1_TriggerStatusClear
+ .text            0x0094c6        0x168 build/app_only/production/mcc_generated_files/spi1.o
+                  0x0094c6                  _SPI1_Initialize
+                  0x0094d4                  _SPI_Send_16
+                  0x009508                  _SPI1_Exchange
+                  0x009538                  _SPI1_ExchangeBuffer
+                  0x009602                  _SPI1_Exchange8bit
+                  0x009612                  _SPI1_Exchange8bitBuffer
+                  0x009626                  _SPI1_StatusGet
+ .text            0x00962e        0x110 build/app_only/production/mcc_generated_files/adc1.o
+                  0x00962e                  _ADC1_Initialize
+                  0x009648                  _ADC1_Start
+                  0x009650                  _ADC1_Stop
+                  0x009658                  _ADC1_ConversionResultBufferGet
+                  0x00968a                  _ADC1_ConversionResultGet
+                  0x009692                  _ADC1_IsConversionComplete
+                  0x0096aa                  _ADC1_ChannelSelect
+                  0x0096b6                  _ADC1_CallBack
+                  0x0096bc                  _ADC1_Tasks
+                  0x0096d0                  _adc_api
+                  0x0096e6                  _ADC_BLSENSOR_Read
+                  0x009712                  _ADC_CDS_Read
+ .text            0x00973e        0x10c build/app_only/production/mcc_generated_files/ADXL350_TMP102.o
+                  0x00973e                  _adxl350_init
+                  0x0097b0                  _adxl350_xyz_read
+                  0x0097de                  _tmp102_init
+                  0x0097ea                  _tmp102_read_temp
+ .text            0x00984a         0xe8 build/app_only/production/mcc_generated_files/power_reset.o
+                  0x00984a                  _Power_Reset_Init
+                  0x009860                  _Power_On
+                  0x009896                  _Power_Off
+                  0x0098b0                  _Santek_LCD_Reset
+                  0x0098ce                  _Ortustech_LCD_Reset
+                  0x0098ec                  _TC358870_Reset
+                  0x00990a                  _System_Shutdown
+ .text            0x009932         0xe0 build/app_only/production/mcc_generated_files/usb/usb_device_hid.o
+                  0x009932                  _USBCheckHIDRequest
+ .text            0x009a12         0xd6 build/app_only/production/mcc_generated_files/tmr5.o
+                  0x009a12                  _TMR5_Initialize
+                  0x009a36                  _TMR5_Period16BitSet
+                  0x009a48                  _TMR5_Period16BitGet
+                  0x009a50                  _TMR5_Counter16BitSet
+                  0x009a62                  _TMR5_Counter16BitGet
+                  0x009a6a                  _TMR5_CallBack
+                  0x009a8e                  _TMR5_SetInterruptHandler
+                  0x009a9e                  _TMR5_Start
+                  0x009aae                  _TMR5_Stop
+                  0x009ab8                  _TMR5_GetElapsedThenClear
+                  0x009ad0                  _TMR5_SoftwareCounterGet
+                  0x009adc                  _TMR5_SoftwareCounterClear
+ .text            0x009ae8         0xc6 build/app_only/production/mcc_generated_files/tmr2.o
+                  0x009ae8                  _TMR2_Initialize
+                  0x009b0a                  _TMR2_Period16BitSet
+                  0x009b1c                  _TMR2_Period16BitGet
+                  0x009b24                  _TMR2_Counter16BitSet
+                  0x009b36                  _TMR2_Counter16BitGet
+                  0x009b3e                  _TMR2_CallBack
+                  0x009b54                  _TMR2_SetInterruptHandler
+                  0x009b64                  _TMR2_Start
+                  0x009b74                  _TMR2_Stop
+                  0x009b7e                  _TMR2_GetElapsedThenClear
+                  0x009b96                  _TMR2_SoftwareCounterGet
+                  0x009ba2                  _TMR2_SoftwareCounterClear
 
-.text             0x009bc6         0xfc
- .text            0x009bc6         0x64 build/app_only/production/mcc_generated_files/usb/usb_events.o
-                  0x009bc6                  _USER_USB_CALLBACK_EVENT_HANDLER
- .text            0x009c2a         0x42 build/app_only/production/mcc_generated_files/interrupt_manager.o
-                  0x009c2a                  _INTERRUPT_Initialize
- .text            0x009c6c         0x32 build/app_only/production/mcc_generated_files/clock.o
-                  0x009c6c                  _CLOCK_Initialize
- .text            0x009c9e         0x24 build/app_only/production/mcc_generated_files/ext_int.o
-                  0x009c9e                  _EX_INT0_CallBack
-                  0x009ca8                  _EX_INT1_CallBack
-                  0x009cae                  _EXT_INT_Initialize
+.dinit            0x009bae         0x9a
+ .dinit           0x009bae         0x9a data_init
 
-.init.delay32     0x009cc2         0x1c
- .init.delay32    0x009cc2         0x1c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(delay32.Meo)
-                  0x009cc2                  ___delay32
+.text             0x009c48        0x19c
+ .text            0x009c48         0x92 build/app_only/production/mcc_generated_files/pin_manager.o
+                  0x009c48                  _PIN_MANAGER_Initialize
+ .text            0x009cda         0x64 build/app_only/production/mcc_generated_files/usb/usb_events.o
+                  0x009cda                  _USER_USB_CALLBACK_EVENT_HANDLER
+ .text            0x009d3e         0x4c build/app_only/production/mcc_generated_files/interrupt_manager.o
+                  0x009d3e                  _INTERRUPT_Initialize
+ .text            0x009d8a         0x32 build/app_only/production/mcc_generated_files/clock.o
+                  0x009d8a                  _CLOCK_Initialize
+ .text            0x009dbc         0x28 build/app_only/production/mcc_generated_files/ext_int.o
+                  0x009dbc                  _EX_INT0_CallBack
+                  0x009dc6                  _EX_INT1_CallBack
+                  0x009dd0                  _EXT_INT_Initialize
 
-.text             0x009cde         0x36
- .text            0x009cde         0x18 build/app_only/production/mcc_generated_files/system.o
-                  0x009cde                  _SYSTEM_Initialize
- .text            0x009cf6         0x16 build/app_only/production/mcc_generated_files/traps.o
-                  0x009cf6                  _TRAPS_halt_on_error
- .text            0x009d0c          0x8 build/app_only/production/mcc_generated_files/mcc.o
-                  0x009d0c                  _OSCILLATOR_Initialize
+.init.delay32     0x009de4         0x1c
+ .init.delay32    0x009de4         0x1c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(delay32.Meo)
+                  0x009de4                  ___delay32
+
+.text             0x009e00         0x36
+ .text            0x009e00         0x18 build/app_only/production/mcc_generated_files/system.o
+                  0x009e00                  _SYSTEM_Initialize
+ .text            0x009e18         0x16 build/app_only/production/mcc_generated_files/traps.o
+                  0x009e18                  _TRAPS_halt_on_error
+ .text            0x009e2e          0x8 build/app_only/production/mcc_generated_files/mcc.o
+                  0x009e2e                  _OSCILLATOR_Initialize

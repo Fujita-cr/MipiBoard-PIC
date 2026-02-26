@@ -15,15 +15,15 @@
   @Description:
     This source file provides implementations for driver APIs for EXT_INT. 
     Generation Information : 
-        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.155.0-a
+        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.171.4
         Device            :  PIC24FJ64GB004
     The generated drivers are tested against the following:
-        Compiler          :  XC16 v1.40
-        MPLAB             :  MPLAB X v5.25
+        Compiler          :  XC16 v2.10
+        MPLAB             :  MPLAB X v6.05
 */
 
 /*
-    (c) 2019 Microchip Technology Inc. and its subsidiaries. You may use this
+    (c) 2020 Microchip Technology Inc. and its subsidiaries. You may use this
     software and any derivatives exclusively with Microchip products.
 
     THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER
@@ -50,10 +50,7 @@
 
 #include "ext_int.h"
 #include "power_reset.h"
-
-//***User Area Begin->code: Add External Interrupt handler specific headers 
-
-//***User Area End->code: Add External Interrupt handler specific headers
+#include "tmr2.h"
 
 /**
    Section: External Interrupt Handlers
@@ -62,87 +59,6 @@
 // TC358870 Interrupt flag
 volatile int16_t tc358870_interrupt;
 
-// Change 2020/02/26
-// void __attribute__ ((weak)) EX_INT1_CallBack(void)
-//{
-//    // Add your custom callback code here
-//    //パワーダウン割込み入力処理
-//     Power_Off();
-//     while(1);
-//     
-//}
-//
-///**
-//  Interrupt Handler for EX_INT1 - INT1
-//*/
-//void __attribute__ ( ( interrupt, no_auto_psv ) ) _INT1Interrupt(void)
-//{
-//    //***User Area Begin->code: INT1 - External Interrupt 1***
-//	
-//	EX_INT1_CallBack();
-//    
-//	//***User Area End->code: INT1 - External Interrupt 1***
-//    EX_INT1_InterruptFlagClear();
-//}
-// void __attribute__ ((weak)) EX_INT2_CallBack(void)
-//{
-//    // Add your custom callback code here
-//     tc358870_interrupt = 1;
-//     //EXTERNAL INT from TC358870 IC
-//}
-//
-///**
-//  Interrupt Handler for EX_INT2 - INT2
-//*/
-//void __attribute__ ( ( interrupt, no_auto_psv ) ) _INT2Interrupt(void)
-//{
-//    //***User Area Begin->code: INT2 - External Interrupt 2***
-//	
-//	EX_INT2_CallBack();
-//    
-//	//***User Area End->code: INT2 - External Interrupt 2***
-//    EX_INT2_InterruptFlagClear();
-//}
-///**
-//    Section: External Interrupt Initializers
-// */
-///**
-//    void EXT_INT_Initialize(void)
-//
-//    Initializer for the following external interrupts
-//    INT1
-//    INT2
-//*/
-//void EXT_INT_Initialize(void)
-//{
-//    tc358870_interrupt = 0;
-//    /*******
-//     * INT1
-//     * Clear the interrupt flag
-//     * Set the external interrupt edge detect
-//     * Enable the interrupt, if enabled in the UI. 
-//     ********/
-//    EX_INT1_InterruptFlagClear();   
-//    EX_INT1_NegativeEdgeSet();
-//    //EX_INT1_InterruptEnable();
-//    /*******
-//     * INT2
-//     * Clear the interrupt flag
-//     * Set the external interrupt edge detect
-//     * Enable the interrupt, if enabled in the UI. 
-//     ********/
-////    EX_INT2_InterruptFlagClear();   
-////    EX_INT2_PositiveEdgeSet();
-////    EX_INT2_InterruptEnable();
-//}
-////***User Area Begin->code: Add External Interrupt handler specific headers 
-//
-////***User Area End->code: Add External Interrupt handler specific headers
-
-/**
-   Section: External Interrupt Handlers
-*/
- 
  void __attribute__ ((weak)) EX_INT0_CallBack(void)
 {
     // Add your custom callback code here
@@ -164,10 +80,8 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _INT0Interrupt(void)
 }
  void __attribute__ ((weak)) EX_INT1_CallBack(void)
 {
-    // Add your custom callback code here
-     //パワーダウン割込み入力処理
-     Power_Off();
-     while(1);    
+     EX_INT1_InterruptDisable();   // 再割り込み防止
+     TMR2_Start();
 }
 
 /**

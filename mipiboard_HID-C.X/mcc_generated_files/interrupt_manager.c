@@ -14,14 +14,14 @@
   @Description:
     This source file provides implementations for PIC24 / dsPIC33 / PIC32MM MCUs interrupts.
     Generation Information : 
-        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.155.0-a
+        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.171.4
         Device            :  PIC24FJ64GB004
     The generated drivers are tested against the following:
-        Compiler          :  XC16 v1.40
-        MPLAB             :  MPLAB X v5.25
+        Compiler          :  XC16 v2.10
+        MPLAB             :  MPLAB X v6.05
 */
 /*
-    (c) 2019 Microchip Technology Inc. and its subsidiaries. You may use this
+    (c) 2020 Microchip Technology Inc. and its subsidiaries. You may use this
     software and any derivatives exclusively with Microchip products.
 
     THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER
@@ -52,26 +52,6 @@
 */
 void INTERRUPT_Initialize (void)
 {
-// Change 2020/02/26
-//    //    USBI: USB1 - USB1 Interrupt
-//    //    Priority: 1
-//        IPC21bits.USB1IP = 1;
-//    //    INT1I: INT1 - External Interrupt 1
-//    //    Priority: 1
-//        IPC5bits.INT1IP = 1;
-//    //    INT2I: INT2 - External Interrupt 2
-//    //    Priority: 1
-//        IPC7bits.INT2IP = 1;
-//    //    MICI: MI2C1 - I2C1 Master Events
-//    //    Priority: 1
-//        IPC4bits.MI2C1IP = 1;
-//    //    MICI: MI2C2 - I2C2 Master Events
-//    //    Priority: 1
-//        IPC12bits.MI2C2IP = 1;
-//    //    TI: T5 - Timer5
-//    //    Priority: 1
-//        IPC7bits.T5IP = 1;
-
    //    USBI: USB1 - USB1 Interrupt
     //    Priority: 1
         IPC21bits.USB1IP = 1;
@@ -90,28 +70,8 @@ void INTERRUPT_Initialize (void)
     //    TI: T5 - Timer5
     //    Priority: 1
         IPC7bits.T5IP = 1;
+    //    TI: T2 - Timer2
+    //    Priority: 1
+        IPC1bits.T2IP = 1;
 
 }
-
-//void INTERRUPT_Initialize (void)
-//{
-//    //    USBI: USB1 - USB1 Interrupt
-//    //    Priority: 1
-//        IPC21bits.USB1IP = 4;
-//    //    INT1I: INT1 - External Interrupt 1
-//    //    Priority: 1
-//        IPC5bits.INT1IP = 3;
-//    //    INT2I: INT2 - External Interrupt 2
-//    //    Priority: 1
-//        IPC7bits.INT2IP = 2;
-//    //    MICI: MI2C1 - I2C1 Master Events
-//    //    Priority: 1
-//        IPC4bits.MI2C1IP = 5;
-//    //    MICI: MI2C2 - I2C2 Master Events
-//    //    Priority: 1
-//        IPC12bits.MI2C2IP = 6;
-//    //    TI: T5 - Timer5
-//    //    Priority: 1
-//        IPC7bits.T5IP = 1;
-//
-//}

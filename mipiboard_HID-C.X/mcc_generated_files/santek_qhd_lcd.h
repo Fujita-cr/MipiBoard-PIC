@@ -79,6 +79,7 @@ void santek_DO(void);
 void santek_RS4(void);
 void santek_LCDOFF(void);
 void santek_LCDBrightness(int16_t brightness);
+void santek_ColorBar();
 
 #ifdef	__cplusplus
 }

@@ -15,15 +15,15 @@
   @Description:
     This source file provides implementations for PIN MANAGER.
     Generation Information :
-        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.155.0-a
+        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.171.4
         Device            :  PIC24FJ64GB004
     The generated drivers are tested against the following:
-        Compiler          :  XC16 v1.40
-        MPLAB 	          :  MPLAB X v5.25
+        Compiler          :  XC16 v2.10
+        MPLAB 	          :  MPLAB X v6.05
 */
 
 /*
-    (c) 2019 Microchip Technology Inc. and its subsidiaries. You may use this
+    (c) 2020 Microchip Technology Inc. and its subsidiaries. You may use this
     software and any derivatives exclusively with Microchip products.
 
     THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER
@@ -54,17 +54,6 @@
 /**
     Section: Device Pin Macros
 */
-/* PORTS Were disabled 2020/02/27
-
-#define Camera_R_Reset_SetHigh()          _LATA10 = 1
-#define Camera_R_Reset_SetLow()           _LATA10 = 0
-
-#define Camera_C_Reset_SetHigh()          _LATA4 = 1
-#define Camera_C_Reset_SetLow()           _LATA4 = 0
-
-#define Camera_L_Reset_SetHigh()          _LATA9 = 1
-#define Camera_L_Reset_SetLow()           _LATA9 = 0
-*/
 
 #define TC358870_Reset_SetHigh()          _LATA7 = 1
 #define TC358870_Reset_SetLow()           _LATA7 = 0
@@ -74,29 +63,9 @@
 
 #define SPI_CS_DA_IR_SetHigh()          _LATA9 = 1
 #define SPI_CS_DA_IR_SetLow()           _LATA9 = 0
-//#define FAN_ON_SetHigh()          _LATB13 = 1
-//#define FAN_ON_SetLow()           _LATB13 = 0
 
-#define LED_G_ON_SetHigh()          _LATB14 = 1
-#define LED_G_ON_SetLow()           _LATB14 = 0
-#define LED_G_ON_Toggle()           _LATB14 ^= 1
-
-#define LED_R_ON_SetHigh()          _LATB15 = 1
-#define LED_R_ON_SetLow()           _LATB15 = 0
-#define LED_R_ON_Toggle()           _LATB15 ^= 1
-
-/* 2020/02/26  PORT CHANGE From RB7 to RB4 */
 #define LCD_Reset_SetHigh()          _LATB4 = 1
 #define LCD_Reset_SetLow()           _LATB4 = 0
-
-
-/* 2020/02/26 SPI_CS_DA_BL Eliminated
-#define SPI_CS_DA_BL_SetHigh()          _LATC0 = 1
-#define SPI_CS_DA_BL_SetLow()           _LATC0 = 0
-*/
-
-//#define SPI_CS_DA_IR_SetHigh()          _LATC1 = 1
-//#define SPI_CS_DA_IR_SetLow()           _LATC1 = 0
 
 #define PW_ON1N_SetHigh()          _LATC4 = 1
 #define PW_ON1N_SetLow()           _LATC4 = 0

@@ -11,17 +11,17 @@
     This is the mcc.h file generated using PIC24 / dsPIC33 / PIC32MM MCUs
 
   @Description:
-    This header file provides implementations for driver APIs for all modules selected in the GUI.
+    This file will be removed in future MCC releases. Use system.h instead.
     Generation Information :
-        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.155.0-a
+        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.171.4
         Device            :  PIC24FJ64GB004
     The generated drivers are tested against the following:
-        Compiler          :  XC16 v1.40
-        MPLAB             :  MPLAB X v5.25
+        Compiler          :  XC16 v2.10
+        MPLAB             :  MPLAB X v6.05
 */
 
 /*
-    (c) 2019 Microchip Technology Inc. and its subsidiaries. You may use this
+    (c) 2020 Microchip Technology Inc. and its subsidiaries. You may use this
     software and any derivatives exclusively with Microchip products.
 
     THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER
@@ -54,6 +54,7 @@
 #include "traps.h"
 #include "usb/usb.h"
 #include "adc1.h"
+#include "tmr2.h"
 #include "tmr5.h"
 #include "ext_int.h"
 #include "thd_i2c1.h"

@@ -55,6 +55,7 @@ extern "C" {
 
 void tc358870_init(void);
 void tc358870(bool bCheckAll);
+void tc358870_dsi_reset();
 
 void test(void);
 

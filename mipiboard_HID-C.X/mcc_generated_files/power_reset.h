@@ -69,9 +69,9 @@ void Power_Off(void);
 void Santek_LCD_Reset(void);
 void Ortustech_LCD_Reset(void);
 void TC358870_Reset(void);
-//void Camera_Reset_Release(void);
+void System_Shutdown(void);
 
-void Turner_LCD_Reset(void);
+//void Turner_LCD_Reset(void);
 
 #ifdef	__cplusplus
 extern "C" {

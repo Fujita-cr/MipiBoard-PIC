@@ -8,8 +8,10 @@ build/app_only/production/app_device_custom_hid.o: \
  mcc_generated_files/pin_manager.h mcc_generated_files/LTC1661.h \
  mcc_generated_files/spi1.h mcc_generated_files/pin_manager.h \
  mcc_generated_files/thd_i2c1.h mcc_generated_files/thd_i2c1.h \
- mcc_generated_files/oc1.h mcc_generated_files/oc2.h \
- mcc_generated_files/oc3.h extern_val.h
+ mcc_generated_files/thd_i2c2.h mcc_generated_files/oc1.h \
+ mcc_generated_files/oc2.h mcc_generated_files/oc3.h extern_val.h \
+ mcc_generated_files/tmr2.h mcc_generated_files/TC358870.h \
+ mcc_generated_files/santek_qhd_lcd.h
 
 mcc_generated_files/usb/usb.h:
 
@@ -41,6 +43,8 @@ mcc_generated_files/thd_i2c1.h:
 
 mcc_generated_files/thd_i2c1.h:
 
+mcc_generated_files/thd_i2c2.h:
+
 mcc_generated_files/oc1.h:
 
 mcc_generated_files/oc2.h:
@@ -48,3 +52,9 @@ mcc_generated_files/oc2.h:
 mcc_generated_files/oc3.h:
 
 extern_val.h:
+
+mcc_generated_files/tmr2.h:
+
+mcc_generated_files/TC358870.h:
+
+mcc_generated_files/santek_qhd_lcd.h:

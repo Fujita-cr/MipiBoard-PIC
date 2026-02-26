@@ -15,15 +15,15 @@
   @Description:
     This source file provides implementations for PIN MANAGER.
     Generation Information :
-        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.155.0-a
+        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.171.4
         Device            :  PIC24FJ64GB004
     The generated drivers are tested against the following:
-        Compiler          :  XC16 v1.40
-        MPLAB 	          :  MPLAB X v5.25
+        Compiler          :  XC16 v2.10
+        MPLAB 	          :  MPLAB X v6.05
 */
 
 /*
-    (c) 2019 Microchip Technology Inc. and its subsidiaries. You may use this
+    (c) 2020 Microchip Technology Inc. and its subsidiaries. You may use this
     software and any derivatives exclusively with Microchip products.
 
     THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER
@@ -51,10 +51,7 @@
 
 #include <xc.h>
 #include <stdio.h>
-#include "power_reset.h"
-/**
- Section: File specific functions
-*/
+#include "pin_manager.h"
 
 /**
  Section: Driver Interface Function Definitions
@@ -66,20 +63,13 @@ void PIN_MANAGER_Initialize (void)
      ***************************************************************************/
     LATA = 0x0000;
     LATB = 0x0000;
-    LATC = 0x0000;
+    LATC = 0x0078;	//Power1Å`4ÇOFF(High)Ç…Ç∑ÇÈ
 
     /****************************************************************************
      * Setting the GPIO Direction SFR(s)
      ***************************************************************************/
-//    TRISA = 0x0007;
-//    //TRISB = 0x0F1F;
-//    // 2020/02/26 
-//    //TRISB = 0x0F3F;     //RB5Çì¸óÕèâä˙âª
-//    TRISB = 0x0F8F;
-//    TRISC = 0x0104;
-    
     TRISA = 0x0417;
-    TRISB = 0x0FAF;
+    TRISB = 0xCFAF;
     TRISC = 0x0104;
 
     /****************************************************************************
@@ -93,51 +83,25 @@ void PIN_MANAGER_Initialize (void)
      ***************************************************************************/
     ODCA = 0x0000;
     ODCB = 0x0000;
-    // 2020/02/26
-    ODCC = 0x0001;
-    //ODCC = 0x0000;
+    ODCC = 0x0001;  //BL_PWMÇÕODóLå¯
 
     /****************************************************************************
      * Setting the Analog/Digital Configuration SFR(s)
      ***************************************************************************/
-    //AD1PCFG = 0x013C;
-
-    AD1PCFG = 0x09FC;
+    AD1PCFG = 0x1FFC;
 
     /****************************************************************************
      * Set the PPS
-     ***************************************************************************/
-//    __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
-//
-//    RPINR1bits.INT2R = 0x0004;    //RB4->EXT_INT:INT2
-//    RPINR20bits.SDI1R = 0x0018;    //RC8->SPI1:SDI1
-//    RPOR11bits.RP23R = 0x0008;    //RC7->SPI1:SCK1OUT
-//    RPINR0bits.INT1R = 0x0012;    //RC2->EXT_INT:INT1
-//    RPOR12bits.RP25R = 0x0007;    //RC9->SPI1:SDO1
-//
-//    __builtin_write_OSCCONL(OSCCON | 0x40); // lock PPS
-
-// Changed 2020/02/26    
+     ***************************************************************************/ 
     __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
 
-//    RPOR8bits.RP16R = 0x0012;    //RC0->OC1:OC1
-//    RPOR11bits.RP23R = 0x0008;    //RC7->SPI1:SCK1OUT
-//    RPINR20bits.SDI1R = 0x0018;    //RC8->SPI1:SDI1
-//    RPOR12bits.RP25R = 0x0007;    //RC9->SPI1:SDO1
-//    RPINR0bits.INT1R = 0x0012;    //RC2->EXT_INT:INT1
-    
     RPINR0bits.INT1R = 0x0012;    //RC2->EXT_INT:INT1
     RPOR11bits.RP23R = 0x0008;    //RC7->SPI1:SCK1OUT
     RPOR6bits.RP13R = 0x0014;    //RB13->OC3:OC3
     RPOR8bits.RP17R = 0x0013;    //RC1->OC2:OC2
-    RPINR20bits.SDI1R = 0x0018;    //RC8->SPI1:SDI1
     RPOR8bits.RP16R = 0x0012;    //RC0->OC1:OC1
     RPOR12bits.RP25R = 0x0007;    //RC9->SPI1:SDO1
 
     __builtin_write_OSCCONL(OSCCON | 0x40); // lock PPS
-    /****************************************************************************
-     * Set up Initial I/O Condition IOÇèâä˙âªèÛë‘ÇÃèoóÕÇ…Ç∑ÇÈ
-     * *************************************************************************/
-
 
 }

@@ -25,10 +25,14 @@ please contact mla_licensing@microchip.com
 #include "mcc_generated_files/pin_manager.h"
 #include "mcc_generated_files/LTC1661.h"
 #include "mcc_generated_files/thd_i2c1.h"
+#include "mcc_generated_files/thd_i2c2.h"
 #include "mcc_generated_files/oc1.h"
 #include "mcc_generated_files/oc2.h"
 #include "mcc_generated_files/oc3.h"
 #include "extern_val.h"
+#include "mcc_generated_files/tmr2.h"
+#include "mcc_generated_files/TC358870.h"
+#include "mcc_generated_files/santek_qhd_lcd.h"
 
 /** VARIABLES ******************************************************/
 /* Some processors have a limited range of RAM addresses where the USB module
@@ -100,12 +104,13 @@ typedef enum
     COMMAND_IRLED_ON = 0x0C,        //メモリ値でIRLED ON OFF
     COMMAND_FAN_ON = 0x0D,          //指定温度でFAN ON OFF
     COMMAND_BL_NAVI = 0x0E,         //バックライト安定化制御
-    COMMAND_GET_VER = 0x0F,           //バージョン情報取得
-    COMMAND_BOOTLOADER = 0x10,        //ブートローダー起動
-    COMMAND_HDMIRST = 0x11,          //HDMI RXのリセット
+    COMMAND_GET_VER = 0x0F,         //バージョン情報取得
+    COMMAND_BOOTLOADER = 0x10,      //ブートローダー起動
+    COMMAND_HDMIRST = 0x11,         //HDMI RXのリセット
     COMMAND_DSIRST = 0x12,          //DSI TXのリセット
-    COMMAND_COLORBAR = 0x13,          //カラーバー表示     
-    COMMAND_GET_SYSSTS = 0x14,        //システムステータス取得        
+    COMMAND_COLORBAR = 0x13,        //カラーバー表示     
+    COMMAND_GET_SYSSTS = 0x14,      //システムステータス取得    
+    COMMAND_UNKNOWN= 0xFF,          //不明なコマンド
 } CUSTOM_HID_DEMO_COMMANDS;
 
 /** FUNCTIONS ******************************************************/
@@ -304,24 +309,25 @@ void APP_DeviceCustomHIDTasks()
                     }
                     break;
                 case COMMAND_SET_LED:  //LED点灯制御
-                    switch(ReceivedDataBuffer[3]){
-                        case 0:
-                            LED_G_ON_SetLow();
-                            LED_R_ON_SetLow();
-                            break;
-                        case 1:
-                            LED_R_ON_SetHigh();
-                            LED_G_ON_SetLow();
-                            break;
-                        case 2:
-                            LED_G_ON_SetHigh();
-                            LED_R_ON_SetLow();
-                            break;
-                        case 3:
-                            LED_R_ON_SetHigh();
-                            LED_G_ON_SetHigh();
-                            break;
-                    }
+                    //LED無しなので何もしない
+//                    switch(ReceivedDataBuffer[3]){
+//                        case 0:
+//                            LED_G_ON_SetLow();
+//                            LED_R_ON_SetLow();
+//                            break;
+//                        case 1:
+//                            LED_R_ON_SetHigh();
+//                            LED_G_ON_SetLow();
+//                            break;
+//                        case 2:
+//                            LED_G_ON_SetHigh();
+//                            LED_R_ON_SetLow();
+//                            break;
+//                        case 3:
+//                            LED_R_ON_SetHigh();
+//                            LED_G_ON_SetHigh();
+//                            break;
+//                    }
                      if(!HIDTxHandleBusy(USBInHandle))
                     {
                         ToSendDataBuffer[0] = 0x0A;	  //返信先頭バイト
@@ -467,6 +473,7 @@ void APP_DeviceCustomHIDTasks()
                     i2c2_uh2cd_write16(0x0002,0x0100);  //HDMIリセット
                     __delay_ms(10);
                     i2c2_uh2cd_write16(0x0002,0x0000);
+                    TC_State = 0;   //S0に戻す
                     //Check to make sure the endpoint/buffer is free before we modify the contents
                     if(!HIDTxHandleBusy(USBInHandle))
                     {
@@ -531,9 +538,14 @@ void APP_DeviceCustomHIDTasks()
                     break;
             }
         }else{
-            //system.cのUSBサスペンドの割り込みで先に消灯するので、ここの処理が実行されることはない。
-            m_bSuspendflg = true;
-            BackLight_ON_SetLow();
+            //不正なコマンドの場合
+            if(!HIDTxHandleBusy(USBInHandle))
+            {
+                ToSendDataBuffer[0] = 0x0A;	  //返信先頭バイト
+                ToSendDataBuffer[1] = COMMAND_UNKNOWN;   //コマンドエコーバック
+                //Prepare the USB module to send the data packet to the host
+                USBInHandle = HIDTxPacket(CUSTOM_DEVICE_HID_EP, (uint8_t*)&ToSendDataBuffer[0],64);
+            }
         }
         //Re-arm the OUT endpoint, so we can receive the next OUT data packet 
         //that the host may try to send us.

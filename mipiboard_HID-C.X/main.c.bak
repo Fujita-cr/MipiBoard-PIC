@@ -1,46 +1,79 @@
-/**
-  Generated main.c file from MPLAB Code Configurator
+//////////////////////////////////////////////////////////////////////////////////////
+// 　　　　　　　　　　　　　 プロジェクトを開くときの注意
+//////////////////////////////////////////////////////////////////////////////////////
+// 最初にmipiboard_HID-C.Xを開く。
+// 次にbootloaderフォルダ内のexp16_pic24fj64gb004_pim.xを開く
+// mipiboard_HIDを右クリックしてSet as main projectする。
+//////////////////////////////////////////////////////////////////////////////////////
 
-  @Company
-    Microchip Technology Inc.
+//////////////////////////////////////////////////////////////////////////////////////
+// 　　　　　　　　　　　　　 バージョン変更時の注意
+//////////////////////////////////////////////////////////////////////////////////////
+// バージョン変更時は、下記の手順で行う
+// １．main.cのバージョン履歴に変更点の説明を書く
+// ２．main.cのm_versionのバージョン番号を書き換える（変数定義の最後辺り）
+// ３．git commitする
+// ４．「app boot」のコンフィグに設定する
+// ５．「mipiboard_HID」のプロジェクトを右クリックして「Clean and build」
+// ６．出力されたHexファイルの日付時刻を確認する。
+//////////////////////////////////////////////////////////////////////////////////////
 
-  @File Name
-    main.c
-
-  @Summary
-    This is the generated main.c using PIC24 / dsPIC33 / PIC32MM MCUs.
-
-  @Description
-    This source file provides main entry point for system initialization and application code development.
-    Generation Information :
-        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.155.0-a
-        Device            :  PIC24FJ64GB004
-    The generated drivers are tested against the following:
-        Compiler          :  XC16 v1.40
-        MPLAB 	          :  MPLAB X v5.25
-*/
-
-/*
-    (c) 2019 Microchip Technology Inc. and its subsidiaries. You may use this
-    software and any derivatives exclusively with Microchip products.
-
-    THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER
-    EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED
-    WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A
-    PARTICULAR PURPOSE, OR ITS INTERACTION WITH MICROCHIP PRODUCTS, COMBINATION
-    WITH ANY OTHER PRODUCTS, OR USE IN ANY APPLICATION.
-
-    IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE,
-    INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND
-    WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP HAS
-    BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE
-    FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
-    ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
-    THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
-
-    MICROCHIP PROVIDES THIS SOFTWARE CONDITIONALLY UPON YOUR ACCEPTANCE OF THESE
-    TERMS.
-*/
+//******************************************************************************
+//***************************** バージョン履歴 **********************************
+//******************************************************************************
+//
+//2021年1月 V01・・・初期バージョン
+//2023年6月 V02・・・加速度センサー無し対応
+//20231026 V10・・・USBでのファームウェア書き込みに対応した。（ここから篠田担当）
+//                  USBサスペンド信号でPICがスリープしないようにした。（スリープからの復帰後にI2C通信できなくなる対策）
+//                  サーバ資料「13.不具合対策」→「20231027_ボードの応答停止問題」を参照。
+//20240208 V11・・・V12と同様の修正だが、EDIDを間違ったので欠番。
+//20240208 V12・・・NUC13でオーディオを認識しない問題に対応。EDIDをモノラル1CHから2CHに変更した。
+//                  サーバ資料「13.不具合対策」→「20240208_オーディオ認識の問題」を参照。
+//                  3/14出荷分から適用
+//20240330 V13・・・3300,3400基板でRGB(30,30,30）の画像を表示したときに液晶表示が乱れる問題に対応。EDIDのEQを無効にした。(V02からEQが有効になっていた）
+//                  サーバ資料「13.不具合対策」→「20240330_液晶の乱れ」を参照。
+//20240416 V14・・・NUC13で音が鳴らない問題の対策。メインループ前に12秒のウェイト追加。NUCのBIOSが起動しない問題あり。
+//                  USB通信も止めてしまっているのが問題と思われる。
+//                  サーバ資料「13.不具合対策」→「20240417_NUC13サウンド不具合対策」を参照。
+//20240416 V15・・・V14でNUCのBIOSが起動しない問題の対策。USB通信は止めずに、HDMIの処理開始まで12秒待つようにした。
+//                  サーバ資料「13.不具合対策」→「20240417_NUC13サウンド不具合対策」を参照。
+//20240425 V16・・・HDMI切断直後の再接続で画面が表示されない問題の対策。HDMIステータス確認の間隔200ms→10ms。
+//                  NUC11のHDMIのサウンド不具合対策で、HDMIの処理開始の待ち時間を20秒に変更。
+//                  サーバ資料「13.不具合対策」→「20240427_液晶が表示されない不具合ほかの調査および対策」を参照。
+//                  2024/5/10クリュート承認　6/14出荷分から適用
+//20240613 V17(リリース無し）・・・画面非表示とサウンド問題の対策として下記の対応
+//                  ・SYNC信号OFFの場合にS3→S1に戻す。
+//                  ・接続ステータスを割り込みイベントと現在のステータスの両方で確認する。
+//                  ・ステータス確認の間隔は10ms（念のためV16と同じ設定とする）
+//                  ・起動時の待ち時間は30秒（NUC11での液晶非表示・サウンド不具合の対策）
+//                  ・ミュートの追加（NUC13で起動時のスピーカー異音対策）
+//                  ・HDMIスタートコマンドの追加。（待ち時間経過する前にHDMI接続を開始したいときに使用）
+//                  下記はプロジェクトの変更
+//                  ・不要なコメントを一部削除
+//                  ・Git対応
+//                  ・出力するHEXファイル名の変更。プロジェクトのフォルダ名でファイル名をつけるようにした。ビルド前に古いHEXファイルを削除するように変更。
+//                    HEXファイルの名前付け処理の変更の関係で、プロジェクトのフォルダ名の付け方を変更。
+//20250912 V1601（テスト用）・・・サスペンド処理の無効化
+//20260225 V1602・・・V17をベースに下記の点を変更
+//					・DDC5VがOFFになったときにS1に戻すように変更
+//                  ・カラーバー表示から戻るときはICリセットが必要なので、従来通りS0に戻す処理とした。
+//					・HDMIスタートコマンドは削除
+//					・シャットダウン割り込み発生時に、1ms後に再確認するように変更。終了処理をより安全な方法に変更。
+//					・起動時の待ち時間は20秒でV16と同じ
+//                  ・従来は不明なUSBコマンド受信時にバックライトOFFになっていたのを削除し、不明なコマンドとして応答するように変更。
+//				    下記の部分はV17から引継ぎ
+//                  ・SYNC信号OFFの場合にS3→S1に戻す。
+//                  ・接続ステータスを割り込みイベントと現在のステータスの両方で確認する。
+//                  ・ステータス確認の間隔は10ms（V16と同じ設定とする）
+//                  ・ミュートの追加（NUC13で起動時のスピーカー異音対策）
+//                  下記はプロジェクトの変更
+//                  ・不要なコメントを一部削除
+//                  ・Git対応
+//                  ・出力するHEXファイル名の変更。プロジェクトのフォルダ名でファイル名をつけるようにした。ビルド前に古いHEXファイルを削除するように変更。
+//                    HEXファイルの名前付け処理の変更の関係で、プロジェクトのフォルダ名の付け方を変更。
+//
+//******************************************************************************
 
 /**
   Section: Included Files
@@ -51,6 +84,7 @@
 #include "mcc_generated_files/adc1.h"
 #include "mcc_generated_files/usb/usb.h"
 #include "mcc_generated_files/tmr5.h"
+#include "mcc_generated_files/tmr2.h"
 #include "mcc_generated_files/ext_int.h"
 #include "mcc_generated_files/thd_i2c1.h"
 #include "mcc_generated_files/thd_i2c2.h"
@@ -101,13 +135,19 @@ int16_t     ADXL350_ari = 0;    //20230605 加速度センサあり
 uint16_t    m_brightness = 0;
 
 uint16_t TC_State;
-bool m_bSuspendflg = false;     //extern いらない
+bool m_bSuspendflg = false;
+
+uint16_t TC358870_BootCount;         //HDMI起動待ち用のカウンタ
+uint16_t TC358870_CheckAll = 0;      //HDMI接続チェック時にバックライト制御などを行うか
+
+#define TC358870_BOOT_WAIT 100    //PCが起動するまでの待ち時間 100に設定したときは10msタイマーx20回(TC358870_CheckAll)x100回=20000ms(20秒)
+                                  //TC358870_BOOT_WAIT=0のときは、最初の1回(200ms)だけ待ってHDMIの初期化が始まる
 
 ///////////////////////////////////////////////////////////////////////////////
 //           プログラムのバージョン情報                                        //
 //           プログラムを更新する場合に必ず書き換えること！                     //
 ///////////////////////////////////////////////////////////////////////////////
-const uint16_t   m_version = 14;  //プログラムのバージョン情報
+const uint16_t   m_version = 1602;  //プログラムのバージョン情報
 ///////////////////////////////////////////////////////////////////////////////
 
 void I2C1_Device_init(void){
@@ -129,6 +169,8 @@ void I2C1_Device_init(void){
     CDS_Timer = 0;         //CDセンサースキャンタイマー
     TMP102_Timer = 0;      //TMP102温度センサスキャンタイマー
     ADXL350_Timer = 0;     //ADXL350加速度センサースキャンタイマー    
+    TC358870_BootCount = 0;
+    TC358870_CheckAll = 0;
 }
 void I2C1_Device_Check(void){
     int16_t retVal;
@@ -253,6 +295,7 @@ int main(void)
     OC1_Initialize();
     OC2_Initialize();
     OC3_Initialize();
+    TMR2_Initialize();
     TMR5_Initialize();
     I2C2_Initialize();
     EXT_INT_Initialize();
@@ -278,14 +321,9 @@ int main(void)
         ret = I2C1_EEPROM_Read(SYSMEM_ADR + BOOTFLAG_OFFSET,&mem_buffer[0],2);
     }
     
-    __delay_ms(12000);
-   
-    //i2c2_uh2cd_write16(0x0002,0x0100); // SysCtl
-    //__delay_ms(100);
-    //i2c2_uh2cd_write16(0x0002,0x0000); // SysCtl
-    
     while (1)
     {
+//IRLEDのテスト用コード
 //OC1_PrimaryValueSet(150);
 //Spi_LT1661_Set(1, 500);
 //__delay_ms(100);
@@ -293,25 +331,32 @@ int main(void)
 //        __delay_ms(100);
 //        Spi_LT1661_Set(3, 1023);    //IRLED_R
 //        __delay_ms(100);
-//        LED_G_ON_Toggle();
-//        LED_R_ON_Toggle();
-//        __delay_ms(100);
         
         I2C1_Device_Check();
         APP_DeviceCustomHIDTasks();
-        //if(TC_State != S3){
-            if(TC358870_Timer > 20){
-                tc358870();
-                //test();
-                TC358870_Timer = 0;
+        if(TC358870_Timer >= 1){    //10ms毎にチェックする。これを長くするとHDMIの瞬断で画面が映らなくなるので注意。
+            TC358870_CheckAll++;
+            if (TC358870_CheckAll > 20){    //200ms毎に処理
+                //起動待ち用のカウント
+                //NUC13のBIOSが起動するのに7秒ぐらい。
+                //待たないとHDMIの音が出ない場合があるので、20秒待ってから処理する。
+                if (TC358870_BootCount > TC358870_BOOT_WAIT){
+                    tc358870(true); //バックライト制御などは200msに1回
+                }else if (TC358870_BootCount <= TC358870_BOOT_WAIT){
+                    TC358870_BootCount++;   //200msで1カウント
+                }
+                TC358870_CheckAll = 0;
+            }else{
+                if (TC358870_BootCount > TC358870_BOOT_WAIT){
+                    tc358870(false);    //HDMI周りは10msごとに処理
+                }
             }
-        //}
+            TC358870_Timer = 0;
+        }
         if(m_bSuspendflg){
             BackLight_ON_SetLow();
         }
-        // Add your application code
     }
-
     return 1;
 }
 

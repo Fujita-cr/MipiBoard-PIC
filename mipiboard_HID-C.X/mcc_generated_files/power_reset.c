@@ -13,11 +13,7 @@
 #include "power_reset.h"
 
 void Power_Reset_Init(void){
-    //Cypress カメラICはすべてリセット状態
-//    Camera_R_Reset_SetLow();
-//    Camera_C_Reset_SetLow();
-//    Camera_L_Reset_SetLow();
-   //TC358870 MIPI ICも初期状態はリセット状態
+   //TC358870 MIPI IC初期状態はリセット状態
     TC358870_Reset_SetLow();
    //LCD　初期リセット状態
     LCD_Reset_SetLow();
@@ -28,11 +24,7 @@ void Power_Reset_Init(void){
     PW_ON4N_SetHigh();
    //IOはOFF状態
     BackLight_ON_SetLow();
-    //FAN_ON_SetLow(); 
-    LED_G_ON_SetLow();
-    LED_R_ON_SetLow();
     //SPIのCS選択はH状態
-    // SPI_CS_DA_BL_SetHigh();
     SPI_CS_DA_IR_SetHigh();   
 }
 
@@ -54,9 +46,6 @@ void Power_On(void) {
 void Power_Off(void){
     
     BackLight_ON_SetLow(); //バックライトOFF
-//    Camera_L_Reset_SetLow();
-//    Camera_R_Reset_SetLow();
-//    Camera_C_Reset_SetLow();
     LCD_Reset_SetLow();
     PW_ON4N_SetHigh();
     TC358870_Reset_SetLow();
@@ -89,10 +78,38 @@ void TC358870_Reset(void){
     TC358870_Reset_SetHigh();
     __delay_ms(2);
 }
-//void Camera_Reset_Release(void){
-//    Camera_C_Reset_SetHigh(); //センターカメラリセット解除
-//    __delay_ms(250);
-//    Camera_L_Reset_SetHigh(); //左カメラリセット解除
-//    __delay_ms(250);
-//    Camera_R_Reset_SetHigh(); //右カメラリセット解除
-//}
+
+void System_Shutdown(void)
+{
+    /* 外部電源OFF */
+    Power_Off();
+
+    /* 全タイマ停止 */
+    T1CONbits.TON = 0;
+    T2CONbits.TON = 0;
+    T3CONbits.TON = 0;
+    T4CONbits.TON = 0;
+    T5CONbits.TON = 0;
+
+    /* USB無効化 */
+    U1CONbits.USBEN = 0;
+
+    /* 割り込み禁止 */
+    IEC0 = 0;
+    IEC1 = 0;
+    IEC2 = 0;
+
+    /* 割り込みフラグクリア */
+    IFS0 = 0;
+    IFS1 = 0;
+    IFS2 = 0;
+
+    /* グローバル割り込み禁止 */
+    __builtin_disable_interrupts();
+    
+    /* 永久停止 */
+    while(1)
+    {
+        Sleep();
+    }
+}

@@ -70,10 +70,19 @@ uint16_t BackLight_Kido = 0;
 uint16_t fan_data;
 uint16_t fan2_data;
 
+uint8_t tc_sys_status; 
+uint8_t tc_video_input_status; 
+uint8_t tc_video_input_status1; 
+uint8_t tc_audio_status0; 
+
 extern uint16_t    m_brightness;
 extern bool m_bSuspendflg;
 extern uint16_t TC_State;
 extern uint16_t m_version;
+extern bool TC358870_Bootflg;
+
+bool m_bColorBar_Req  = false;  //カラーバー表示要求
+bool m_bColorBar_Show = false;  //カラーバー表示中
 
 /** DEFINITIONS ****************************************************/
 typedef enum
@@ -92,8 +101,13 @@ typedef enum
     COMMAND_IRLED_ON = 0x0C,        //メモリ値でIRLED ON OFF
     COMMAND_FAN_ON = 0x0D,          //指定温度でFAN ON OFF
     COMMAND_BL_NAVI = 0x0E,         //バックライト安定化制御
-    COMMAND_GET_VER = 0x0F,           //バージョン情報取得
-    COMMAND_BOOTLOADER = 0x10,        //ブートローダー起動
+    COMMAND_GET_VER = 0x0F,         //バージョン情報取得
+    COMMAND_BOOTLOADER = 0x10,      //ブートローダー起動
+    COMMAND_HDMIRST = 0x11,         //HDMI RXのリセット
+    COMMAND_DSIRST = 0x12,          //DSI TXのリセット
+    COMMAND_COLORBAR = 0x13,        //カラーバー表示     
+    COMMAND_GET_SYSSTS = 0x14,      //システムステータス取得    
+    COMMAND_HDMI_START = 0x15,       //HDMI起動コマンド
 } CUSTOM_HID_DEMO_COMMANDS;
 
 /** FUNCTIONS ******************************************************/
@@ -435,9 +449,6 @@ void APP_DeviceCustomHIDTasks()
                         //Prepare the USB module to send the data packet to the host
                         USBInHandle = HIDTxPacket(CUSTOM_DEVICE_HID_EP, (uint8_t*)&ToSendDataBuffer[0],64);    
                     }
-                    i2c2_uh2cd_write16(0x0002,0x0100); // SysCtl
-                    __delay_ms(100);
-                    i2c2_uh2cd_write16(0x0002,0x0000); // SysCtl
                     break;
                 case COMMAND_BOOTLOADER: //ブートローダ起動
                     mem_buffer[0] = (BOOTFLAG >> 8);   //ブートローダ起動フラグ
@@ -452,6 +463,83 @@ void APP_DeviceCustomHIDTasks()
                         ToSendDataBuffer[1] = COMMAND_BOOTLOADER;   //コマンドエコーバック
                         //Prepare the USB module to send the data packet to the host
                         USBInHandle = HIDTxPacket(CUSTOM_DEVICE_HID_EP, (uint8_t*)&ToSendDataBuffer[0],64);
+                    }
+                    break;
+                case COMMAND_HDMIRST:  //HDMIリセット
+                    i2c2_uh2cd_write16(0x0002,0x0100);  //HDMIリセット
+                    __delay_ms(10);
+                    i2c2_uh2cd_write16(0x0002,0x0000);
+                    //Check to make sure the endpoint/buffer is free before we modify the contents
+                    if(!HIDTxHandleBusy(USBInHandle))
+                    {
+                        ToSendDataBuffer[0] = 0x0A;	  //返信先頭バイト
+                        ToSendDataBuffer[1] = COMMAND_HDMIRST;   //コマンドエコーバック
+                        //Prepare the USB module to send the data packet to the host
+                        USBInHandle = HIDTxPacket(CUSTOM_DEVICE_HID_EP, (uint8_t*)&ToSendDataBuffer[0],64);    
+                    }
+                    break;
+                case COMMAND_DSIRST:  //DSIリセット
+                    tc358870_dsi_reset();
+                    santek_RS3();
+                    
+                    //Check to make sure the endpoint/buffer is free before we modify the contents
+                    if(!HIDTxHandleBusy(USBInHandle))
+                    {
+                        ToSendDataBuffer[0] = 0x0A;	  //返信先頭バイト
+                        ToSendDataBuffer[1] = COMMAND_DSIRST;   //コマンドエコーバック
+                        //Prepare the USB module to send the data packet to the host
+                        USBInHandle = HIDTxPacket(CUSTOM_DEVICE_HID_EP, (uint8_t*)&ToSendDataBuffer[0],64);    
+                    }
+                    break;
+                case COMMAND_COLORBAR:  //カラーバー表示
+                    if (ReceivedDataBuffer[3] == 1){
+                        m_bColorBar_Req = true;
+                        m_bColorBar_Show = false;
+                    }else{
+                        m_bColorBar_Req = false;
+                    }
+                    //Check to make sure the endpoint/buffer is free before we modify the contents
+                    if(!HIDTxHandleBusy(USBInHandle))
+                    {
+                        ToSendDataBuffer[0] = 0x0A;	  //返信先頭バイト
+                        ToSendDataBuffer[1] = COMMAND_COLORBAR;   //コマンドエコーバック
+                        //Prepare the USB module to send the data packet to the host
+                        USBInHandle = HIDTxPacket(CUSTOM_DEVICE_HID_EP, (uint8_t*)&ToSendDataBuffer[0],64);    
+                    }
+                    break;
+                case COMMAND_GET_SYSSTS:  //システムステータス
+                    tc_sys_status = i2c2_uh2cd_read8(0x8520); //SYS_STATUS
+                    tc_video_input_status = i2c2_uh2cd_read8(0x8521); //VIDEO_INPUT_STATUS
+                    tc_video_input_status1 = i2c2_uh2cd_read8(0x8522); //VIDEO_INPUT_STATUS1
+                    tc_audio_status0 = i2c2_uh2cd_read8(0x8523); //AUDIO_STATUS0
+                    
+                    //Check to make sure the endpoint/buffer is free before we modify the contents
+                    if(!HIDTxHandleBusy(USBInHandle))
+                    {
+                        ToSendDataBuffer[0] = 0x0A;	  //返信先頭バイト
+                        ToSendDataBuffer[1] = COMMAND_GET_SYSSTS;   //コマンドエコーバック
+                        ToSendDataBuffer[2] = 0;
+                        ToSendDataBuffer[3] = tc_sys_status;
+                        ToSendDataBuffer[4] = 0;
+                        ToSendDataBuffer[5] = tc_video_input_status;
+                        ToSendDataBuffer[6] = 0;
+                        ToSendDataBuffer[7] = tc_video_input_status1;
+                        ToSendDataBuffer[8] = 0;
+                        ToSendDataBuffer[9] = tc_audio_status0;
+                        
+                        //Prepare the USB module to send the data packet to the host
+                        USBInHandle = HIDTxPacket(CUSTOM_DEVICE_HID_EP, (uint8_t*)&ToSendDataBuffer[0],64);    
+                    }
+                    break;
+                case COMMAND_HDMI_START:
+                    TC358870_Bootflg = true;
+                    //Check to make sure the endpoint/buffer is free before we modify the contents
+                    if(!HIDTxHandleBusy(USBInHandle))
+                    {
+                        ToSendDataBuffer[0] = 0x0A;	  //返信先頭バイト
+                        ToSendDataBuffer[1] = COMMAND_HDMI_START;   //コマンドエコーバック
+                        //Prepare the USB module to send the data packet to the host
+                        USBInHandle = HIDTxPacket(CUSTOM_DEVICE_HID_EP, (uint8_t*)&ToSendDataBuffer[0],64);    
                     }
                     break;
             }
