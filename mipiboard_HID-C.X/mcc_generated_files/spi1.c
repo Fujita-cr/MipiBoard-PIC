@@ -73,7 +73,7 @@ void SPI1_Initialize (void)
 //    // SISEL SPI_INT_SPIRBF; SPIROV disabled; SPIEN enabled; SPISIDL disabled; 
 //    SPI1STAT = 0x800C;
     
-    SCK = 0;
+    SCK = 1;
     SDO = 0;
     
     TRISCbits.TRISC7 = 0;
@@ -92,16 +92,16 @@ void SPI_Send_16(uint16_t data)
     uint8_t i;
     
      for(i = 0 ; i < 16 ;i++){
-        SCK=0;
-        //__delay_us(5);
+        SCK=1;
+        __delay_us(1);
         SDO = (data & 0x8000) ? 1 : 0;
-        //__delay_us(5);
-        SCK = 1;
-        //__delay_us(5);
+        __delay_us(1);
+        SCK = 0;
+        __delay_us(1);
         data = data << 1;
     }   
-//    __delay_us(10);
-//    SCK = 0;
+   __delay_us(1);
+   SCK = 1;
 }
 void SPI1_Exchange( uint8_t *pTransmitData, uint8_t *pReceiveData )
 {

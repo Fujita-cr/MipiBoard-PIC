@@ -23,7 +23,7 @@ please contact mla_licensing@microchip.com
 #include <string.h>
 #include "mcc_generated_files/system.h"
 #include "mcc_generated_files/pin_manager.h"
-#include "mcc_generated_files/LTC1661.h"
+#include "mcc_generated_files/dac082s085.h"
 #include "mcc_generated_files/thd_i2c1.h"
 #include "mcc_generated_files/thd_i2c2.h"
 #include "mcc_generated_files/oc1.h"
@@ -253,12 +253,12 @@ void APP_DeviceCustomHIDTasks()
                     da_data = da_data << 8;
                     da_data = da_data | ReceivedDataBuffer[3];
                     da_data = da_data & 0x03FF;  
-                    Spi_LT1661_Set(IRLED_LEFT,da_data); 
+                    DAC082S085_Set(IRLED_LEFT,da_data); 
                     da_data = ReceivedDataBuffer[4];
                     da_data = da_data << 8;
                     da_data = da_data | ReceivedDataBuffer[5];
                     da_data = da_data & 0x03FF;
-                    Spi_LT1661_Set(IRLED_RIGHT,da_data);
+                    DAC082S085_Set(IRLED_RIGHT,da_data);
                     if(!HIDTxHandleBusy(USBInHandle))
                     {
                         ToSendDataBuffer[0] = 0x0A;	  //返信先頭バイト
