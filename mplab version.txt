@@ -1,0 +1,9 @@
+・MPLAB 6.15でビルド
+・アプリ側プログラムをバージョンアップするときはmain.cのバージョン情報(m_version)を書き換える
+
+・ブートローダをコンパイルするときはサイズ最適化の機能を使うのでXC16のPRO版が必要。
+　2カ月体験版は下記のアドレスからダウンロードできる
+　https://www.microchip.com/xcdemo/GetDemoLicense.aspx
+　Firefoxだとアクセスできないので、Chromeでログインして、1回目はエラーになるが、再度アクセスすると開ける。
+　だめなら下記ページのEvaluation Lisenceのリンクからアクセスする。
+　https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers/licenses
