@@ -1,2 +1,17 @@
-bootloader/
+# build artifacts
+**/build/
+**/dist/
+**/debug/
+
+# MPLAB private settings
+**/nbproject/private/
+
+# 自動生成ログ系
+**/.generated_files/
+**/queuelogs/
+
+# バイナリ
 *.hex
+*.elf
+*.map
+*.log
