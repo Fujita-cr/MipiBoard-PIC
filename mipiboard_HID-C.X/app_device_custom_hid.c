@@ -389,7 +389,7 @@ void APP_DeviceCustomHIDTasks()
                     mem_adr = mem_adr | ReceivedDataBuffer[3];
                     mem_num = ReceivedDataBuffer[5];
                     for (index_retVal = 0; index_retVal < mem_num; index_retVal++){
-                       mem_buffer[index_retVal] = ReceivedDataBuffer[4+index_retVal]; //レシーブバッファから内容コピー
+                       mem_buffer[index_retVal] = ReceivedDataBuffer[6+index_retVal]; //レシーブバッファから内容コピー
                     }
                     index_retVal = I2C1_EEPROM_Write(mem_adr,&mem_buffer[0],mem_num);
                     if(!HIDTxHandleBusy(USBInHandle))
