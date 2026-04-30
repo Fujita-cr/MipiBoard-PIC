@@ -388,6 +388,20 @@ void APP_DeviceCustomHIDTasks()
                     mem_adr = mem_adr << 8;
                     mem_adr = mem_adr | ReceivedDataBuffer[3];
                     mem_num = ReceivedDataBuffer[5];
+                    // ガード
+                    if (mem_num == 0 || mem_num > 32 ||
+                        mem_adr < 0x0100 ||
+                        mem_adr > (0x2000 - mem_num))
+                    {
+                        if(!HIDTxHandleBusy(USBInHandle))
+                        {
+                            ToSendDataBuffer[0] = 0x0A;
+                            ToSendDataBuffer[1] = 0xFF;
+                            ToSendDataBuffer[2] = 0x02; // エラーコード（仮）
+                            USBInHandle = HIDTxPacket(CUSTOM_DEVICE_HID_EP, (uint8_t*)&ToSendDataBuffer[0],64);
+                        }
+                        break;
+                    }
                     for (index_retVal = 0; index_retVal < mem_num; index_retVal++){
                        mem_buffer[index_retVal] = ReceivedDataBuffer[6+index_retVal]; //レシーブバッファから内容コピー
                     }
