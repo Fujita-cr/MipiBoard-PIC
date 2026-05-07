@@ -265,12 +265,12 @@ i2c2_uh2cd_write8(0x8C35,0x01); // EDID_RAM
 i2c2_uh2cd_write8(0x8C36,0x50); // EDID_RAM
 i2c2_uh2cd_write8(0x8C37,0x5F); // EDID_RAM
 i2c2_uh2cd_write8(0x8C38,0xA0); // EDID_RAM
-i2c2_uh2cd_write8(0x8C39,0xAC); // EDID_RAM
+i2c2_uh2cd_write8(0x8C39,0x89); // EDID_RAM
 i2c2_uh2cd_write8(0x8C3A,0x50); // EDID_RAM
 i2c2_uh2cd_write8(0x8C3B,0x00); // EDID_RAM
-i2c2_uh2cd_write8(0x8C3C,0x08); // EDID_RAM
+i2c2_uh2cd_write8(0x8C3C,0x14); // EDID_RAM
 i2c2_uh2cd_write8(0x8C3D,0xA0); // EDID_RAM
-i2c2_uh2cd_write8(0x8C3E,0x64); // EDID_RAM
+i2c2_uh2cd_write8(0x8C3E,0x41); // EDID_RAM
 i2c2_uh2cd_write8(0x8C3F,0x20); // EDID_RAM
 i2c2_uh2cd_write8(0x8C40,0x22); // EDID_RAM
 i2c2_uh2cd_write8(0x8C41,0x00); // EDID_RAM
@@ -283,12 +283,12 @@ i2c2_uh2cd_write8(0x8C47,0x18); // EDID_RAM
 i2c2_uh2cd_write8(0x8C48,0x50); // EDID_RAM
 i2c2_uh2cd_write8(0x8C49,0x5F); // EDID_RAM
 i2c2_uh2cd_write8(0x8C4A,0xA0); // EDID_RAM
-i2c2_uh2cd_write8(0x8C4B,0xAC); // EDID_RAM
+i2c2_uh2cd_write8(0x8C4B,0x89); // EDID_RAM
 i2c2_uh2cd_write8(0x8C4C,0x50); // EDID_RAM
 i2c2_uh2cd_write8(0x8C4D,0x00); // EDID_RAM
-i2c2_uh2cd_write8(0x8C4E,0x08); // EDID_RAM
+i2c2_uh2cd_write8(0x8C4E,0x14); // EDID_RAM
 i2c2_uh2cd_write8(0x8C4F,0xA0); // EDID_RAM
-i2c2_uh2cd_write8(0x8C50,0x64); // EDID_RAM
+i2c2_uh2cd_write8(0x8C50,0x41); // EDID_RAM
 i2c2_uh2cd_write8(0x8C51,0x20); // EDID_RAM
 i2c2_uh2cd_write8(0x8C52,0x22); // EDID_RAM
 i2c2_uh2cd_write8(0x8C53,0x00); // EDID_RAM
@@ -335,7 +335,7 @@ i2c2_uh2cd_write8(0x8C7B,0x20); // EDID_RAM
 i2c2_uh2cd_write8(0x8C7C,0x20); // EDID_RAM
 i2c2_uh2cd_write8(0x8C7D,0x20); // EDID_RAM
 i2c2_uh2cd_write8(0x8C7E,0x01); // EDID_RAM
-i2c2_uh2cd_write8(0x8C7F,0x3C); // EDID_RAM
+i2c2_uh2cd_write8(0x8C7F,0xB0); // EDID_RAM
 i2c2_uh2cd_write8(0x8C80,0x02); // EDID_RAM
 i2c2_uh2cd_write8(0x8C81,0x03); // EDID_RAM
 i2c2_uh2cd_write8(0x8C82,0x1A); // EDID_RAM
@@ -365,12 +365,12 @@ i2c2_uh2cd_write8(0x8C99,0x00); // EDID_RAM
 i2c2_uh2cd_write8(0x8C9A,0x50); // EDID_RAM
 i2c2_uh2cd_write8(0x8C9B,0x5F); // EDID_RAM
 i2c2_uh2cd_write8(0x8C9C,0xA0); // EDID_RAM
-i2c2_uh2cd_write8(0x8C9D,0xAC); // EDID_RAM
+i2c2_uh2cd_write8(0x8C9D,0x89); // EDID_RAM
 i2c2_uh2cd_write8(0x8C9E,0x50); // EDID_RAM
 i2c2_uh2cd_write8(0x8C9F,0x00); // EDID_RAM
-i2c2_uh2cd_write8(0x8CA0,0x08); // EDID_RAM
+i2c2_uh2cd_write8(0x8CA0,0x14); // EDID_RAM
 i2c2_uh2cd_write8(0x8CA1,0xA0); // EDID_RAM
-i2c2_uh2cd_write8(0x8CA2,0x64); // EDID_RAM
+i2c2_uh2cd_write8(0x8CA2,0x41); // EDID_RAM
 i2c2_uh2cd_write8(0x8CA3,0x20); // EDID_RAM
 i2c2_uh2cd_write8(0x8CA4,0x22); // EDID_RAM
 i2c2_uh2cd_write8(0x8CA5,0x00); // EDID_RAM
@@ -383,12 +383,12 @@ i2c2_uh2cd_write8(0x8CAB,0x18); // EDID_RAM
 i2c2_uh2cd_write8(0x8CAC,0x50); // EDID_RAM
 i2c2_uh2cd_write8(0x8CAD,0x5F); // EDID_RAM
 i2c2_uh2cd_write8(0x8CAE,0xA0); // EDID_RAM
-i2c2_uh2cd_write8(0x8CAF,0xAC); // EDID_RAM
+i2c2_uh2cd_write8(0x8CAF,0x89); // EDID_RAM
 i2c2_uh2cd_write8(0x8CB0,0x50); // EDID_RAM
 i2c2_uh2cd_write8(0x8CB1,0x00); // EDID_RAM
-i2c2_uh2cd_write8(0x8CB2,0x08); // EDID_RAM
+i2c2_uh2cd_write8(0x8CB2,0x14); // EDID_RAM
 i2c2_uh2cd_write8(0x8CB3,0xA0); // EDID_RAM
-i2c2_uh2cd_write8(0x8CB4,0x64); // EDID_RAM
+i2c2_uh2cd_write8(0x8CB4,0x41); // EDID_RAM
 i2c2_uh2cd_write8(0x8CB5,0x20); // EDID_RAM
 i2c2_uh2cd_write8(0x8CB6,0x22); // EDID_RAM
 i2c2_uh2cd_write8(0x8CB7,0x00); // EDID_RAM
@@ -401,12 +401,12 @@ i2c2_uh2cd_write8(0x8CBD,0x18); // EDID_RAM
 i2c2_uh2cd_write8(0x8CBE,0x50); // EDID_RAM
 i2c2_uh2cd_write8(0x8CBF,0x5F); // EDID_RAM
 i2c2_uh2cd_write8(0x8CC0,0xA0); // EDID_RAM
-i2c2_uh2cd_write8(0x8CC1,0xAC); // EDID_RAM
+i2c2_uh2cd_write8(0x8CC1,0x89); // EDID_RAM
 i2c2_uh2cd_write8(0x8CC2,0x50); // EDID_RAM
 i2c2_uh2cd_write8(0x8CC3,0x00); // EDID_RAM
-i2c2_uh2cd_write8(0x8CC4,0x08); // EDID_RAM
+i2c2_uh2cd_write8(0x8CC4,0x14); // EDID_RAM
 i2c2_uh2cd_write8(0x8CC5,0xA0); // EDID_RAM
-i2c2_uh2cd_write8(0x8CC6,0x64); // EDID_RAM
+i2c2_uh2cd_write8(0x8CC6,0x41); // EDID_RAM
 i2c2_uh2cd_write8(0x8CC7,0x20); // EDID_RAM
 i2c2_uh2cd_write8(0x8CC8,0x22); // EDID_RAM
 i2c2_uh2cd_write8(0x8CC9,0x00); // EDID_RAM
@@ -419,12 +419,12 @@ i2c2_uh2cd_write8(0x8CCF,0x18); // EDID_RAM
 i2c2_uh2cd_write8(0x8CD0,0x50); // EDID_RAM
 i2c2_uh2cd_write8(0x8CD1,0x5F); // EDID_RAM
 i2c2_uh2cd_write8(0x8CD2,0xA0); // EDID_RAM
-i2c2_uh2cd_write8(0x8CD3,0xAC); // EDID_RAM
+i2c2_uh2cd_write8(0x8CD3,0x89); // EDID_RAM
 i2c2_uh2cd_write8(0x8CD4,0x50); // EDID_RAM
 i2c2_uh2cd_write8(0x8CD5,0x00); // EDID_RAM
-i2c2_uh2cd_write8(0x8CD6,0x08); // EDID_RAM
+i2c2_uh2cd_write8(0x8CD6,0x14); // EDID_RAM
 i2c2_uh2cd_write8(0x8CD7,0xA0); // EDID_RAM
-i2c2_uh2cd_write8(0x8CD8,0x64); // EDID_RAM
+i2c2_uh2cd_write8(0x8CD8,0x41); // EDID_RAM
 i2c2_uh2cd_write8(0x8CD9,0x20); // EDID_RAM
 i2c2_uh2cd_write8(0x8CDA,0x22); // EDID_RAM
 i2c2_uh2cd_write8(0x8CDB,0x00); // EDID_RAM
@@ -437,12 +437,12 @@ i2c2_uh2cd_write8(0x8CE1,0x18); // EDID_RAM
 i2c2_uh2cd_write8(0x8CE2,0x50); // EDID_RAM
 i2c2_uh2cd_write8(0x8CE3,0x5F); // EDID_RAM
 i2c2_uh2cd_write8(0x8CE4,0xA0); // EDID_RAM
-i2c2_uh2cd_write8(0x8CE5,0xAC); // EDID_RAM
+i2c2_uh2cd_write8(0x8CE5,0x89); // EDID_RAM
 i2c2_uh2cd_write8(0x8CE6,0x50); // EDID_RAM
 i2c2_uh2cd_write8(0x8CE7,0x00); // EDID_RAM
-i2c2_uh2cd_write8(0x8CE8,0x08); // EDID_RAM
+i2c2_uh2cd_write8(0x8CE8,0x14); // EDID_RAM
 i2c2_uh2cd_write8(0x8CE9,0xA0); // EDID_RAM
-i2c2_uh2cd_write8(0x8CEA,0x64); // EDID_RAM
+i2c2_uh2cd_write8(0x8CEA,0x41); // EDID_RAM
 i2c2_uh2cd_write8(0x8CEB,0x20); // EDID_RAM
 i2c2_uh2cd_write8(0x8CEC,0x22); // EDID_RAM
 i2c2_uh2cd_write8(0x8CED,0x00); // EDID_RAM
@@ -463,7 +463,7 @@ i2c2_uh2cd_write8(0x8CFB,0x00); // EDID_RAM
 i2c2_uh2cd_write8(0x8CFC,0x00); // EDID_RAM
 i2c2_uh2cd_write8(0x8CFD,0x00); // EDID_RAM
 i2c2_uh2cd_write8(0x8CFE,0x00); // EDID_RAM
-i2c2_uh2cd_write8(0x8CFF,0x12); // EDID_RAM
+i2c2_uh2cd_write8(0x8CFF,0x34); // EDID_RAM
 // HDCP Setting
 // HDMI SYSTEM
 i2c2_uh2cd_write8(0x8543,0x02); // DDC_CTL
@@ -557,7 +557,7 @@ void santek_RS3(void)
     // Check HDMI resolution/format
     Waitx1ms(5000);
     // MIPI Output Setting
-    // Stop Video and Audio
+// Stop Video and Audio
     i2c2_uh2cd_write16(0x0004,0x0C14); // ConfCtl0
     // Soft Reset CSI-TX and Splitter Block
     i2c2_uh2cd_write16(0x0002,0x1200); // SysCtl
@@ -587,7 +587,7 @@ void santek_RS3(void)
     i2c2_uh2cd_write32(0x0154,0x00000001); // DSI_RX_VC_ENABLE
     i2c2_uh2cd_write32(0x0158,0x000000C8); // IND_TO_COUNT
     i2c2_uh2cd_write32(0x0168,0x0000002A); // DSI_HSYNC_STOP_COUNT
-    i2c2_uh2cd_write32(0x0170,0x000002A0); // APF_VDELAYCNT	
+    i2c2_uh2cd_write32(0x0170,0x00000299); // APF_VDELAYCNT
     i2c2_uh2cd_write32(0x017C,0x00000080); // DSI_TX_MODE
     i2c2_uh2cd_write32(0x018C,0x00000020); // DSI_HSYNC_WIDTH
     i2c2_uh2cd_write32(0x0190,0x0000000E); // DSI_HBPR
@@ -631,7 +631,7 @@ void santek_RS3(void)
     i2c2_uh2cd_write32(0x0354,0x00000001); // DSI_RX_VC_ENABLE
     i2c2_uh2cd_write32(0x0358,0x000000C8); // IND_TO_COUNT
     i2c2_uh2cd_write32(0x0368,0x0000002A); // DSI_HSYNC_STOP_COUNT
-    i2c2_uh2cd_write32(0x0370,0x000002A0); // APF_VDELAYCNT	
+    i2c2_uh2cd_write32(0x0370,0x00000299); // APF_VDELAYCNT
     i2c2_uh2cd_write32(0x037C,0x00000080); // DSI_TX_MODE
     i2c2_uh2cd_write32(0x038C,0x00000020); // DSI_HSYNC_WIDTH
     i2c2_uh2cd_write32(0x0390,0x0000000E); // DSI_HBPR
@@ -656,7 +656,6 @@ void santek_RS3(void)
     i2c2_uh2cd_write16(0x0500,0x0004); // CMD_SEL
     i2c2_uh2cd_write32(0x0110,0x00000016); // MODE_CONFIG
     i2c2_uh2cd_write32(0x0310,0x00000016); // MODE_CONFIG
-
 
     // LCD Initialization
     // POWER ON +/-AVDD
