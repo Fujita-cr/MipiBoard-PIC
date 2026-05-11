@@ -71,6 +71,7 @@ void PIN_MANAGER_Initialize (void)
     TRISA = 0x0007;
     TRISB = 0xCFAF;
     TRISC = 0x0004;
+    //BoardVersion:RC8,RB15,RA1,RA0(CN20,CN11,CN2,CN3)
 
     /****************************************************************************
      * Setting the Weak Pull Up and Weak Pull Down SFR(s)
@@ -88,7 +89,7 @@ void PIN_MANAGER_Initialize (void)
     /****************************************************************************
      * Setting the Analog/Digital Configuration SFR(s)
      ***************************************************************************/
-    AD1PCFG = 0x1FFC;
+    AD1PCFG = 0x1FFF;
 
     /****************************************************************************
      * Set the PPS

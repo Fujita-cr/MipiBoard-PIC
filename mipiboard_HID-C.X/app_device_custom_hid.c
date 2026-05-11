@@ -84,6 +84,7 @@ extern uint16_t    m_brightness;
 extern bool m_bSuspendflg;
 extern uint16_t TC_State;
 extern uint16_t m_version;
+extern uint16_t m_boardVersion;
 
 bool m_bColorBar_Req  = false;  //カラーバー表示要求
 bool m_bColorBar_Show = false;  //カラーバー表示中
@@ -464,8 +465,12 @@ void APP_DeviceCustomHIDTasks()
                     {
                         ToSendDataBuffer[0] = 0x0A;	  //返信先頭バイト
                         ToSendDataBuffer[1] = COMMAND_GET_VER;   //コマンドエコーバック
+                        // FW Version
                         ToSendDataBuffer[2] = (uint8_t)(m_version >> 8);
                         ToSendDataBuffer[3] = (uint8_t)(m_version & 0xFF);
+                        // Board Version
+                        ToSendDataBuffer[4] = 0x00;
+                        ToSendDataBuffer[5] = m_boardVersion;
                         //Prepare the USB module to send the data packet to the host
                         USBInHandle = HIDTxPacket(CUSTOM_DEVICE_HID_EP, (uint8_t*)&ToSendDataBuffer[0],64);    
                     }

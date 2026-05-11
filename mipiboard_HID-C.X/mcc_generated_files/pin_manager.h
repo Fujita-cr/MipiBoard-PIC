@@ -58,8 +58,9 @@
 #define Camera_R_Reset_SetHigh()          _LATA10 = 1
 #define Camera_R_Reset_SetLow()           _LATA10 = 0
 
-#define Camera_C_Reset_SetHigh()          _LATC8 = 1
-#define Camera_C_Reset_SetLow()           _LATC8 = 0
+// センターカメラは削除⇒C8はバージョン抵抗として使用
+// #define Camera_C_Reset_SetHigh()          _LATC8 = 1
+// #define Camera_C_Reset_SetLow()           _LATC8 = 0
 
 #define Camera_L_Reset_SetHigh()          _LATA4 = 1
 #define Camera_L_Reset_SetLow()           _LATA4 = 0
@@ -88,6 +89,10 @@
 #define PW_ON4N_SetHigh()          _LATC3 = 1
 #define PW_ON4N_SetLow()           _LATC3 = 0
 
+#define VERBIT0_GetValue()        _RA0
+#define VERBIT1_GetValue()        _RA1
+#define VERBIT2_GetValue()        _RB15
+#define VERBIT3_GetValue()        _RC8
 
 void PIN_MANAGER_Initialize (void);
 

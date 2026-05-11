@@ -15,7 +15,6 @@
 void Power_Reset_Init(void){
     //Cypress カメラICはすべてリセット状態
     Camera_L_Reset_SetLow();
-    Camera_C_Reset_SetLow();
     Camera_R_Reset_SetLow();
    //TC358870 MIPI IC初期状態はリセット状態
     TC358870_Reset_SetLow();
@@ -46,7 +45,6 @@ void Power_On(void) {
     __delay_ms(2);
     LCD_Reset_SetHigh();  //LCD リセット解除
     Camera_L_Reset_SetHigh(); //左カメラリセット解除
-    Camera_C_Reset_SetHigh(); //センターカメラリセット解除
     Camera_R_Reset_SetHigh(); //右カメラリセット解除
     __delay_ms(240); //LCDリセット用のウェイト？
 }
@@ -54,7 +52,6 @@ void Power_Off(void){
     
     BackLight_ON_SetLow(); //バックライトOFF
     Camera_L_Reset_SetLow();    //カメラリセット
-    Camera_C_Reset_SetLow();
     Camera_R_Reset_SetLow();
     LCD_Reset_SetLow();
     PW_ON4N_SetHigh();
@@ -128,14 +125,13 @@ void Camera_Reset(int camsel){
     switch(camsel){
         case 0:
           Camera_L_Reset_SetLow(); //左カメラリセット
-          Camera_C_Reset_SetLow(); //センターカメラリセット
           Camera_R_Reset_SetLow(); //右カメラリセット
           break;
         case 1:
           Camera_L_Reset_SetLow(); //左カメラリセット
           break;
         case 2:
-          Camera_C_Reset_SetLow(); //センターカメラリセット
+          // //センターカメラは削除済み
           break;
         case 3:
           Camera_R_Reset_SetLow(); //右カメラリセット
@@ -145,14 +141,13 @@ void Camera_Reset(int camsel){
     switch(camsel){
         case 0:
           Camera_L_Reset_SetHigh(); //左カメラリセット
-          Camera_C_Reset_SetHigh(); //センターカメラリセット
           Camera_R_Reset_SetHigh(); //右カメラリセット
           break;
         case 1:
           Camera_L_Reset_SetHigh(); //左カメラリセット
           break;
         case 2:
-          Camera_C_Reset_SetHigh(); //センターカメラリセット
+          // //センターカメラは削除済み
           break;
         case 3:
           Camera_R_Reset_SetHigh(); //右カメラリセット

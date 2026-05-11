@@ -142,14 +142,15 @@ bool m_bSuspendflg = false;
 uint16_t TC358870_BootCount;         //HDMI起動待ち用のカウンタ
 uint16_t TC358870_CheckAll = 0;      //HDMI接続チェック時にバックライト制御などを行うか
 
-#define TC358870_BOOT_WAIT 100    //PCが起動するまでの待ち時間 100に設定したときは10msタイマーx20回(TC358870_CheckAll)x100回=20000ms(20秒)
+#define TC358870_BOOT_WAIT 10     //PCが起動するまでの待ち時間 100に設定したときは10msタイマーx20回(TC358870_CheckAll)x100回=20000ms(20秒)
                                   //TC358870_BOOT_WAIT=0のときは、最初の1回(200ms)だけ待ってHDMIの初期化が始まる
 
 ///////////////////////////////////////////////////////////////////////////////
 //           プログラムのバージョン情報                                        //
 //           プログラムを更新する場合に必ず書き換えること！                     //
 ///////////////////////////////////////////////////////////////////////////////
-const uint16_t   m_version = 9901;  //プログラムのバージョン情報
+const uint16_t   m_version = 903;  //プログラムのバージョン情報
+uint8_t m_boardVersion;
 ///////////////////////////////////////////////////////////////////////////////
 
 void I2C1_Device_init(void){
@@ -273,6 +274,14 @@ void I2C1_Device_Check(void){
     
 }
 
+void BOARD_VERSION_Initialize(void)
+{
+    m_boardVersion =
+        (VERBIT3_GetValue() << 3) |
+        (VERBIT2_GetValue() << 2) |
+        (VERBIT1_GetValue() << 1) |
+        (VERBIT0_GetValue() << 0);
+}
 
 /*
                          Main application
@@ -281,6 +290,7 @@ int main(void)
 {
     // initialize the device
     PIN_MANAGER_Initialize();
+    BOARD_VERSION_Initialize();
     Power_Reset_Init(); //ピンのlow/highを設定　初期化時にされているはずだが
     Power_On();     //電源投入TC358870とLCDリセット解除 USBカメラリセット解除
     INTERRUPT_Initialize();
