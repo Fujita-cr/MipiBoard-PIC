@@ -84,7 +84,7 @@ void PIN_MANAGER_Initialize (void)
      ***************************************************************************/
     ODCA = 0x0000;
     ODCB = 0x0000;
-    ODCC = 0x0001;  //BL_PWM‚ÍOD—LŒø
+    ODCC = 0x0000;
 
     /****************************************************************************
      * Setting the Analog/Digital Configuration SFR(s)
