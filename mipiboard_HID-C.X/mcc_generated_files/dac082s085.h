@@ -16,6 +16,6 @@
 // val  : 0`255
 // –ß‚è’l: ³í=0 / ˆÙí=-1
 //--------------------------------------
-int16_t DAC082S085_Set(uint16_t func, uint8_t val);
+int16_t DAC082S085_Set(uint16_t func, uint16_t val);
 
 #endif // DAC082S085_H

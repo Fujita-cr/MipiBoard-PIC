@@ -32,10 +32,9 @@ static void SPI_Write16(uint16_t data)
 //--------------------------------------
 // API（既存互換）
 //--------------------------------------
-int16_t DAC082S085_Set(uint16_t func, uint8_t val)
+int16_t DAC082S085_Set(uint16_t func, uint16_t val)
 {
     uint8_t ch;
-
     // func → DACチャネル変換
     if (func == IRLED_LEFT) {
         ch = DAC_CH_A;
@@ -52,10 +51,16 @@ int16_t DAC082S085_Set(uint16_t func, uint8_t val)
     // [13:12] Command (2bit)
     // [11:4]  Data (8bit)
     // [3:0]   Don't care
+    
+    // 10bitデータのうち、上位8btを使用する
+    // ただし、実際にはPCからは0～511までの9bitデータしか送られてこず、50％を最大値として使用されている
+    // 既存互換のため踏襲する
+    uint8_t dac_data = (val >> 2) & 0xFF;
+    
     uint16_t frame = 0;
     frame |= (ch << 14);
     frame |= (DAC_CMD_WRITE_UPDATE << 12);
-    frame |= ((uint16_t)val << 4);
+    frame |= (dac_data  << 4); 
 
     // 送信
     SPI_Write16(frame);
