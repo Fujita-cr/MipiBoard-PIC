@@ -45,6 +45,7 @@
 #define CDS_SENSOR_SCAN_TIME    20  //CSS_SENSORは20X10ms=200ms更新
 #define TMP102_SCAN_TIME        20  //TMP102温度は20X10ms=200ms更新
 #define ADXL350_SCAN_TIME       2   //ADX350_SCAN_TIME 2X10ms=20ms更新
+#define BH1750_SCAN_TIME        20  //BH1750は20X10ms=200ms更新
 #define TC358870_SCAN_TIME      20
 
 //ブートローダモード
@@ -55,10 +56,12 @@
 extern uint8_t  BL_Timer;          //BLセンサースキャンタイマー
 extern uint8_t  CDS_Timer;         //CDセンサースキャンタイマー
 extern uint8_t  TMP102_Timer;      //TMP102温度センサスキャンタイマー
+extern uint8_t  BH1750_Timer;   //BH1750スキャンタイマー
 extern uint8_t  ADXL350_Timer;     //ADXL350加速度センサースキャンタイマー
 extern uint16_t BL_AD_Val;         //BLセンサーの値
 extern uint16_t CDS_AD_Val;        //CDSセンサーの値
 extern int16_t  TMP102_Val;       //温度センサーの値
+extern uint16_t  BH1750_Val;     //BH1750の値
 extern int16_t  ADXL350_X_Val;    //Gセンサーの値
 extern int16_t  ADXL350_Y_Val;
 extern int16_t  ADXL350_Z_Val;
@@ -67,6 +70,8 @@ extern uint16_t BackLight_Kido;     //バックライトのLTC1661の値
 extern uint8_t TC358870_Timer;
 
 extern int16_t  tc358870_interrupt;    //TC358870 external interrput flag
+
+
 
 // TODO Insert C++ class definitions if appropriate
 

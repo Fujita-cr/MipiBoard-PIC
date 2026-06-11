@@ -53,6 +53,7 @@
 volatile uint8_t BL_Timer;          //BLセンサースキャンタイマー
 volatile uint8_t CDS_Timer;         //CDセンサースキャンタイマー
 volatile uint8_t TMP102_Timer;      //TMP102温度センサスキャンタイマー
+volatile uint8_t BH1750_Timer;      //BH1750スキャンタイマー
 volatile uint8_t ADXL350_Timer;     //ADXL350加速度センサースキャンタイマー
 volatile uint8_t TC358870_Timer;
 
@@ -172,6 +173,7 @@ void __attribute__ ((weak)) TMR5_CallBack(void)
     BL_Timer +=1 ;          //BLセンサースキャンタイマー
     CDS_Timer +=1 ;         //CDセンサースキャンタイマー
     TMP102_Timer +=1 ;      //TMP102温度センサスキャンタイマー
+    BH1750_Timer +=1;       //BH1750スキャンタイマー
     ADXL350_Timer +=1 ;     //ADXL350加速度センサースキャンタイマー
     TC358870_Timer +=1;
 }

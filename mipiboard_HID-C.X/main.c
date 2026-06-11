@@ -102,6 +102,7 @@
 #include "mcc_generated_files/oc1.h"
 #include "mcc_generated_files/oc2.h"
 #include "mcc_generated_files/oc3.h"
+#include "mcc_generated_files/BH1750.h"
 
 // TC358870 State
 #define S0      0
@@ -118,10 +119,10 @@
 uint16_t    BL_AD_Val = 0;
 uint16_t    CDS_AD_Val = 0;
 int16_t     TMP102_Val = 0;
+uint16_t    BH1750_Val;
 int16_t     ADXL350_X_Val= 0;
 int16_t     ADXL350_Y_Val = 0;
 int16_t     ADXL350_Z_Val = 0;
-
 
 // Average Calc Buffer
 uint16_t    ad_arry[10];
@@ -133,7 +134,6 @@ int16_t     x_val = 0;
 int16_t     y_val = 0;
 int16_t     z_val = 0;
 int16_t     ADXL350_ari = 0;    //20230605 ‰Á‘¬“xƒZƒ“ƒT‚ ‚è
-
 uint16_t    m_brightness = 0;
 
 uint16_t TC_State;
@@ -149,14 +149,14 @@ uint16_t TC358870_CheckAll = 0;      //HDMIÚ‘±ƒ`ƒFƒbƒNŽž‚ÉƒoƒbƒNƒ‰ƒCƒg§Œä‚È‚Ç‚
 //           ƒvƒƒOƒ‰ƒ€‚Ìƒo[ƒWƒ‡ƒ“î•ñ                                        //
 //           ƒvƒƒOƒ‰ƒ€‚ðXV‚·‚éê‡‚É•K‚¸‘‚«Š·‚¦‚é‚±‚ÆI                     //
 ///////////////////////////////////////////////////////////////////////////////
-const uint16_t   m_version = 9906;  //ƒvƒƒOƒ‰ƒ€‚Ìƒo[ƒWƒ‡ƒ“î•ñ
+const uint16_t   m_version = 9908;  //ƒvƒƒOƒ‰ƒ€‚Ìƒo[ƒWƒ‡ƒ“î•ñ
 uint8_t m_boardVersion;
 ///////////////////////////////////////////////////////////////////////////////
 
 void I2C1_Device_init(void){
 
     tmp102_init();
-
+    bh1750_init();
     //‰Šú‰»Žž‚É‰Á‘¬“xƒZƒ“ƒT[—L‚è–³‚µ”»’è‚·‚é
     ADXL350_ari = adxl350_init();
     //‰º‚Ìs‚ÅAÄ“x‰Á‘¬“xƒZƒ“ƒT[‚ ‚è‚É‚µ‚Ä‚¢‚é‚ª‰º‹L‚Ps‚Ííœ‚Å‚à—Ç‚¢B
@@ -167,10 +167,12 @@ void I2C1_Device_init(void){
     ADXL350_X_Val = 0;
     ADXL350_Y_Val = 0;
     ADXL350_Z_Val = 0;
-    
+    BH1750_Val = 0;
+
     BL_Timer = 0;          //BLƒZƒ“ƒT[ƒXƒLƒƒƒ“ƒ^ƒCƒ}[
     CDS_Timer = 0;         //CDƒZƒ“ƒT[ƒXƒLƒƒƒ“ƒ^ƒCƒ}[
     TMP102_Timer = 0;      //TMP102‰·“xƒZƒ“ƒTƒXƒLƒƒƒ“ƒ^ƒCƒ}[
+    BH1750_Timer = 0;      //BH1750ƒXƒLƒƒƒ“ƒ^ƒCƒ}[
     ADXL350_Timer = 0;     //ADXL350‰Á‘¬“xƒZƒ“ƒT[ƒXƒLƒƒƒ“ƒ^ƒCƒ}[    
     TC358870_BootCount = 0;
     TC358870_CheckAll = 0;
@@ -271,7 +273,19 @@ void I2C1_Device_Check(void){
         }
         ADXL350_Timer = 0;  
     }
-    
+    if (BH1750_Timer > BH1750_SCAN_TIME)
+    {
+        uint16_t lux;
+
+        retVal = bh1750_read_lux(&lux);
+
+        if(retVal == 0)
+        {
+            BH1750_Val = lux;
+        }
+
+        BH1750_Timer = 0;
+    }    
 }
 
 void BOARD_VERSION_Initialize(void)

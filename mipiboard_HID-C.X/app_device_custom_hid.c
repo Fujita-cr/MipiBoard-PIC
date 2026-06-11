@@ -214,6 +214,8 @@ void APP_DeviceCustomHIDTasks()
                         ToSendDataBuffer[11] = (uint8_t)(ADXL350_Y_Val & 0xFF);
                         ToSendDataBuffer[12] = (uint8_t)(ADXL350_Z_Val >> 8);
                         ToSendDataBuffer[13] = (uint8_t)(ADXL350_Z_Val & 0xFF);
+                        ToSendDataBuffer[14] = (uint8_t)(BH1750_Val >> 8);
+                        ToSendDataBuffer[15] = (uint8_t)(BH1750_Val & 0xFF);
                         //Prepare the USB module to send the data packet to the host
                         USBInHandle = HIDTxPacket(CUSTOM_DEVICE_HID_EP, (uint8_t*)&ToSendDataBuffer[0],64);
                     }
