@@ -42,7 +42,6 @@
     TERMS.
 */
 
-
 // Configuration bits: selected in the GUI
 
 // CONFIG4
@@ -61,7 +60,7 @@
 #pragma config WPEND = WPENDMEM    //Segment Write Protection End Page Select->Write Protect from WPFP to the last page of memory
 
 // CONFIG2
-#pragma config POSCMOD = XT    //Primary Oscillator Select->XT Oscillator mode selected
+#pragma config POSCMOD = EC    //Primary Oscillator Select->XT Oscillator mode selected
 #pragma config I2C1SEL = PRI    //I2C1 Pin Select bit->Use default SCL1/SDA1 pins for I2C1 
 #pragma config IOL1WAY = ON    //IOLOCK One-Way Set Enable->Once set, the IOLOCK bit cannot be cleared
 #pragma config OSCIOFNC = OFF    //OSCO Pin Configuration->OSCO pin functions as clock output (CLKO)

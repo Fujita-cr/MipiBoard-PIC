@@ -5,6 +5,7 @@
         <group name="20240425_mipiboard_v17_rc3"/>
         <group>
             <file>file:/C:/WorkSpace/sparrow/PIC/HU-BoardPIC/mipiboard_HID-C.X/mcc_generated_files/dac082s085.c</file>
+            <file>file:/C:/WorkSpace/sparrow/PIC/HU-BoardPIC/mipiboard_HID-C.X/mcc_generated_files/mcc.c</file>
             <file>file:/C:/WorkSpace/sparrow/PIC/HU-BoardPIC/mipiboard_HID-C.X/mcc_generated_files/BH1750.c</file>
             <file>file:/C:/WorkSpace/sparrow/PIC/HU-BoardPIC/mipiboard_HID-C.X/extern_val.h</file>
             <file>file:/C:/WorkSpace/sparrow/PIC/HU-BoardPIC/mipiboard_HID-C.X/main.c</file>
