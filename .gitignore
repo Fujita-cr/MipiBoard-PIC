@@ -1,2 +1,5 @@
 bootloader/
 *.hex
+mipiboard_HID-C.X/build/
+mipiboard_HID-C.X/.vs/
+mipiboard_HID-C.X/.generated_files/
