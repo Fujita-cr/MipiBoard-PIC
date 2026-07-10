@@ -1,2 +1,21 @@
-bootloader/
+# build artifacts
+**/build/
+**/dist/
+**/debug/
+
+# MPLAB generated
+**/.generated_files/
+**/queuelogs/
+
+# MPLAB private
+**/nbproject/private/
+
+# binaries
 *.hex
+*.elf
+*.map
+*.o
+*.log
+
+# etc
+**/.vs/
